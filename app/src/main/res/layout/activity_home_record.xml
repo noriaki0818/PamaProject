@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home_record">
+
+
+    <ImageView
+        android:id="@+id/home_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/header" />
+
+    <ImageButton
+        android:id="@+id/home_bo_nextday2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_header"
+        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/home_header"
+        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:srcCompat="@drawable/bo_nextday" />
+
+    <ImageButton
+        android:id="@+id/home_bo_daybefore2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_header"
+        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="@+id/home_header"
+        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:srcCompat="@drawable/bo_daybefore" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_header"
+        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/home_header"
+        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:srcCompat="@drawable/bo_menu" />
+
+    <ImageView
+        android:id="@+id/home_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/footer" />
+
+    <ImageButton
+        android:id="@+id/bo_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/home_footer"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer"
+        app:srcCompat="@drawable/bo_record" />
+
+    <ImageButton
+        android:id="@+id/home_bo_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/home_footer"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer"
+        app:srcCompat="@drawable/bo_calendar" />
+
+    <ImageButton
+        android:id="@+id/home_bo_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/home_footer"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer"
+        app:srcCompat="@drawable/bo_summary" />
+
+    <ImageButton
+        android:id="@+id/home_bo_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/home_footer"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer"
+        app:srcCompat="@drawable/bo_article" />
+
+    <ImageButton
+        android:id="@+id/home_bo_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/home_footer"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer"
+        app:srcCompat="@drawable/bo_chat" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000/02/01"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000/02/07"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="~"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
+        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

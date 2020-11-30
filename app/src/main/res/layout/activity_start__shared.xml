@@ -19,18 +19,18 @@
 
     <EditText
         android:id="@+id/Start_Shared_Partner"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:contentDescription="あなたの名前入力"
+        android:contentDescription="パートナーのID入力"
         android:gravity="center_vertical"
         android:hint="ID入力"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652" />
+        app:layout_constraintVertical_bias="0.642" />
 
     <ImageView
         android:id="@+id/Start_Shared_next"
@@ -80,7 +80,7 @@
         app:srcCompat="@drawable/text16" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/baby_bo_menubaby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
