@@ -27,7 +27,7 @@
         android:layout_marginTop="40dp"
         android:contentDescription="あなたの名前入力"
         android:gravity="center_vertical"
-        android:hint="名前入力"
+        android:hint="あなたの名前"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
