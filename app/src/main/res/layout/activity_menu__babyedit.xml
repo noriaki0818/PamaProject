@@ -7,9 +7,10 @@
     tools:context=".Menu_Babyedit">
 
     <ImageView
-        android:id="@+id/imageView25"
+        android:id="@+id/baby_edit_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -19,38 +20,22 @@
         app:srcCompat="@drawable/header" />
 
     <ImageView
-        android:id="@+id/imageView29"
+        android:id="@+id/baby_edit_bo_back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/baby_edit_header"
+        app:layout_constraintEnd_toEndOf="@+id/baby_edit_header"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/baby_edit_header"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/text11" />
-
-    <ImageView
-        android:id="@+id/imageView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bo_back" />
 
     <ImageView
-        android:id="@+id/imageView31"
+        android:id="@+id/baby_edit_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="89dp"
+        android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +44,7 @@
         app:srcCompat="@drawable/circle2" />
 
     <ImageButton
-        android:id="@+id/imageView34"
+        android:id="@+id/baby_edit_bo_noset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
@@ -72,7 +57,7 @@
         app:srcCompat="@drawable/bo_noset" />
 
     <ImageButton
-        android:id="@+id/imageView33"
+        android:id="@+id/baby_edit_bo_girl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
@@ -86,13 +71,13 @@
         app:srcCompat="@drawable/bo_girl" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/baby_edit_editname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="名前"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,13 +85,13 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/baby_edit_editbirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="484dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="誕生日"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +99,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/baby_edit_bo_boy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
@@ -128,7 +113,18 @@
         app:srcCompat="@drawable/bo_boy" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/baby_edit_text_hen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/baby_edit_header"
+        app:layout_constraintEnd_toEndOf="@+id/baby_edit_header"
+        app:layout_constraintStart_toStartOf="@+id/baby_edit_header"
+        app:layout_constraintTop_toTopOf="@+id/baby_edit_header"
+        app:srcCompat="@drawable/text11" />
+
+    <ImageButton
+        android:id="@+id/baby_edit_bo_babyadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
@@ -138,6 +134,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bo_update" />
-
+        app:srcCompat="@drawable/bo_babyadd" />
 </androidx.constraintlayout.widget.ConstraintLayout>
