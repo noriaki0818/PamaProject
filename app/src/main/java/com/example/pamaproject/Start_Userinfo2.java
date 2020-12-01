@@ -18,7 +18,7 @@ public class Start_Userinfo2 extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick (View v){
         if(v == btn) {
-            intent = new Intent(getApplication(), Start_Shared.class);
+            intent = new Intent(Start_Userinfo2.this, Start_Shared.class);
             startActivity(intent);
         }
     }

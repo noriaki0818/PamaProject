@@ -19,7 +19,7 @@ public class Start_Shared extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick (View v){
         if(v == view) {
-            intent = new Intent(getApplication(), Start_Complete.class);
+            intent = new Intent(Start_Shared.this, Start_Complete.class);
             startActivity(intent);
         }
     }
