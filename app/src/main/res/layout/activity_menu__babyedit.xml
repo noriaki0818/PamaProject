@@ -7,7 +7,7 @@
     tools:context=".Menu_Babyedit">
 
     <ImageView
-        android:id="@+id/baby_edit_header"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -23,10 +23,10 @@
         android:id="@+id/baby_edit_bo_back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/baby_edit_header"
-        app:layout_constraintEnd_toEndOf="@+id/baby_edit_header"
+        app:layout_constraintBottom_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toEndOf="@+id/header"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/baby_edit_header"
+        app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bo_back" />
 
@@ -117,10 +117,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/baby_edit_header"
-        app:layout_constraintEnd_toEndOf="@+id/baby_edit_header"
-        app:layout_constraintStart_toStartOf="@+id/baby_edit_header"
-        app:layout_constraintTop_toTopOf="@+id/baby_edit_header"
+        app:layout_constraintBottom_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header"
         app:srcCompat="@drawable/text11" />
 
     <ImageButton
