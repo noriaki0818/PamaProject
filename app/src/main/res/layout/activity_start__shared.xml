@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Start_Shared">
 
-    <ImageButton
-        android:id="@+id/Start_Shared_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:contentDescription="戻る"
-        android:src="@drawable/bo_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/Start_Shared_Partner"
         android:layout_width="300dp"

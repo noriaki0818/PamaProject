@@ -7,7 +7,7 @@
     tools:context=".Menu_Sharedone">
 
     <ImageView
-        android:id="@+id/imageView39"
+        android:id="@+id/Start_Complete_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,10 +15,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32999998"
-        app:srcCompat="@drawable/text17" />
+        app:srcCompat="@drawable/text7" />
+
+    <TextView
+        android:id="@+id/Start_Complete_text"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/Start_Complete_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="450dp"
@@ -28,6 +39,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_ok" />
+        app:srcCompat="@drawable/bo_start" />
+
+    <ImageButton
+        android:id="@+id/Start_Complete_noshare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/bo_noshare" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/circle2" />
+        app:srcCompat="@drawable/babycircle" />
 
     <ImageButton
         android:id="@+id/baby_edit_bo_noset"
@@ -134,5 +134,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bo_babyadd" />
+        app:srcCompat="@drawable/bo_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
