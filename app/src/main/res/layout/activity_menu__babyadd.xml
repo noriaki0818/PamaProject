@@ -7,7 +7,7 @@
     tools:context=".Menu_Babyadd">
 
     <ImageView
-        android:id="@+id/baby_add_header"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -18,17 +18,16 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/header" />
 
-    <ImageButton
-        android:id="@+id/babyadd_bo_home"
-        android:layout_width="85dp"
-        android:layout_height="51dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:srcCompat="@drawable/bo_home" />
+    <ImageView
+        android:id="@+id/baby_add_bo_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header"
+        app:srcCompat="@drawable/bo_back" />
 
     <ImageView
         android:id="@+id/baby_add_ic"
@@ -117,10 +116,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/baby_add_header"
-        app:layout_constraintEnd_toEndOf="@+id/baby_add_header"
-        app:layout_constraintStart_toStartOf="@+id/baby_add_header"
-        app:layout_constraintTop_toTopOf="@+id/baby_add_header"
+        app:layout_constraintBottom_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header"
         app:srcCompat="@drawable/text12" />
 
     <ImageButton
