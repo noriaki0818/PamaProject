@@ -20,17 +20,6 @@
         app:srcCompat="@drawable/header" />
 
     <ImageView
-        android:id="@+id/baby_edit_bo_back2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/header"
-        app:layout_constraintEnd_toEndOf="@+id/header"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/header"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bo_back" />
-
-    <ImageView
         android:id="@+id/baby_edit_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

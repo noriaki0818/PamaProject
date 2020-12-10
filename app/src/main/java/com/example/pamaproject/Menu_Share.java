@@ -12,16 +12,14 @@ public class Menu_Share extends AppCompatActivity  implements View.OnClickListen
     ImageButton btn,btn2,btn3;
     Intent intent;
 
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
+    @Override
+    protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__share);
         btn = (ImageButton) findViewById(R.id.share_bo_help);
         btn.setOnClickListener(this);
         btn2 = (ImageButton) findViewById(R.id.share_bo_baby);
         btn2.setOnClickListener(this);
-            btn2 = (ImageButton) findViewById(R.id.share_bo_home);
-            btn2.setOnClickListener(this);
     }
     @Override
     public void onClick (View v){
@@ -31,10 +29,6 @@ public class Menu_Share extends AppCompatActivity  implements View.OnClickListen
         }
         if(v == btn2) {
             intent = new Intent(getApplication(), Menu_Baby.class);
-            startActivity(intent);
-        }
-        if(v == btn3) {
-            intent = new Intent(getApplication(), Home.class);
             startActivity(intent);
         }
     }

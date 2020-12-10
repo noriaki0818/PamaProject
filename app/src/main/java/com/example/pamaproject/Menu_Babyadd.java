@@ -18,16 +18,10 @@ public class Menu_Babyadd extends AppCompatActivity implements View.OnClickListe
 
         btn = (ImageButton) findViewById(R.id.baby_add_bo_babyadd);
         btn.setOnClickListener( this );
-        btn2 = (ImageButton) findViewById(R.id.babyadd_bo_home);
-        btn2.setOnClickListener( this );
     }
     public void onClick (View v){
         if(v == btn) {
             intent = new Intent(getApplication(), Menu_Baby.class);
-            startActivity(intent);
-        }
-        if(v == btn2) {
-            intent = new Intent(getApplication(), Home.class);
             startActivity(intent);
         }
     }
