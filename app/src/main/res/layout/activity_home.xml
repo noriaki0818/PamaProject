@@ -77,7 +77,7 @@
         android:layout_marginBottom="640dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/home_bo_nextday"
-        app:srcCompat="@drawable/circle3" />
+        app:srcCompat="@drawable/circle" />
 
     <TextView
         android:id="@+id/home_text_passingdate"
@@ -160,19 +160,6 @@
         app:srcCompat="@drawable/bo_meallist" />
 
     <ImageButton
-        android:id="@+id/bo_physiologicallist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="169dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_physiologicallist" />
-
-    <ImageButton
         android:id="@+id/bo_bodylist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -213,19 +200,6 @@
         app:srcCompat="@drawable/bomilkwatch" />
 
     <ImageButton
-        android:id="@+id/bo_otherlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="418dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
-        app:layout_constraintEnd_toEndOf="@+id/listback"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_otherlist" />
-
-    <ImageButton
         android:id="@+id/bo_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -236,18 +210,6 @@
         app:layout_constraintStart_toStartOf="@+id/home_footer"
         app:layout_constraintTop_toTopOf="@+id/home_footer"
         app:srcCompat="@drawable/bo_record" />
-
-    <ImageButton
-        android:id="@+id/home_bo_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_calendar" />
 
     <ImageButton
         android:id="@+id/home_bo_summary"
