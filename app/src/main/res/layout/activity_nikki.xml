@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Nikki">
 
+
     <ImageView
         android:id="@+id/header2"
         android:layout_width="wrap_content"
@@ -19,19 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/header" />
-
-    <ImageView
-        android:id="@+id/footer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/footer" />
 
     <ImageView
         android:id="@+id/home_circle"
@@ -72,6 +60,56 @@
         app:layout_constraintTop_toTopOf="@+id/txt_nen"
         app:layout_constraintVertical_bias="0.666" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header2"
+        app:srcCompat="@drawable/text" />
+
+    <ImageButton
+        android:id="@+id/bo_tukibetu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="@+id/header2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bo_tukibetu" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/footer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/footer" />
+
     <LinearLayout
         android:layout_width="393dp"
         android:layout_height="73dp"
@@ -83,7 +121,7 @@
 
         <ImageButton
             android:id="@+id/bo_record"
-            android:layout_width="95dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
@@ -109,45 +147,16 @@
             android:layout_weight="1"
             android:background="@null"
             app:srcCompat="@drawable/bo_summary" />
-
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/header2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header2"
-        app:srcCompat="@drawable/text" />
-
-    <ImageButton
-        android:id="@+id/bo_tukibetu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/header2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="@+id/header2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bo_tukibetu" />
-
-    <ScrollView
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/footer2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/header2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
