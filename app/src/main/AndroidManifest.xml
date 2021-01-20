@@ -9,22 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PamaProject" >
-        <activity android:name=".Nikki_naiyou"></activity>
-        <activity android:name=".Nikki_tosibetu">
+        <activity android:name=".Nikki_naiyou">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Nikki_tosibetu"></activity>
         <activity android:name=".Nikki" />
-        <activity android:name=".Article" />
-        <activity android:name=".Article_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Article"/>
+        <activity android:name=".Article_list" ></activity>
         <activity android:name=".Home_summary" />
         <activity android:name=".Home" />
         <activity android:name=".Start_Shared" />
@@ -41,11 +35,7 @@
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
         <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
