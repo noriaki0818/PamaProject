@@ -1,7 +1,5 @@
 package com.example.pamaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,9 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-public class article_list extends AppCompatActivity implements View.OnClickListener , AdapterView.OnItemClickListener , SearchView.OnQueryTextListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Article_list extends AppCompatActivity implements View.OnClickListener , AdapterView.OnItemClickListener , SearchView.OnQueryTextListener {
 
     ListView listview;
     ArrayAdapter<String> adapter;

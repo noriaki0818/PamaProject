@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Nikki" />
-        <activity android:name=".article" />
-        <activity android:name=".article_list" >
+        <activity android:name=".Article" />
+        <activity android:name=".Article_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
