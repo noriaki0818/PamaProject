@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/home_header"
+        android:id="@+id/Summary_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -21,43 +21,44 @@
         app:srcCompat="@drawable/header" />
 
     <ImageButton
-        android:id="@+id/home_bo_nextday2"
+        android:id="@+id/Summary_bo_nextday2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
         app:srcCompat="@drawable/bo_nextday" />
 
     <ImageButton
-        android:id="@+id/home_bo_daybefore2"
+        android:id="@+id/Summary_bo_daybefore2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
+        app:layout_constraintVertical_bias="0.39"
         app:srcCompat="@drawable/bo_daybefore" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/Summary_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
         app:srcCompat="@drawable/bo_menu" />
 
     <ImageView
-        android:id="@+id/home_footer"
+        android:id="@+id/Summary_Food_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -69,74 +70,169 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/footer" />
 
-    <ImageButton
-        android:id="@+id/home_bo_record"
+    <ImageView
+        android:id="@+id/summary_Food_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_record" />
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/footer" />
 
-    <ImageButton
-        android:id="@+id/bo_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_summary" />
+    <LinearLayout
+        android:id="@+id/footerlist"
+        android:layout_width="393dp"
+        android:layout_height="73dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Summary_Food_footer"
+        app:layout_constraintTop_toTopOf="@+id/Summary_Food_footer">
 
-    <ImageButton
-        android:id="@+id/bo_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_article" />
+        <ImageButton
+            android:id="@+id/Summary_bo_record"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_record" />
 
+        <ImageButton
+            android:id="@+id/Summary_bo_diary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_diary" />
+
+        <ImageButton
+            android:id="@+id/Summary_bo_article"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_article" />
+
+        <ImageButton
+            android:id="@+id/Summary_bo_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_summary" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Summary_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2000/02/01"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
-        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/Summary_bo_nextday2"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
-        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+        app:layout_constraintStart_toEndOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/Summary_bo_nextday2" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/Summary_textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2000/02/07"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
-        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/Summary_bo_nextday2"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
-        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+        app:layout_constraintStart_toEndOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/Summary_bo_nextday2" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/Summary_textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="~"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/home_bo_daybefore2"
-        app:layout_constraintEnd_toStartOf="@+id/home_bo_nextday2"
-        app:layout_constraintStart_toEndOf="@+id/home_bo_daybefore2"
-        app:layout_constraintTop_toTopOf="@+id/home_bo_nextday2" />
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintEnd_toStartOf="@+id/Summary_bo_nextday2"
+        app:layout_constraintStart_toEndOf="@+id/Summary_bo_daybefore2"
+        app:layout_constraintTop_toTopOf="@+id/Summary_bo_nextday2" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/Summary_bar_chart"
+        android:layout_width="369dp"
+        android:layout_height="499dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.562" />
+
+    <ImageView
+        android:id="@+id/summary_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        app:srcCompat="@drawable/tab_food" />
+
+    <ImageView
+        android:id="@+id/summary_imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        app:srcCompat="@drawable/tab_excretion" />
+
+    <ImageView
+        android:id="@+id/summary_imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        app:srcCompat="@drawable/tab_sleep" />
+
+    <ImageView
+        android:id="@+id/summary_imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        app:srcCompat="@drawable/tab_height" />
+
+    <ImageView
+        android:id="@+id/summary_imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        app:srcCompat="@drawable/tab_waight" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

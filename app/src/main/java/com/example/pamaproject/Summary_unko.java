@@ -22,7 +22,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_summary extends AppCompatActivity implements View.OnClickListener {
+public class Summary_unko extends AppCompatActivity implements View.OnClickListener {
     protected BarChart chart;
     ImageView menu,left,right,
             food,unko,sleep,height,weight;
@@ -68,12 +68,11 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
 
         //ボタンの色を変える
         summary.setBackgroundColor(Color.WHITE);
-        food.setBackgroundColor(Color.CYAN);
-        unko.setBackgroundColor(Color.RED);
+        food.setBackgroundColor(Color.RED);
+        unko.setBackgroundColor(Color.CYAN);
         sleep.setBackgroundColor(Color.RED);
         height.setBackgroundColor(Color.RED);
         weight.setBackgroundColor(Color.RED);
-
 
         //テキスト
         next.setText("2021/2/1");
@@ -100,7 +99,7 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         //X軸
         XAxis xAxis = chart.getXAxis();
         //X軸に表示するLabelのリスト(最初の""は原点の位置) 日付
-        final String[] labels = {"","9/12", "9/13", "9/14","9/15","9/16","9/17","9/18"};
+        final String[] labels = {"","うんこ", "9/13", "9/14","9/15","9/16","9/17","9/18"};
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         XAxis bottomAxis = chart.getXAxis();
         bottomAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -174,9 +173,9 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
             intent = new Intent(this, Article.class);
             startActivity(intent);
         }
-        if (view == unko){
-            //排せつ記録画面に飛ぶ
-            intent = new Intent(this, Summary_unko.class);
+        if (view == food){
+            //食事記録画面に飛ぶ
+            intent = new Intent(this, Home_summary.class);
             startActivity(intent);
         }
         if (view == sleep){
