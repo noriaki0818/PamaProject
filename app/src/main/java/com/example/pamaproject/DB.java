@@ -190,8 +190,6 @@ public class DB extends SQLiteOpenHelper {
                 Class + "TEXT NOT NULL, " +
                 Code_Name + "TEXT NOT NULL);";
 
-
-
 //    削除
     public static final String SQL_DELETE_ALL =
         "DROP TABLE IF EXISTS " + User_TABLE + Baby_TABLE + Food_TABLE + Sleep_TABLE
