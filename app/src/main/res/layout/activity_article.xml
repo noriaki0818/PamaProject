@@ -58,7 +58,7 @@
 
 
     <ImageButton
-        android:id="@+id/home_bo_summary"
+        android:id="@+id/bo_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/bo_summary" />
 
     <ImageButton
-        android:id="@+id/home_bo_article"
+        android:id="@+id/bo_article"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"

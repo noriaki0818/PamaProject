@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 public class Home extends AppCompatActivity  implements View.OnClickListener{
     ImageButton btn;
@@ -17,7 +16,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btn = (ImageButton) findViewById(R.id.home_menu);
+        btn = (ImageButton) findViewById(R.id.bo_menu);
         btn.setOnClickListener( this );
     }
     @Override
