@@ -1,12 +1,12 @@
 package com.example.pamaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Menu_Baby extends AppCompatActivity implements View.OnClickListener{
     ImageView view;
@@ -25,6 +25,7 @@ public class Menu_Baby extends AppCompatActivity implements View.OnClickListener
         btn2.setOnClickListener( this );
         btn3 = (ImageButton) findViewById(R.id.baby_bo_home);
         btn3.setOnClickListener( this );
+
     }
     @Override
     public void onClick (View v){

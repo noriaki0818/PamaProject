@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     tools:context=".Home">
 
-<!--    ホームです-->
+    <!--    ホームです-->
 
     <ImageView
         android:id="@+id/home_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="ヘッダー"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,20 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/header"
-        android:contentDescription="ヘッダー"/>
-
-    <ImageButton
-        android:id="@+id/home_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
-        app:srcCompat="@drawable/bo_menu" />
+        app:srcCompat="@drawable/header" />
 
     <ImageButton
         android:id="@+id/home_bo_daybefore"
@@ -70,6 +59,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/home_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/footer" />
+
+    <ImageView
         android:id="@+id/home_circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,20 +80,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/home_bo_nextday"
         app:srcCompat="@drawable/circle" />
-
-    <TextView
-        android:id="@+id/home_text_passingdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="224"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/home_text_hiniti"
@@ -107,131 +95,559 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.044" />
 
-    <ImageButton
-        android:id="@+id/listback"
+    <TextView
+        android:id="@+id/home_text_passingdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="224"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/listback"
+        android:layout_width="81dp"
+        android:layout_height="579dp"
         android:background="#FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61"
+        app:layout_constraintTop_toBottomOf="@+id/home_text_hiniti"
+        app:layout_constraintVertical_bias="0.48000002"
         app:srcCompat="@drawable/listback7" />
 
+    <ImageButton
+        android:id="@+id/home_photo"
+        android:layout_width="85dp"
+        android:layout_height="66dp"
+
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/bo_diary"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/bo_diary"
+        app:layout_constraintTop_toTopOf="@+id/bo_diary"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/view_photo" />
+
+    <TextView
+        android:id="@+id/bo_diary"
+        android:layout_width="312dp"
+        android:layout_height="67dp"
+        android:background="@drawable/flame_home"
+        android:ems="10"
+        android:text="日記"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintEnd_toStartOf="@+id/listback"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageView
-        android:id="@+id/home_footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="639dp"
+        android:alpha="0.7"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/footer" />
+        app:srcCompat="@drawable/background" />
 
     <ImageButton
-        android:id="@+id/bo_babylist"
+        android:id="@+id/home_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
-        app:layout_constraintEnd_toEndOf="@+id/listback"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_babylist" />
+        app:layout_constraintBottom_toBottomOf="@+id/home_header"
+        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/home_header"
+        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:srcCompat="@drawable/bo_menu" />
 
-    <ImageButton
-        android:id="@+id/bo_meallist"
+    <LinearLayout
+        android:id="@+id/recordlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:background="@null"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/listback"
         app:layout_constraintEnd_toEndOf="@+id/listback"
         app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_meallist" />
+        app:layout_constraintTop_toTopOf="@+id/listback">
 
-    <ImageButton
-        android:id="@+id/bo_bodylist"
+        <ImageButton
+            android:id="@+id/bo_babylist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/view_babylist" />
+
+        <ImageButton
+            android:id="@+id/bo_meallist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_meallist" />
+
+        <ImageButton
+            android:id="@+id/bo_sleeplist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_physiologicallist" />
+
+        <ImageButton
+            android:id="@+id/bo_excretionlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_excretionlist" />
+
+        <ImageButton
+            android:id="@+id/bo_hospitallist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_hospitallist" />
+
+        <ImageButton
+            android:id="@+id/bo_bodyhealthlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_bodylist" />
+
+        <ImageButton
+            android:id="@+id/bo_milkwatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:visibility="visible"
+            app:srcCompat="@drawable/bomilkwatch" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footerlist"
+        android:layout_width="393dp"
+        android:layout_height="73dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/home_footer"
+        app:layout_constraintTop_toTopOf="@+id/home_footer">
+
+        <ImageButton
+            android:id="@+id/home_bo_record"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_record" />
+
+        <ImageButton
+            android:id="@+id/home_bo_diary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_diary" />
+
+        <ImageButton
+            android:id="@+id/home_bo_article"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_article" />
+
+        <ImageButton
+            android:id="@+id/home_bo_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_summary" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/meallistbg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="252dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
-        app:layout_constraintEnd_toEndOf="@+id/listback"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bo_bodylist" />
 
-    <ImageButton
-        android:id="@+id/bo_hospital"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintVertical_bias="0.155"
+        app:srcCompat="@drawable/foodslist" />
+
+    <LinearLayout
+        android:id="@+id/meallist"
+        android:layout_width="380dp"
+        android:layout_height="93dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/meallistbg"
+        app:layout_constraintEnd_toEndOf="@+id/meallistbg"
+        app:layout_constraintStart_toStartOf="@+id/meallistbg"
+        app:layout_constraintTop_toTopOf="@+id/meallistbg"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/milk3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/milk3" />
+
+        <ImageButton
+            android:id="@+id/snack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/snack" />
+
+        <ImageButton
+            android:id="@+id/babyfood"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/babyfood" />
+
+        <ImageButton
+            android:id="@+id/drink"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/drink" />
+
+        <ImageButton
+            android:id="@+id/meal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/meal" />
+
+        <ImageButton
+            android:id="@+id/milk2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/milk2" />
+
+        <ImageButton
+            android:id="@+id/milk1"
+            android:layout_width="62dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/milk1" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sleeplistbg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="336dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
-        app:layout_constraintEnd_toEndOf="@+id/listback"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/hospital" />
+        android:layout_marginTop="2dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="@+id/background"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintVertical_bias="0.33"
+        app:srcCompat="@drawable/sleeplist" />
 
-    <ImageButton
-        android:id="@+id/bo_milkwatch"
-        android:layout_width="80dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="495dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/listback"
+    <LinearLayout
+        android:id="@+id/sleeplist"
+        android:layout_width="170dp"
+        android:layout_height="93dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/sleeplistbg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/sleeplistbg"
+        app:layout_constraintTop_toTopOf="@+id/sleeplistbg"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/bath"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bath" />
+
+        <ImageButton
+            android:id="@+id/getup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/getup" />
+
+        <ImageButton
+            android:id="@+id/sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/sleep" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/excretionlistbg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/listback"
-        app:layout_constraintTop_toTopOf="@+id/listback"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bomilkwatch" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintVertical_bias="0.511"
+        app:srcCompat="@drawable/excretionlist" />
 
-    <ImageButton
-        android:id="@+id/bo_record"
+    <LinearLayout
+        android:id="@+id/excretionlist"
+        android:layout_width="170dp"
+        android:layout_height="93dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/excretionlistbg"
+        app:layout_constraintEnd_toEndOf="@+id/excretionlistbg"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toStartOf="@+id/excretionlistbg"
+        app:layout_constraintTop_toTopOf="@+id/excretionlistbg"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/both"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/both" />
+
+        <ImageButton
+            android:id="@+id/pee"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/pee" />
+
+        <ImageButton
+            android:id="@+id/poo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/poo" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/hospitallistbg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_record" />
+        android:layout_marginBottom="127dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintVertical_bias="0.924"
+        app:srcCompat="@drawable/hospitallist" />
 
-    <ImageButton
-        android:id="@+id/home_bo_summary"
+    <LinearLayout
+        android:id="@+id/hospitallist"
+        android:layout_width="380dp"
+        android:layout_height="93dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/hospitallistbg"
+        app:layout_constraintEnd_toEndOf="@+id/hospitallistbg"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="@+id/hospitallistbg"
+        app:layout_constraintTop_toTopOf="@+id/hospitallistbg"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/medicine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/medicine" />
+
+        <ImageButton
+            android:id="@+id/preventional"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/preventional" />
+
+        <ImageButton
+            android:id="@+id/hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/hospital" />
+
+        <ImageButton
+            android:id="@+id/lnjury"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/lnjury" />
+
+        <ImageButton
+            android:id="@+id/rash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/rash" />
+
+        <ImageButton
+            android:id="@+id/vomit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/vomit" />
+
+        <ImageButton
+            android:id="@+id/cough"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/cough" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bodyhealthlistbg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_summary" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintVertical_bias="0.861"
+        app:srcCompat="@drawable/bodyhealthlist" />
 
-    <ImageButton
-        android:id="@+id/home_bo_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_footer"
-        app:layout_constraintEnd_toEndOf="@+id/home_footer"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer"
-        app:srcCompat="@drawable/bo_article" />
+    <LinearLayout
+        android:id="@+id/bodyhealthlist"
+        android:layout_width="170dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/bodyhealthlistbg"
+        app:layout_constraintEnd_toEndOf="@+id/bodyhealthlistbg"
+        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintStart_toStartOf="@+id/bodyhealthlistbg"
+        app:layout_constraintTop_toTopOf="@+id/bodyhealthlistbg"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/weight" />
+
+        <ImageButton
+            android:id="@+id/height"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/height" />
+
+        <ImageButton
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/temperature" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09">
+
+        <ImageView
+            android:id="@+id/home_babypic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="0.783"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/background"
+            app:layout_constraintVertical_bias="0.093"
+            app:srcCompat="@drawable/abe" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textview_babyname"
+        android:layout_width="74dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="babyname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

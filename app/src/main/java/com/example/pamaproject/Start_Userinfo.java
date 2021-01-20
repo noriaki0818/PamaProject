@@ -1,11 +1,11 @@
 package com.example.pamaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Start_Userinfo extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,6 +19,7 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
 
         IV = (ImageView) findViewById(R.id.next_to_userInfo);
         IV.setOnClickListener( this );
+
     }
     @Override
     public void onClick (View v){
