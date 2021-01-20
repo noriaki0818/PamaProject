@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pamaproject" >
+    package="com.example.pamaproject">
 
     <application
         android:allowBackup="true"
@@ -8,8 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PamaProject" >
-        <activity android:name=".Nikki_tosibetu" >
+        android:theme="@style/Theme.PamaProject">
+
+        <activity android:name=".Nikki_naiyou"></activity>
+        <activity android:name=".Nikki_tosibetu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Nikki" />
         <activity android:name=".article" />
@@ -28,12 +34,8 @@
         <activity android:name=".Menu_Share" />
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
