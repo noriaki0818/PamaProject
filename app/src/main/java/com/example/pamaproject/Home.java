@@ -159,7 +159,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         //赤ちゃんの画像
         photo.setImageResource(R.drawable.abe);
 
-
     }
     @Override
     public void onClick (View view){
@@ -194,14 +193,17 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         if (view == Diary){
             //日記画面に飛ぶ
             intent = new Intent(Home.this, Nikki.class);
+            startActivity(intent);
         }
         if (view == Article){
             //記事画面に飛ぶ
-//            intent = new Intent(Home.this, Article.class);
+            intent = new Intent(Home.this, Article.class);
+            startActivity(intent);
         }
         if (view == Summary){
             //まとめ画面に飛ぶ
 //            intent = new Intent(Home.this, Summary.class);
+//            startActivity(intent);
         }
 
         //ボタンリスト
