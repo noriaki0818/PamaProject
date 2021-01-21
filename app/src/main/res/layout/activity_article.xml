@@ -7,10 +7,9 @@
     tools:context=".Article">
 
     <ImageView
-        android:id="@+id/header"
+        android:id="@+id/article_header2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -19,84 +18,54 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/header" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/header"
-        app:layout_constraintEnd_toEndOf="@+id/header"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/header"
-        app:layout_constraintTop_toTopOf="@+id/header"
-        app:srcCompat="@drawable/bo_menu" />
+    <TextView
+        android:id="@+id/article_title2"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="652dp"
+        android:text="お役立ち記事"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-    <ImageView
-        android:id="@+id/footer"
+    <ImageButton
+        android:id="@+id/article_menu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:layout_marginBottom="660dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/footer" />
+        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:srcCompat="@drawable/bo_menu" />
 
-    <ImageButton
-        android:id="@+id/home_bo_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:srcCompat="@drawable/bo_record" />
-
-
-    <ImageButton
-        android:id="@+id/bo_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:srcCompat="@drawable/bo_summary" />
-
-    <ImageButton
-        android:id="@+id/bo_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:srcCompat="@drawable/bo_article" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/header"
-        app:layout_constraintEnd_toEndOf="@+id/header"
-        app:layout_constraintStart_toStartOf="@+id/header"
-        app:layout_constraintTop_toTopOf="@+id/header"
-        app:srcCompat="@drawable/text21" />
-
-    <SearchView
-        android:layout_width="247dp"
-        android:layout_height="35dp"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="52dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        app:layout_constraintVertical_bias="0.110000014" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137" />
 
+    <ListView
+        android:id="@+id/article_list2"
+        android:layout_width="370dp"
+        android:layout_height="450dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
