@@ -1,6 +1,7 @@
 package com.example.pamaproject;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
 
 public class Home extends AppCompatActivity  implements View.OnClickListener{
     TextView day, passingday, babyname,
@@ -32,11 +35,15 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
 
     Intent intent;
 
+    private DBHelper helper;
+    private static SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         //テキスト
         day = (TextView) findViewById(R.id.home_text_day);
         passingday = (TextView) findViewById(R.id.home_text_passingdate);
@@ -163,6 +170,8 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
     @Override
     public void onClick (View view){
 
+//        時間の取得
+        String date = getNowDate();
 
         //ヘッダー
         if (view == daybefore){
@@ -207,9 +216,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         }
 
         //ボタンリスト
-        if (view == bo_babylist){
-            //ベイビーリスト
-        }
         if (view == bo_meallist){
             //食事リスト
             bo_meallist.setVisibility(View.INVISIBLE);
@@ -253,6 +259,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         //食事リスト
         if (view == milk1){
             //母乳
+
         }
         if (view == milk2){
             //ミルク
@@ -350,4 +357,20 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
 
         }
     }
+//    時間取得
+    public static String getNowDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    // 0 - 11
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+        String date = year + "年" + (month + 1) + "月" + day + "日　" + hour + "時" + minute + "分" + second + "秒";
+
+        System.out.println(date);
+
+        return date;
+    }
 }
+
