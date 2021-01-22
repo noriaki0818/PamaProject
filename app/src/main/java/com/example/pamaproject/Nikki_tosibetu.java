@@ -19,7 +19,7 @@ import java.util.List;
 public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickListener {
     ImageButton bo_menu,bo_record,bo_nikki,bo_article,bo_summary;
 
-    String nikki_nen ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,51 +38,55 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         bo_summary.setOnClickListener(this);
 
         //親要素のリスト
-        List<String> makers = new ArrayList<>();
-        makers.add("2020");
-        makers.add("2021");
-        makers.add("2022");
+        List<String> nen1 = new ArrayList<>();
+        nen1.add("2020");
+        nen1.add("2021");
+        nen1.add("2022");
 
         //子要素のリスト
-        List<String> cars_toyota = new ArrayList<>();
-        cars_toyota.add("1");
-        cars_toyota.add("2");
-        cars_toyota.add("3");
-        cars_toyota.add("4");
-        cars_toyota.add("5");
-        cars_toyota.add("6");
-        cars_toyota.add("7");
-        cars_toyota.add("8");
-        cars_toyota.add("9");
-        cars_toyota.add("10");
-        cars_toyota.add("11");
-        cars_toyota.add("12");
+        List<String> tuki1 = new ArrayList<>();
+        tuki1.add("1");
+        tuki1.add("2");
+        tuki1.add("3");
+        tuki1.add("4");
+        tuki1.add("5");
+        tuki1.add("6");
+        tuki1.add("7");
+        tuki1.add("8");
+        tuki1.add("9");
+        tuki1.add("10");
+        tuki1.add("11");
+        tuki1.add("12");
 
         List<List<String>> cars = new ArrayList<>();
-        cars.add(cars_toyota);
-        cars.add(cars_toyota);
+        cars.add(tuki1);
+        cars.add(tuki1);
+        cars.add(tuki1);
+
 
 
         //ExpandableListViewの初期化
         ExpandableListView exListView = findViewById(R.id.exlistview);
-        CarMakerListAdapter adapter = new CarMakerListAdapter(this, makers, cars);
+        CarMakerListAdapter adapter = new CarMakerListAdapter(this, nen1,cars);
         exListView.setAdapter(adapter);
 
         exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //子要素をタップした時の処理
-                //このサンプルではToastメッセージを表示するだけ
+
                 CarMakerListAdapter adapter1 = (CarMakerListAdapter) parent.getExpandableListAdapter();
-                String makername =  (String)adapter1.getGroup(groupPosition);       //親要素からメーカー名を取得
-                String carname = (String)adapter1.getChild(groupPosition, childPosition);   //子要素から車名を取得
-//                Toast.makeText(getApplicationContext(), makername + " : " + carname, Toast.LENGTH_LONG).show();  //Toast生成
+                String nen =  (String)adapter1.getGroup(groupPosition);       //親要素からメーカー名を取得
+                String tuki = (String)adapter1.getChild(groupPosition, childPosition);   //子要素から車名を取得
+                //Toast.makeText(getApplicationContext(), nen1, Toast.LENGTH_LONG).show();  //Toast生成
 
                 Intent intent = new Intent(getApplication(), Nikki.class);
-                intent.putExtra("tuki",carname);
+                intent.putExtra("tuki",tuki);
+                intent.putExtra("nen",nen);
                 startActivity(intent);
-
+                finish();
                 return true;
+
             }
         });
     }
@@ -106,8 +110,10 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         }
 
         @Override
-        public int getChildrenCount(int groupPosition) {
-            return listCar.get(groupPosition).size();   //子要素の数を返す
+        public int getChildrenCount(int childPosition) {
+
+            return listCar.get(childPosition).size();   //子要素の数を返す
+
         }
 
         @Override
@@ -173,14 +179,6 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
-
-
-
-
-
-
-
     //画面遷移
     @Override
     public void onClick(View v) {
@@ -194,8 +192,8 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }
         if(v == bo_article){
-
-
+            intent = new Intent(this,Article_list.class);
+            startActivity(intent);
         }
         if(v == bo_summary){
             intent = new Intent(this,Home_summary.class);

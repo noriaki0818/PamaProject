@@ -1,5 +1,6 @@
 package com.example.pamaproject;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,6 +11,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView IV;
     ImageButton btn;
     Intent intent;
+    private DBHelper helper;
+    private SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn = (ImageButton) findViewById(R.id.start_to_UserInfo2);
         btn.setOnClickListener( this );
 
+        // DB作成
+        helper = new DBHelper(getApplicationContext());
+
     }
     @Override
     public void onClick (View v){
@@ -27,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(v == btn) {
-            intent = new Intent(MainActivity.this, Start_Userinfo2.class);
-            startActivity(intent);
+
         }
     }
 }

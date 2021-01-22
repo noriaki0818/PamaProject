@@ -21,15 +21,15 @@
         app:layout_constraintTop_toBottomOf="@+id/baby_info"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/baby_birth"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="248dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
-        android:contentDescription="あなたの名前入力"
+        android:background="@drawable/flame_home"
         android:gravity="center_vertical"
-        android:hint="誕生日入力"
-        android:inputType="text"
+        android:text="赤ちゃんの誕生日入力"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

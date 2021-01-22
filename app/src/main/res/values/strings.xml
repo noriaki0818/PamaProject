@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">PamaProject</string>
-    <string name="start">左乳スタート</string>
-    <string name="start2">右乳スタート</string>
-    <string name="stop">ストップ</string>
+    <string name="app_name" translatable="false">PamaProject</string>
 </resources>
