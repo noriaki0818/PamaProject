@@ -2,52 +2,146 @@ package com.example.pamaproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.FileDescriptor;
+import java.io.IOException;
 
 public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListener {
-    ImageButton bo_back,bo_back2;
+    ImageButton bo_back;
+    Button bo_back2,button;
     EditText memo;
     ImageView photo;
-    String a = "abe";
+
+
+    private static final int RESULT_PICK_IMAGEFILE = 1001;
+    private TextView textView;
+    private ImageView imageView;
+
+    String hi,tuki,nen,nai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nikki_naiyou);
 
-        bo_back =(ImageButton) findViewById(R.id.bo_bask);
-        bo_back2 =(ImageButton) findViewById(R.id.bo_bask);
+        bo_back =(ImageButton) findViewById(R.id.bo_back);
+        bo_back2 =(Button) findViewById(R.id.bo_back2);
+        button =(Button)findViewById(R.id.button);
         memo = (EditText) findViewById(R.id.edit);
-        photo =(ImageView) findViewById(R.id.nikki_Photo);
+        photo =(ImageView) findViewById(R.id.image_view);
         bo_back.setOnClickListener(this);
         bo_back2.setOnClickListener(this);
+        button.setOnClickListener(this);
 
-        photo.setImageResource(R.drawable.abe);
+
+        //日付けの入力
+        Intent intent1;
+        intent1 = getIntent();
+        hi = intent1.getStringExtra("hi");
+        tuki = intent1.getStringExtra("tuki");
+        nen = intent1.getStringExtra("nen");
+        nai = intent1.getStringExtra("nai");
+
+        //Toast.makeText(getApplicationContext(), hi, Toast.LENGTH_LONG).show();
+
+        TextView textdate =(TextView)findViewById(R.id.textdate);
+
+        textdate.setText(nen+"/"+tuki+"/"+hi);
+
+
 
 
         //dbからの内容をセット
-        String naiyou = "ないようないようないよう";
+        String naiyou = nai;
         memo.setText(naiyou);
         if(naiyou == ""){
             memo.setText("日記");
         }
 
 
+        //textView = findViewById(R.id.text_view);
+
+        imageView = findViewById(R.id.image_view);
+
+        Button button = findViewById(R.id.button);
+        imageView.setOnClickListener( v -> {
+            // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+            // Filter to only show results that can be "opened", such as a
+            // file (as opposed to a list of contacts or timezones)
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+            // Filter to show only images, using the image MIME data type.
+            // it would be "*/*".
+            intent.setType("*/*");
+
+            startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
+        });
+
+        Intent intent;
+        intent = getIntent();
+        String m = intent.getStringExtra("hi");
+        Toast.makeText(this,m,Toast.LENGTH_SHORT).show();
+
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+
+        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
+        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
+        // response to some other intent, and the code below shouldn't run at all.
+        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+            if(resultData.getData() != null){
+
+                ParcelFileDescriptor pfDescriptor = null;
+                try{
+                    Uri uri = resultData.getData();
+                    // Uriを表示
+//                    textView.setText(
+//                            String.format(Locale.US, "Uri:　%s",uri.toString()));
+
+                    pfDescriptor = getContentResolver().openFileDescriptor(uri, "r");
+                    if(pfDescriptor != null){
+                        FileDescriptor fileDescriptor = pfDescriptor.getFileDescriptor();
+                        Bitmap bmp = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+                        pfDescriptor.close();
+                        imageView.setImageBitmap(bmp);
 
 
-
-
-
-
-
-
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try{
+                        if(pfDescriptor != null){
+                            pfDescriptor.close();
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -55,9 +149,13 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         if(v==bo_back || v==bo_back2){
             intent = new Intent(this,Nikki.class);
+
+            intent.putExtra("tuki",tuki);
+            intent.putExtra("nen",nen);
             startActivity(intent);
         }
 
 
     }
+
 }
