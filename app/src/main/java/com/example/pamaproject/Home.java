@@ -1,5 +1,6 @@
 package com.example.pamaproject;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class Home extends AppCompatActivity  implements View.OnClickListener{
+public class Home extends AppCompatActivity  implements View.OnClickListener {
     TextView day, passingday, babyname,
             diary;//日記入力ボタン、表示
 
@@ -38,11 +39,16 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
     private DBHelper helper;
     private static SQLiteDatabase db;
 
+    int CHILD_ID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //child_idの入力
+        CHILD_ID = 1;
 
         //テキスト
         day = (TextView) findViewById(R.id.home_text_day);
@@ -167,177 +173,200 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         photo.setImageResource(R.drawable.abe);
 
     }
+
     @Override
-    public void onClick (View view){
+    public void onClick(View view) {
 
 //        時間の取得
-        String date = getNowDate();
+        String nowTime = getNowDate();
 
         //ヘッダー
-        if (view == daybefore){
+        if (view == daybefore) {
             //前日にする
         }
-        if (view == daynext){
+        if (view == daynext) {
             //次の日にする
         }
-        if (view == photo){
+        if (view == photo) {
             //赤ちゃんの画像
             intent = new Intent();
             startActivity(intent);
         }
-        if (view == menu){
+        if (view == menu) {
             //メニュー
             intent = new Intent(Home.this, Menu_Baby.class);
             startActivity(intent);
         }
 
         //日記入力
-        if (view == diary){
+        if (view == diary) {
             //日記に飛ぶ
             intent = new Intent(Home.this, Nikki.class);
             startActivity(intent);
         }
 
         //フッダーリスト
-        if (view == Diary){
+        if (view == Diary) {
             //日記画面に飛ぶ
             intent = new Intent(Home.this, Nikki.class);
             startActivity(intent);
         }
-        if (view == Article){
+        if (view == Article) {
             //記事画面に飛ぶ
             intent = new Intent(Home.this, Article.class);
             startActivity(intent);
         }
-        if (view == Summary){
+        if (view == Summary) {
             //まとめ画面に飛ぶ
-//            intent = new Intent(Home.this, Summary.class);
-//            startActivity(intent);
+            intent = new Intent(Home.this, Home_summary.class);
+            startActivity(intent);
         }
 
         //ボタンリスト
-        if (view == bo_meallist){
+        if (view == bo_meallist) {
             //食事リスト
             bo_meallist.setVisibility(View.INVISIBLE);
             meallist.setVisibility(View.VISIBLE);
             mealBG.setVisibility(View.VISIBLE);
             background.setVisibility(View.VISIBLE);
         }
-        if (view == bo_sleeplist){
+        if (view == bo_sleeplist) {
             //睡眠リスト
             bo_sleeplist.setVisibility(View.INVISIBLE);
             sleeplist.setVisibility(View.VISIBLE);
             sleepBG.setVisibility(View.VISIBLE);
             background.setVisibility(View.VISIBLE);
         }
-        if (view == bo_excretionlist){
+        if (view == bo_excretionlist) {
             //排泄リスト
             bo_excretionlist.setVisibility(View.INVISIBLE);
             excretionlist.setVisibility(View.VISIBLE);
             excretionBG.setVisibility(View.VISIBLE);
             background.setVisibility(View.VISIBLE);
         }
-        if (view == bo_hospitallist){
+        if (view == bo_hospitallist) {
             //病院リスト
             bo_hospitallist.setVisibility(View.INVISIBLE);
             hospitallist.setVisibility(View.VISIBLE);
             hospitalBG.setVisibility(View.VISIBLE);
             background.setVisibility(View.VISIBLE);
         }
-        if (view == bo_bodyhealthlist){
+        if (view == bo_bodyhealthlist) {
             //身体リスト
             bo_bodyhealthlist.setVisibility(View.INVISIBLE);
             bodyhealthlist.setVisibility(View.VISIBLE);
             bodyhealthBG.setVisibility(View.VISIBLE);
             background.setVisibility(View.VISIBLE);
         }
-        if (view == bo_milkwatch){
+        if (view == bo_milkwatch) {
             //ミルクウォッチ
 
         }
 
         //食事リスト
-        if (view == milk1){
+        if (view == milk1) {
             //母乳
 
         }
-        if (view == milk2){
+        if (view == milk2) {
             //ミルク
+            insertFoodtable(CHILD_ID, 7, nowTime);
         }
-        if (view == meal){
+        if (view == meal) {
             //ごはん
+            insertFoodtable(CHILD_ID, 8, nowTime);
         }
-        if (view == drink){
+        if (view == drink) {
             //飲み物
+            insertFoodtable(CHILD_ID, 9, nowTime);
         }
-        if (view == babyfood){
+        if (view == babyfood) {
             //離乳食
+            insertFoodtable(CHILD_ID, 10, nowTime);
         }
-        if (view == snack){
+        if (view == snack) {
             //おやつ
+            insertFoodtable(CHILD_ID, 11, nowTime);
         }
-        if (view == milk3){
+        if (view == milk3) {
             //搾乳
+            insertFoodtable(CHILD_ID, 12, nowTime);
         }
 
         //睡眠リスト
-        if (view == sleep){
+        if (view == sleep) {
             //寝る
+            insertSleeptable(CHILD_ID, 13, nowTime);
         }
-        if (view == getup){
+        if (view == getup) {
             //起きる
+            insertSleeptable(CHILD_ID, 14, nowTime);
         }
-        if (view == bath){
+        if (view == bath) {
             //風呂
+            insertSleeptable(CHILD_ID, 15, nowTime);
         }
 
         //身体リスト
-        if (view == temperature){
+        if (view == temperature) {
             //体温
+            insertBodyhealthtable(CHILD_ID, 26, nowTime);
         }
-        if (view == height){
+        if (view == height) {
             //身長
+            insertBodyhealthtable(CHILD_ID, 27, nowTime);
         }
-        if (view == weight){
+        if (view == weight) {
             //体重
+            insertBodyhealthtable(CHILD_ID, 28, nowTime);
         }
 
         //病院リスト
-        if (view == cough){
+        if (view == cough) {
             //せき
+            insertHospitaltable(CHILD_ID, 19, nowTime);
         }
-        if (view == vomit){
+        if (view == vomit) {
             //げろ
+            insertHospitaltable(CHILD_ID, 20, nowTime);
         }
-        if (view == rash){
+        if (view == rash) {
             //発疹
+            insertHospitaltable(CHILD_ID, 21, nowTime);
         }
-        if (view == lnjury){
+        if (view == lnjury) {
             //けが
+            insertHospitaltable(CHILD_ID, 22, nowTime);
         }
-        if (view == hospital){
+        if (view == hospital) {
             //病院
+            insertHospitaltable(CHILD_ID, 23, nowTime);
         }
-        if (view == preventional){
+        if (view == preventional) {
             //予防接種
+            insertHospitaltable(CHILD_ID, 24, nowTime);
         }
-        if (view == medicine){
+        if (view == medicine) {
             //薬
+            insertHospitaltable(CHILD_ID, 25, nowTime);
         }
 
         //排泄リスト
-        if (view == poo){
+        if (view == poo) {
             //うんこ
+            insertExcretiontable(CHILD_ID, 16, nowTime);
         }
-        if (view == pee){
+        if (view == pee) {
             //尿
+            insertExcretiontable(CHILD_ID, 17, nowTime);
         }
-        if (view == both){
+        if (view == both) {
             //両方
+            insertExcretiontable(CHILD_ID, 18, nowTime);
         }
 
         //バックグラウンド
-        if (view == background){
+        if (view == background) {
             meallist.setVisibility(View.INVISIBLE);
             sleeplist.setVisibility(View.INVISIBLE);
             excretionlist.setVisibility(View.INVISIBLE);
@@ -357,7 +386,8 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
 
         }
     }
-//    時間取得
+
+    //    時間取得
     public static String getNowDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -371,6 +401,51 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         System.out.println(date);
 
         return date;
+    }
+    public void insertFoodtable(int Child_ID, int Code, String Registraction_Time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Child_ID", Child_ID);
+        values.put("Code", Code);
+        values.put("Registraction_Time", Registraction_Time);
+        db.insert("FoodTable", null, values);
+
+    }
+    public void insertSleeptable(int Child_ID, int Code, String Registraction_Time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Child_ID", Child_ID);
+        values.put("Code", Code);
+        values.put("Registraction_Time", Registraction_Time);
+        db.insert("SleepTable", null, values);
+
+    }
+    public void insertBodyhealthtable(int Child_ID, int Code, String Registraction_Time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Child_ID", Child_ID);
+        values.put("Code", Code);
+        values.put("Registraction_Time", Registraction_Time);
+        db.insert("BodyhealthTable", null, values);
+
+    }
+    public void insertHospitaltable(int Child_ID, int Code, String Registraction_Time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Child_ID", Child_ID);
+        values.put("Code", Code);
+        values.put("Registraction_Time", Registraction_Time);
+        db.insert("HospitalTable", null, values);
+
+    }
+    public void insertExcretiontable(int Child_ID, int Code, String Registraction_Time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Child_ID", Child_ID);
+        values.put("Code", Code);
+        values.put("Registraction_Time", Registraction_Time);
+        db.insert("ExcretionTable", null, values);
+
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pamaproject" >
+    package="com.example.pamaproject">
 
     <application
         android:allowBackup="true"
@@ -8,19 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PamaProject" >
-        <activity android:name=".Home_summary"/>
+        android:theme="@style/Theme.PamaProject">
+        <activity android:name=".BirthNP"></activity>
+        <activity android:name=".Home_summary" />
         <activity android:name=".Nikki_naiyou" />
         <activity android:name=".Nikki_tosibetu" />
         <activity android:name=".Nikki" />
         <activity android:name=".Article" />
-        <activity android:name=".Article_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Article_list" />
         <activity android:name=".Home" />
         <activity android:name=".Start_Shared" />
         <activity android:name=".Start_Fail" />
@@ -35,9 +30,13 @@
         <activity android:name=".Menu_Share" />
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
