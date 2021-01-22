@@ -8,16 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickListener {
@@ -33,8 +29,8 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         bo_menu = (ImageButton)findViewById(R.id.bo_menu);
         bo_record = (ImageButton)findViewById(R.id.bo_record);
         bo_nikki = (ImageButton)findViewById(R.id.bo_nikki);
-        bo_article = (ImageButton)findViewById(R.id.bo_article);
-        bo_summary = (ImageButton)findViewById(R.id.bo_summary);
+        bo_article = (ImageButton)findViewById(R.id.Summary_Food_article);
+        bo_summary = (ImageButton)findViewById(R.id.Summary_Food_summary);
         bo_menu.setOnClickListener(this);
         bo_record.setOnClickListener(this);
         bo_nikki.setOnClickListener(this);

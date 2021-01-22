@@ -10,7 +10,7 @@
     <!--    ホームです-->
 
     <ImageView
-        android:id="@+id/home_header"
+        android:id="@+id/Summary_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="ヘッダー"
@@ -28,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.27"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
         app:srcCompat="@drawable/bo_daybefore" />
 
     <ImageButton
@@ -40,11 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.739"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
         app:srcCompat="@drawable/bo_nextday" />
 
     <TextView
@@ -53,13 +53,13 @@
         android:layout_height="wrap_content"
         android:text="2090/02/22"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/home_footer"
+        android:id="@+id/Summary_Food_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -115,7 +115,7 @@
         android:layout_height="579dp"
         android:background="#FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +129,7 @@
         android:layout_height="66dp"
 
         android:background="@null"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="@+id/bo_diary"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/bo_diary"
@@ -144,7 +144,7 @@
         android:background="@drawable/flame_home"
         android:ems="10"
         android:text="日記"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toStartOf="@+id/listback"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +158,7 @@
         android:alpha="0.7"
         android:scaleType="fitXY"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,11 +171,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/home_header"
-        app:layout_constraintEnd_toEndOf="@+id/home_header"
+        app:layout_constraintBottom_toBottomOf="@+id/Summary_header"
+        app:layout_constraintEnd_toEndOf="@+id/Summary_header"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/home_header"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
+        app:layout_constraintStart_toStartOf="@+id/Summary_header"
+        app:layout_constraintTop_toTopOf="@+id/Summary_header"
         app:srcCompat="@drawable/bo_menu" />
 
     <LinearLayout
@@ -247,11 +247,11 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/home_footer"
-        app:layout_constraintTop_toTopOf="@+id/home_footer">
+        app:layout_constraintStart_toStartOf="@+id/Summary_Food_footer"
+        app:layout_constraintTop_toTopOf="@+id/Summary_Food_footer">
 
         <ImageButton
-            android:id="@+id/home_bo_record"
+            android:id="@+id/Summary_bo_record"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -259,7 +259,7 @@
             app:srcCompat="@drawable/bo_record" />
 
         <ImageButton
-            android:id="@+id/home_bo_diary"
+            android:id="@+id/Summary_bo_diary"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -267,7 +267,7 @@
             app:srcCompat="@drawable/bo_diary" />
 
         <ImageButton
-            android:id="@+id/home_bo_article"
+            android:id="@+id/Summary_bo_article"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -275,7 +275,7 @@
             app:srcCompat="@drawable/bo_article" />
 
         <ImageButton
-            android:id="@+id/home_bo_summary"
+            android:id="@+id/Summary_bo_summary"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -290,11 +290,11 @@
         android:layout_height="wrap_content"
 
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintTop_toBottomOf="@+id/Summary_header"
         app:layout_constraintVertical_bias="0.155"
         app:srcCompat="@drawable/foodslist" />
 
@@ -373,11 +373,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="@+id/background"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintTop_toBottomOf="@+id/Summary_header"
         app:layout_constraintVertical_bias="0.33"
         app:srcCompat="@drawable/sleeplist" />
 
@@ -424,11 +424,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintTop_toBottomOf="@+id/Summary_header"
         app:layout_constraintVertical_bias="0.511"
         app:srcCompat="@drawable/excretionlist" />
 
@@ -481,7 +481,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintTop_toBottomOf="@+id/Summary_header"
         app:layout_constraintVertical_bias="0.924"
         app:srcCompat="@drawable/hospitallist" />
 
@@ -560,11 +560,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/home_footer"
+        app:layout_constraintBottom_toTopOf="@+id/Summary_Food_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header"
+        app:layout_constraintTop_toBottomOf="@+id/Summary_header"
         app:layout_constraintVertical_bias="0.861"
         app:srcCompat="@drawable/bodyhealthlist" />
 
@@ -619,12 +619,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <ImageView
             android:id="@+id/home_babypic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/home_footer"
+            app:layout_constraintBottom_toBottomOf="@+id/Summary_Food_footer"
             app:layout_constraintEnd_toEndOf="@+id/background"
             app:layout_constraintHorizontal_bias="0.783"
             app:layout_constraintStart_toStartOf="parent"
@@ -647,7 +653,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.17" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
