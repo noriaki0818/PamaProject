@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
             weight, height, temperature, //身体リスト
             medicine, preventional, hospital, lnjury, rash, vomit, cough, //病院リスト
             both, pee, poo; //排泄リスト
+
 
     ImageView babypic,//赤ちゃんの画像
             mealBG, sleepBG, bodyhealthBG, hospitalBG, excretionBG, //リストバックグラウンド
@@ -65,10 +67,10 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         hospitallist = (LinearLayout) findViewById(R.id.hospitallist);
         bodyhealthlist = (LinearLayout) findViewById(R.id.bodyhealthlist);
         //フッダー
-        Record = (ImageButton) findViewById(R.id.home_bo_record);
-        Diary = (ImageButton) findViewById(R.id.home_bo_diary);
-        Article = (ImageButton) findViewById(R.id.home_bo_article);
-        Summary = (ImageButton) findViewById(R.id.home_bo_summary);
+        Record = (ImageButton) findViewById(R.id.Summary_bo_record);
+        Diary = (ImageButton) findViewById(R.id.Summary_bo_diary);
+        Article = (ImageButton) findViewById(R.id.Summary_bo_article);
+        Summary = (ImageButton) findViewById(R.id.Summary_bo_summary);
         //食事リスト
         milk1 = (ImageButton) findViewById(R.id.milk1);
         milk2 = (ImageButton) findViewById(R.id.milk2);
@@ -105,7 +107,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         bodyhealthBG = (ImageView) findViewById(R.id.bodyhealthlistbg);
         hospitalBG = (ImageView) findViewById(R.id.hospitallistbg);
         excretionBG = (ImageView) findViewById(R.id.excretionlistbg);
-
 
         diary.setOnClickListener(this);
         daybefore.setOnClickListener(this);
@@ -147,6 +148,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         pee.setOnClickListener(this);
         poo.setOnClickListener(this);
         background.setOnClickListener(this);
+
 
         //ボタンの色を変える
         Record.setBackgroundColor(Color.WHITE);
@@ -201,7 +203,8 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
         }
         if (view == Summary){
             //まとめ画面に飛ぶ
-//            intent = new Intent(Home.this, Summary.class);
+            intent = new Intent(Home.this, Home_summary.class);
+            startActivity(intent);
         }
 
         //ボタンリスト
@@ -244,7 +247,9 @@ public class Home extends AppCompatActivity  implements View.OnClickListener{
             background.setVisibility(View.VISIBLE);
         }
         if (view == bo_milkwatch){
-            //ミルクウォッチ
+            intent = new Intent(Home.this, Home_MilkWatch.class);
+            startActivity(intent);
+            //母乳ウォッチ
 
         }
 
