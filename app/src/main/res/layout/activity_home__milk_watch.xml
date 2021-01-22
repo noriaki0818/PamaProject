@@ -23,14 +23,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.195"
-            app:srcCompat="@drawable/timer" />
+            app:srcCompat="@drawable/bomilkwatch" />
 
         <Button
             android:id="@+id/left_start_button"
             android:layout_width="153dp"
             android:layout_height="72dp"
             android:layout_margin="10dp"
-            android:text="@string/start"
+            android:text="右母乳"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
             android:layout_width="153dp"
             android:layout_height="72dp"
             android:layout_margin="10dp"
-            android:text="@string/start2"
+            android:text="左母乳"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
             android:layout_width="153dp"
             android:layout_height="72dp"
             android:layout_margin="10dp"
-            android:text="@string/stop"
+            android:text="ストップ"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,16 +72,14 @@
             android:layout_width="109dp"
             android:layout_height="36dp"
             android:layout_margin="20dp"
-            android:layout_marginTop="79dp"
-            android:autoText="true"
+            android:background="#FFFFFF"
             android:textColor="#00f"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.56"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.29000002" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.706" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
