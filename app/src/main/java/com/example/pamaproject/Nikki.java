@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,8 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Nikki extends AppCompatActivity implements View.OnClickListener {
+public class Nikki extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     ImageButton bo_tukibetu,bo_record,bo_nikki,bo_article,bo_summary;
+
+    List<String> hi = new ArrayList<>();
+    List<String> nai = new ArrayList<>();
+    String tuki;
+    String nen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +42,30 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener {
         bo_article.setOnClickListener(this);
         bo_summary.setOnClickListener(this);
 
+
+
         Intent intent;
         intent = getIntent();
-        String m = intent.getStringExtra("tuki");
-        Toast.makeText(this,m,Toast.LENGTH_SHORT).show();
+        tuki = intent.getStringExtra("tuki");
+        nen = intent.getStringExtra("nen");
+        if(tuki == "" || nen == ""){
 
+        }
+
+
+        TextView txt_tuki= (TextView)findViewById(R.id.txt_tuki);
+        txt_tuki.setText(tuki);
+        TextView txt_nen = (TextView)findViewById(R.id.txt_nen);
+        txt_nen.setText(nen);
 
         //dbから持ってきたデータをlistに入れる
         //日
-        List<String> hi = new ArrayList<>();
         hi.add("1");
         hi.add("2");
         hi.add("3");
         hi.add("4");
         //内容
-        List<String> nai = new ArrayList<>();
+
         nai.add("さ");
         nai.add("む");
         nai.add("ら");
@@ -70,6 +86,7 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener {
             data.add(item);
         }
 
+
         // リスト項目とListViewを対応付けるArrayAdapterを用意する
         SimpleAdapter adapter = new SimpleAdapter(this, data,
                 android.R.layout.simple_list_item_2,
@@ -80,8 +97,11 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener {
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(this);
+
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -102,5 +122,24 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener {
             startActivity(intent);
         }
 
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this.getApplicationContext(), Nikki_naiyou.class);
+        String[] list = hi.toArray(new String[hi.size()]);
+        String hi = list[i];
+        String[] list2 = nai.toArray(new String[nai.size()]);
+        String nai = list2[i];
+        String tuki2 = tuki;
+        String nen2 = nen;
+        // インテントにセット
+        intent.putExtra("hi", hi);
+        intent.putExtra("tuki",tuki2);
+        intent.putExtra("nen",nen2);
+        intent.putExtra("nai",nai);
+        // Activity をスイッチする
+        startActivity(intent);
     }
 }

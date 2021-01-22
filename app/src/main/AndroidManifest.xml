@@ -10,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PamaProject" >
         <activity android:name=".Home_summary"/>
-        <activity android:name=".Nikki_naiyou" />
-        <activity android:name=".Nikki_tosibetu" />
-        <activity android:name=".Nikki" />
+        <activity android:name=".Nikki_naiyou" ></activity>
+        <activity android:name=".Nikki_tosibetu" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Nikki" ></activity>
         <activity android:name=".Article" />
         <activity android:name=".Article_list" />
         <activity android:name=".Home" />
@@ -29,13 +35,8 @@
         <activity android:name=".Menu_Share" />
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

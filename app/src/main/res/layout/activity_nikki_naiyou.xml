@@ -22,10 +22,9 @@
         app:srcCompat="@drawable/header" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2029/12/07"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/header3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/bo_bask"
+        android:id="@+id/bo_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -45,10 +44,11 @@
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <ImageView
-        android:id="@+id/nikki_Photo"
+        android:id="@+id/image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
