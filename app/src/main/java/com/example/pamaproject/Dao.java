@@ -205,18 +205,7 @@ public class Dao {
 //--------------------------------------------インサートメソッズ------------------------------------------------------
 
 
-    //赤ちゃんテーブルデータ保存
-    public void insertBabyTable(SQLiteDatabase db, int ID, String Baby_Name, String Baby_Gender, String Birth) {
-        ContentValues values = new ContentValues();
-        //IDを取ってくる処理を書く
-        values.put("ID", ID);
-        values.put("Baby_Name", Baby_Name);
-        values.put("Baby_Gender", Baby_Gender);
-        values.put("Birth", Birth);
 
-        db.insert(Baby_TABLE, null, values);
-
-    }
 
     //    日記テーブルにデータ保存
     public void insertDiaryTable(SQLiteDatabase db, String Child_ID, String Registration_Time, String Diary, byte[] Image) {

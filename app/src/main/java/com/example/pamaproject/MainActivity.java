@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(v == btn) {
-            intent = new Intent(MainActivity.this, Start_Userinfo2.class);
-            startActivity(intent);
+
         }
     }
 }
