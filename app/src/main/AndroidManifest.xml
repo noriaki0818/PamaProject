@@ -11,18 +11,8 @@
         android:theme="@style/Theme.PamaProject">
         <activity android:name=".BirthNP"></activity>
         <activity android:name=".Home_summary" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Home_MilkWatch" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Summary_height" />
         <activity android:name=".Summary_sleep" />
@@ -34,11 +24,6 @@
         <activity android:name=".Article" />
         <activity android:name=".Article_list" />
         <activity android:name=".Home" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity android:name=".Start_Shared" />
         <activity android:name=".Start_Fail" />
