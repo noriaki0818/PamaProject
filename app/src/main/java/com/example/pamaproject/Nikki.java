@@ -35,8 +35,8 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         bo_tukibetu = (ImageButton)findViewById(R.id.bo_tukibetu);
         bo_record = (ImageButton)findViewById(R.id.bo_record);
         bo_nikki = (ImageButton)findViewById(R.id.bo_nikki);
-        bo_article = (ImageButton)findViewById(R.id.bo_article);
-        bo_summary = (ImageButton)findViewById(R.id.bo_summary);
+        bo_article = (ImageButton)findViewById(R.id.Summary_Food_article);
+        bo_summary = (ImageButton)findViewById(R.id.Summary_Food_summary);
 
         bo_tukibetu.setOnClickListener(this);
         bo_record.setOnClickListener(this);
