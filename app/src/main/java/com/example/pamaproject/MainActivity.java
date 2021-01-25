@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn = (ImageButton) findViewById(R.id.start_to_UserInfo2);
         btn.setOnClickListener( this );
 
-        // DB作成
-        helper = new DBHelper(getApplicationContext());
-
     }
     @Override
     public void onClick (View v){

@@ -46,6 +46,10 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public void onClick (View v){
+        if(helper == null){
+            helper = new DBHelper(getApplicationContext());
+        }
+
         String gender = "設定なし";
         String name = "noname";
 

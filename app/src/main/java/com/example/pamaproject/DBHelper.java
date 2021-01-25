@@ -1,21 +1,33 @@
 package com.example.pamaproject;
-
-import android.content.ContentValues;
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+import android.database.sqlite.SQLiteStatement;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    //    データーベースのバージョン
+    public static final String User_TABLE = "UserTable";
+    public static final String Baby_TABLE = "BabyTable";
+    public static final String Diary_TABLE = "DiaryTable";
+    public static final String Article_TABLE = "ArticleTable";
+    public static final String Food_TABLE = "FoodTable";
+    public static final String Sleep_TABLE = "SleepTable";
+    public static final String Bodyhealth_TABLE = "BodyhealthTable";
+    public static final String Hospital_TABLE = "HospitalTable";
+    public static final String Excretion_TABLE = "ExcretionTable";
+    public static final String Code_TABLE = "CodeTable";
     public static final int DATABASE_VERSION = 1;
 
-    public static final String DATABASE_NAME = "PamaProject.db";
+    public static final String DATABASE_NAME = "PamaProjectTest.db";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
+    }
+
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
     }
 
     @Override
@@ -23,67 +35,116 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //テーブル作成
         db.execSQL(
-                Dao.SQL_CREATE_USERTABLE
+                "CREATE TABLE UserTable(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Gender TEXT NOT NULL)"
         );
         db.execSQL(
-                Dao.SQL_CREATE_BABYTABLE
+                "CREATE TABLE BabyTable(Child_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", ID INTEGER NOT NULL" +
+                        ", Baby_Name TEXT NOT NULL" +
+                        ", Baby_gender TEXT NOT NULL" +
+                        ", Birth TEXT NOT NULL," +
+                        " FOREIGN KEY (ID) REFERENCES UserTable(ID));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_DIARYTABLE
+                "CREATE TABLE DiaryTable(Diary_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ",Registration_Time TEXT NOT NULL" +
+                        ", Diary TEXT NOT NULL" +
+                        ", Image  BLOB, " +
+                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_ARTICLETABLE
+                "CREATE TABLE ArticleTable(Article_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Article_Name TEXT NOT NULL" +
+                        ", Article_text TEXT NOT NULL);"
         );
         db.execSQL(
-                Dao.SQL_CREATE_FOODTABLE
+                "CREATE TABLE FoodTable(Food_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ", Code INTEGER NOT NULL" +
+                        ", Registration_Time TEXT NOT NULL" +
+                        ", Memo TEXT" +
+                        ", ml INTEGER NOT NULL DEFAULT 0, " +
+                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
+                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_SLEEPTABLE
+                "CREATE TABLE SleepTable(Sleep_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ", Code INTEGE NOT NULL" +
+                        ", Registration_Time TEXT NOT NULL" +
+                        ", Memo TEXT, " +
+                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
+                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_BODYHEALTHTABLE
+                "CREATE TABLE BodyhealthTable(Bodyhealth_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ", Code INTEGER NOT NULL" +
+                        ", Registration_Time TEXT NOT NULL" +
+                        ", Memo TEXT" +
+                        ", Body_Amount TEXT NOT NULL, " +
+                        " FOREIGN KEY (Child_ID) REFERENCES Baby_TABLE(Child_ID), " +
+                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_HOSPITALTABLE
+                "CREATE TABLE HospitalTable(Hospital_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ", Code INTEGER NOT NULL" +
+                        ", Registration_Time TEXT NOT NULL" +
+                        ", Memo TEXT" +
+                        ", Vaccination TEXT, " +
+                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
+                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_EXCRETIONTABLE
+                "CREATE TABLE ExcretionTable(Excretion_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
+                        ", Child_ID INTEGER NOT NULL" +
+                        ", Code INTEGER NOT NULL" +
+                        ", Registration_Time TEXT NOT NULL" +
+                        ", Memo TEXT," +
+                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
+                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
         );
         db.execSQL(
-                Dao.SQL_CREATE_CODETABLE
+                "CREATE TABLE CodeTable(Code INTEGER PRIMARY KEY AUTOINCREMENT" +
+                        ", Class TEXT NOT NULL" +
+                        ", Code_Name TEXT NOT NULL);"
+        );
+        db.execSQL(
+                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
         );
 
-        //識別テーブル内容入力
-        insertCodeTable(db, 1, "食事", "授乳時間");
-        insertCodeTable(db, 2, "食事", "授乳左");
-        insertCodeTable(db, 3, "食事", "授乳右");
-        insertCodeTable(db, 4, "食事", "母乳時間");
-        insertCodeTable(db, 5, "食事", "母乳左");
-        insertCodeTable(db, 6, "食事", "母乳右");
-        insertCodeTable(db, 7, "食事", "ミルク");
-        insertCodeTable(db, 8, "食事", "ごはん");
-        insertCodeTable(db, 9, "食事", "飲み物");
-        insertCodeTable(db, 10, "食事", "離乳食");
-        insertCodeTable(db, 11, "食事", "おやつ");
-        insertCodeTable(db, 12, "食事", "搾母乳");
-        insertCodeTable(db, 13, "睡眠", "寝る");
-        insertCodeTable(db, 14, "睡眠", "起きる");
-        insertCodeTable(db, 15, "睡眠", "ふろ");
-        insertCodeTable(db, 16, "排泄", "うんこ");
-        insertCodeTable(db, 17, "排泄", "尿");
-        insertCodeTable(db, 18, "排泄", "両方");
-        insertCodeTable(db, 19, "病院", "せき");
-        insertCodeTable(db, 20, "病院", "げろ");
-        insertCodeTable(db, 21, "病院", "発疹");
-        insertCodeTable(db, 22, "病院", "けが");
-        insertCodeTable(db, 23, "病院", "病院");
-        insertCodeTable(db, 24, "病院", "予防接種");
-        insertCodeTable(db, 25, "病院", "薬");
-        insertCodeTable(db, 26, "身体", "体温");
-        insertCodeTable(db, 27, "身体", "身長");
-        insertCodeTable(db, 28, "身体", "体重");
+        String[] Class = {"食事","食事","食事","食事","食事"
+                ,"食事","食事","食事","食事","食事"
+                ,"食事","食事", "睡眠","睡眠","睡眠"
+                ,"排泄", "排泄", "排泄","病院","病院"
+                ,"病院","病院","病院","病院","病院"
+                , "身体","身体","身体"};
+        String[] Code_Name = {"授乳時間", "授乳左", "授乳右", "母乳時間", "母乳左"
+                ,"母乳右", "ミルク", "ごはん", "飲み物", "離乳食"
+                ,"おやつ", "搾母乳", "寝る", "起きる", "ふろ"
+                ,"うんこ", "尿", "両方", "せき", "げろ"
+                ,"発疹", "けが", "病院", "予防接種", "薬"
+                ,"体温", "身長", "体温"};
 
-        Log.d("debug", "onCreate(SQLiteDatabase db)");
+        db.beginTransaction();
+
+        try{
+            SQLiteStatement sql = db.compileStatement(
+                    "INSERT INTO "+ Code_TABLE +"(Class, Code_Name) VALUES(?,?)"
+            );
+            for (int i = 0; i < Code_Name.length; i++){
+                sql.bindString(1, Class[i]);
+                sql.bindString(2, Code_Name[i]);
+                sql.executeInsert();//実行
+            }
+            db.setTransactionSuccessful();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+        }
 
     }
 
@@ -91,24 +152,36 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 //        アップデートの判定
         db.execSQL(
-                Dao.SQL_DELETE_TABLES
+                "DROP TABLE IF EXISTS " + User_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Baby_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Diary_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Article_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Food_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Sleep_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Bodyhealth_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Hospital_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Excretion_TABLE
+        );
+        db.execSQL(
+                "DROP TABLE IF EXISTS " + Code_TABLE
         );
         onCreate(db);
-    }
-
-    public void onDownGrade(SQLiteDatabase db, int oldversion, int newversion){
-        onUpgrade(db, oldversion, newversion);
-
-    }
-
-    public void insertCodeTable(SQLiteDatabase db, int Code, String Class, String Code_Name) {
-        ContentValues values = new ContentValues();
-        values.put("Code", Code);
-        values.put("Class", Class);
-        values.put("Code_Name", Code_Name);
-
-        db.insert("CodeTable", null, values);
-
     }
 
 }

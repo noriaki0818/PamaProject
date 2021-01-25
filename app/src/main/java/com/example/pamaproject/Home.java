@@ -391,7 +391,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
     public static String getNowDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);    // 0 - 11
+        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
         int day = cal.get(Calendar.DAY_OF_MONTH);
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);

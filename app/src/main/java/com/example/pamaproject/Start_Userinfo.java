@@ -17,13 +17,13 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
     EditText username;
     ImageButton man, noset, woman;
     Intent intent;
-    private SQLiteDatabase db;
-    private DBHelper helper;
 
     String gender = "設定なし";
     String name = "noname";
     int id = 1;
 
+    private DBHelper helper;
+    private SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,6 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
         man.setOnClickListener(this);
         noset.setOnClickListener(this);
         woman.setOnClickListener(this);
-
 
     }
 
@@ -67,11 +66,15 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
 
         }
         if (v == next) {
+            if(helper == null){
+                helper = new DBHelper(getApplicationContext());
+            }
             name = username.getText().toString();
 //            データベースに挿入
             insertUserTable(name, gender);
 
             intent = new Intent(Start_Userinfo.this, Start_Babyinfo.class);
+
             id = readUserID();
             String strid = String.valueOf(id);
 
@@ -85,6 +88,7 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
 //    ユーザーテーブルに挿入
     public void insertUserTable(String Name, String Gender) {
         SQLiteDatabase db = helper.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put("Name", Name);
         values.put("Gender", Gender);
