@@ -151,6 +151,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <ListView
+        android:id="@+id/recordlist2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bo_diary"
+        app:layout_constraintEnd_toStartOf="@+id/listback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_header" />
+
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
