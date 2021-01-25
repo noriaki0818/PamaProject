@@ -58,7 +58,7 @@
         app:srcCompat="@drawable/babycircle" />
 
     <EditText
-        android:id="@+id/edit"
+        android:id="@+id/nikkinaiyou"
         android:layout_width="342dp"
         android:layout_height="341dp"
         android:background="@drawable/nikki"

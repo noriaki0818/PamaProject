@@ -6,13 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Home extends AppCompatActivity  implements View.OnClickListener {
@@ -41,11 +44,51 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
     int CHILD_ID;
 
+    //しょうや ↓
+    //記録時間
+    String kirokujikan;
+
+    //listview変数設定
+    ListView recodelist2;
+
+    //表示したいの内容のlist
+    ArrayList<String> time = new ArrayList<>();
+    String[] times = time.toArray(new String[time.size()]);
+
+    ArrayList<Integer> ic = new ArrayList<>();
+
+
+    ArrayList<String> syousai = new ArrayList<>();
+    String[] syousais = syousai.toArray(new String[syousai.size()]);
+
+
+    //しょうや ↑
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //記録した時間のリストに追加
+        kirokujikan=kirokutime();
+        time.add(kirokujikan);
+
+        ic.add(R.drawable.milk2);
+        int[] ics = new int[ic.size()];
+        for (int i=0; i<ic.size(); i++) {
+            ics[i] = ic.get(i);
+        }
+
+        //記録を表示するリストしょうや
+        recodelist2 = (ListView)findViewById(R.id.recordlist2) ;
+        BaseAdapter adapter = new Home_BaseAdapter(this.getApplicationContext(),
+                R.layout.list_items, times, ics, syousais);
+        recodelist2.setAdapter(adapter);
+
+
 
         //child_idの入力
         CHILD_ID = 1;
@@ -118,6 +161,9 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         bodyhealthBG = (ImageView) findViewById(R.id.bodyhealthlistbg);
         hospitalBG = (ImageView) findViewById(R.id.hospitallistbg);
         excretionBG = (ImageView) findViewById(R.id.excretionlistbg);
+
+
+
 
 
         diary.setOnClickListener(this);
@@ -271,6 +317,12 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         if (view == milk2) {
             //ミルク
             insertFoodtable(CHILD_ID, 7, nowTime);
+
+
+
+
+
+
         }
         if (view == meal) {
             //ごはん
@@ -401,6 +453,13 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         System.out.println(date);
 
         return date;
+    }
+    public static String kirokutime(){
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        String kirokutime = hour + ":"+  minute;
+        return kirokutime;
     }
     public void insertFoodtable(int Child_ID, int Code, String Registraction_Time) {
         SQLiteDatabase db = helper.getWritableDatabase();

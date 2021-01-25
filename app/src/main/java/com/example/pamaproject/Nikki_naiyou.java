@@ -19,19 +19,21 @@ import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListener {
     ImageButton bo_back;
     Button bo_back2,button;
-    EditText memo;
+    EditText nikkinaiyou;
     ImageView photo;
+    String hi,tuki,nen,nai;
+
 
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     private TextView textView;
     private ImageView imageView;
 
-    String hi,tuki,nen,nai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +43,32 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
         bo_back =(ImageButton) findViewById(R.id.bo_back);
         bo_back2 =(Button) findViewById(R.id.bo_back2);
         button =(Button)findViewById(R.id.button);
-        memo = (EditText) findViewById(R.id.edit);
+        nikkinaiyou = (EditText) findViewById(R.id.nikkinaiyou);
         photo =(ImageView) findViewById(R.id.image_view);
         bo_back.setOnClickListener(this);
         bo_back2.setOnClickListener(this);
         button.setOnClickListener(this);
 
 
-        //日付けの入力
+        //日付け取得
         Intent intent1;
         intent1 = getIntent();
         hi = intent1.getStringExtra("hi");
         tuki = intent1.getStringExtra("tuki");
         nen = intent1.getStringExtra("nen");
-        nai = intent1.getStringExtra("nai");
-
-        //Toast.makeText(getApplicationContext(), hi, Toast.LENGTH_LONG).show();
-
+        //日付けの挿入
         TextView textdate =(TextView)findViewById(R.id.textdate);
-
         textdate.setText(nen+"/"+tuki+"/"+hi);
 
 
 
 
-        //dbからの内容をセット
-        String naiyou = nai;
-        memo.setText(naiyou);
-        if(naiyou == ""){
-            memo.setText("日記");
+        //内容取得、挿入
+        nai = intent1.getStringExtra("nai");
+
+        nikkinaiyou.setText(nai);
+        if(nai == ""){
+            nikkinaiyou.setText("日記");
         }
 
 
@@ -93,10 +92,7 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
         });
 
-        Intent intent;
-        intent = getIntent();
-        String m = intent.getStringExtra("hi");
-        Toast.makeText(this,m,Toast.LENGTH_SHORT).show();
+
 
     }
     @Override
@@ -149,7 +145,6 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         if(v==bo_back || v==bo_back2){
             intent = new Intent(this,Nikki.class);
-
             intent.putExtra("tuki",tuki);
             intent.putExtra("nen",nen);
             startActivity(intent);
@@ -157,5 +152,6 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
 
 }
