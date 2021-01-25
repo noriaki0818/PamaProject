@@ -31,6 +31,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
 
 
+
     }
 
     @Override
@@ -39,6 +40,10 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this,Menu_Baby.class);
             startActivity(intent);
         }
+    }
+
+    void seigo1(){
+
     }
 
 }
