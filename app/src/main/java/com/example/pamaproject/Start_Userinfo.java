@@ -1,26 +1,27 @@
+
 package com.example.pamaproject;
 
-import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Start_Userinfo extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton next;
-    EditText username;
+    EditText username = null;
     ImageButton man, noset, woman;
     Intent intent;
-
-    String gender = "設定なし";
-    String name = "noname";
-    int id = 1;
+    String GENDER = null;
+    String NAME = null;
 
     private DBHelper helper;
     private SQLiteDatabase db;
@@ -39,85 +40,78 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
         noset.setOnClickListener(this);
         woman.setOnClickListener(this);
 
+        man.setAlpha((float) 0.5);
+        woman.setAlpha((float) 0.5);
+        noset.setAlpha((float) 0.5);
+
+        //ヘルパーの準備
+        helper = new DBHelper(this);
+
+        //入力画面外をタップしたら入力画面を閉じる（oncreateの一番最後に配置）
+//        ↓↓↓ここにeditTextをセット
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    //キーボード非表示
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                }
+            }
+        });
+//        ↑↑↑ここまでで
     }
+
+//        入力画面以外をタップしたらフォーカスを外す
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+//        ↓↓↓適当なidを設定する（edittextのid以外）設定したidのレイアウトに　android:focusable="true"android:focusableInTouchMode="true"　を追加する
+        next.requestFocus();
+        return super.onTouchEvent(event);
+    }
+//    ここまで
 
     @Override
     public void onClick(View v) {
+        //これも忘れずに
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        NAME = username.getText().toString();
 
         if (v == man) {
-            gender = "男";
+            GENDER = "男";
             man.setAlpha((float) 1.0);
             woman.setAlpha((float) 0.5);
             noset.setAlpha((float) 0.5);
 
         }
         if (v == noset) {
-            gender = "設定なし";
+            GENDER = "設定なし";
             man.setAlpha((float) 0.5);
             woman.setAlpha((float) 0.5);
             noset.setAlpha((float) 1.0);
 
         }
         if (v == woman) {
-            gender = "女";
+            GENDER = "女";
             man.setAlpha((float) 0.5);
             woman.setAlpha((float) 1.0);
             noset.setAlpha((float) 0.5);
 
         }
         if (v == next) {
-            if(helper == null){
-                helper = new DBHelper(getApplicationContext());
+            if(GENDER == null || NAME == null) {
+                Toast.makeText(this, "すべての項目を入力してください", Toast.LENGTH_SHORT).show();
+            }else{
+                NAME = username.getText().toString();
+                Toast.makeText(this, NAME + "さん、" + "性別は"+ GENDER+ "を登録",Toast.LENGTH_SHORT).show();
+                intent = new Intent(Start_Userinfo.this, Start_Babyinfo.class);
+                intent.putExtra("username", NAME);
+                intent.putExtra("usergender",GENDER);
+                startActivity(intent);
             }
-            name = username.getText().toString();
-//            データベースに挿入
-            insertUserTable(name, gender);
-
-            intent = new Intent(Start_Userinfo.this, Start_Babyinfo.class);
-
-            id = readUserID();
-            String strid = String.valueOf(id);
-
-            intent.putExtra("id", strid);
-
-            startActivity(intent);
-
         }
-    }
-
-//    ユーザーテーブルに挿入
-    public void insertUserTable(String Name, String Gender) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("Name", Name);
-        values.put("Gender", Gender);
-        db.insert("UserTable", null, values);
-
-    }
-
-//    ユーザーテーブルからIDを取得
-    public int readUserID() {
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        Cursor cursor = db.query(
-                "UserTable",
-                new String[]{"ID"},//返り血
-                name + " = ?",
-                null,
-                null,
-                null,
-                null
-        );
-
-        cursor.moveToFirst();
-        int id = 0;
-        for (int i = 0; i < cursor.getCount(); i++) {
-            id = cursor.getInt(0);
-            cursor.moveToNext();
-        }
-        cursor.close();
-
-        return id;
     }
 }
