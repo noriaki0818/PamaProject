@@ -157,7 +157,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         values.put("Birth", Birth);
         db.insert("BabyTable", null, values);
     }
-//    CHILD_IDを取得
+    //    CHILD_IDを取得
     public int ongetChild_ID(String babyname){
         int Child_ID = 0;
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -182,7 +182,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         }
         return Child_ID;
     }
-//    ユーザーを登録
+    //    ユーザーを登録
     public void onSaveUser(String name, String gender) {
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
@@ -196,7 +196,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
             db.close();
         }
     }
-//    ユーザーIDを取得
+    //    ユーザーIDを取得
     public int onSearch_ID(String name) {
         int ID = 0;
         SQLiteDatabase db = helper.getReadableDatabase();
