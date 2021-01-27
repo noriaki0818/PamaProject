@@ -1,6 +1,7 @@
 package com.example.pamaproject;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,7 +19,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 public class Article_list extends AppCompatActivity implements View.OnClickListener , AdapterView.OnItemClickListener {
-
+    private DBHelper helper = null;
     ImageButton articleMenuBtn,
             Record, Diary, Article, Summary;
     Intent intent;
@@ -73,6 +74,18 @@ public class Article_list extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+
+        //ヘルパーの準備
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        }finally {
+            db.close();
+        }
 
     }
 

@@ -84,6 +84,8 @@
         android:id="@+id/next_to_userInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_marginBottom="100dp"
         android:background="@null"
         android:contentDescription="次へ"
