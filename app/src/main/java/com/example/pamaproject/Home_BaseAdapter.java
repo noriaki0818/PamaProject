@@ -22,7 +22,7 @@ public class Home_BaseAdapter extends BaseAdapter {
         TextView syousai;
         ImageView img;
     }
-    Home_BaseAdapter(Context context,int itemlayoutID,String[] times,int[] ics,String[] syousais){
+    Home_BaseAdapter(Context context, int itemlayoutID, String[] times, int[] ics, String[] syousais){
         inflater = LayoutInflater.from(context);
         layoutID = itemlayoutID;
         timelist = times;
@@ -45,27 +45,33 @@ public class Home_BaseAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.img = convertView.findViewById(R.id.img);
             holder.time = convertView.findViewById(R.id.time);
-            
+            holder.syousai = convertView.findViewById(R.id.syousai);
+            convertView.setTag(holder);
 
-
+        }else {
+            holder = (ViewHolder) convertView.getTag();
         }
+        holder.img.setImageBitmap(iclist[position]);
+        holder.syousai.setText(syousailist[position]);
+        holder.time.setText(timelist[position]);
 
-        return null;
+
+
+        return convertView;
     }
     @Override
     public int getCount() {
-        return 0;
+        return timelist.length;
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Object getItem(int position) {
+        return position;
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
-
 
 }

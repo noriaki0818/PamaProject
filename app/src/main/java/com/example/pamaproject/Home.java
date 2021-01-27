@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Home extends AppCompatActivity  implements View.OnClickListener {
+public class Home extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     TextView day, passingday, babyname,
             diary;//日記入力ボタン、表示
 
@@ -53,20 +54,15 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
     //表示したいの内容のlist
     ArrayList<String> time = new ArrayList<>();
-    String[] times = time.toArray(new String[time.size()]);
+
 
     ArrayList<Integer> ic = new ArrayList<>();
 
 
     ArrayList<String> syousai = new ArrayList<>();
-    String[] syousais = syousai.toArray(new String[syousai.size()]);
 
 
     //しょうや ↑
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +70,28 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
         //記録した時間のリストに追加
         kirokujikan=kirokutime();
+        System.out.println(kirokujikan);
         time.add(kirokujikan);
+        String[] times = time.toArray(new String[time.size()]);
+        System.out.println(times[0]);
 
+
+        syousai.add("aaaaaa");
+        String[] syousais = syousai.toArray(new String[syousai.size()]);
+
+
+
+        int hantei =hantei();
+        //記録したもののアイコン
         ic.add(R.drawable.milk2);
-        int[] ics = new int[ic.size()];
+        int[] ics = new int[100];
         for (int i=0; i<ic.size(); i++) {
             ics[i] = ic.get(i);
+        }
+
+
+        for(int aaaa =0;aaaa<times.length;aaaa++){
+            System.out.println(times[aaaa]);
         }
 
         //記録を表示するリストしょうや
@@ -87,6 +99,8 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         BaseAdapter adapter = new Home_BaseAdapter(this.getApplicationContext(),
                 R.layout.list_items, times, ics, syousais);
         recodelist2.setAdapter(adapter);
+
+        recodelist2.setOnItemClickListener(this);
 
 
 
@@ -164,8 +178,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
 
 
-
-
         diary.setOnClickListener(this);
         daybefore.setOnClickListener(this);
         daynext.setOnClickListener(this);
@@ -218,6 +230,11 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         //赤ちゃんの画像
         photo.setImageResource(R.drawable.abe);
 
+    }
+
+    private int hantei() {
+        int ichantei= 7;
+        return ichantei;
     }
 
     @Override
@@ -317,11 +334,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         if (view == milk2) {
             //ミルク
             insertFoodtable(CHILD_ID, 7, nowTime);
-
-
-
-
-
 
         }
         if (view == meal) {
@@ -504,6 +516,12 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         values.put("Code", Code);
         values.put("Registraction_Time", Registraction_Time);
         db.insert("ExcretionTable", null, values);
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
 
     }
 }
