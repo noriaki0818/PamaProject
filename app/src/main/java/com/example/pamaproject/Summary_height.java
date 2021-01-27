@@ -3,12 +3,14 @@ package com.example.pamaproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -20,9 +22,12 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Summary_height extends AppCompatActivity implements View.OnClickListener {
+    private DBHelper helper = null;
+    private static SQLiteDatabase db;
     protected BarChart chart;
     ImageView menu,left,right,
             food,unko,sleep,height,weight;
@@ -66,6 +71,18 @@ public class Summary_height extends AppCompatActivity implements View.OnClickLis
         next.setOnClickListener(this);
         back.setOnClickListener(this);
 
+        //ヘルパーの準備
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        } finally {
+            db.close();
+        }
+
         //ボタンの色を変える
         summary.setBackgroundColor(Color.WHITE);
         food.setBackgroundColor(Color.RED);
@@ -74,10 +91,13 @@ public class Summary_height extends AppCompatActivity implements View.OnClickLis
         height.setBackgroundColor(Color.CYAN);
         weight.setBackgroundColor(Color.RED);
 
+        //時間
+        String now = getNowDate();
+        String now2 = getNowDate();
 
         //テキスト
         next.setText("2021/2/1");
-        back.setText("2021/2/7");
+        back.setText(now);
 
         //表示データ取得
         BarData data = new BarData(getBarData());
@@ -98,10 +118,13 @@ public class Summary_height extends AppCompatActivity implements View.OnClickLis
         right.setDrawZeroLine(true);
         right.setDrawTopYLabelEntry(true);
 
+
+
+
         //X軸
         XAxis xAxis = chart.getXAxis();
         //X軸に表示するLabelのリスト(最初の""は原点の位置) 日付
-        final String[] labels = {"","身長", "9/13", "9/14","9/15","9/16","9/17","9/18"};
+        final String[] labels = {"","", "9/13", "9/14","9/15","9/16",now2,now};
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         XAxis bottomAxis = chart.getXAxis();
         bottomAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -118,6 +141,22 @@ public class Summary_height extends AppCompatActivity implements View.OnClickLis
         chart.getLegend().setEnabled(false);
 
         chart.setScaleEnabled(false);
+    }
+
+    //時間取得
+    public static String getNowDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+        String date = (month + 1) + "/" + day;
+
+        System.out.println(date);
+
+        return date;
     }
 
     //棒グラフのデータを取得　
