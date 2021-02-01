@@ -13,26 +13,36 @@ import android.widget.TextView;
 public class Home_BaseAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int layoutID;
-    private String[] timelist;
+    private String[] IntNowdataslist;
+    private String[] Codeslist;
     private String[] syousailist;
+    private String[] Jihunlist;
     private Bitmap[] iclist;
+    private String[] cidlist;
 
     static class ViewHolder {
-        TextView time;
-        TextView syousai;
-        ImageView img;
+        TextView timev;
+        TextView syousaiv;
+        ImageView imgv;
+        TextView jihunv;
+        TextView codev;
+        TextView cidv;
     }
-    Home_BaseAdapter(Context context, int itemlayoutID, String[] times, int[] ics, String[] syousais){
+    Home_BaseAdapter(Context context, int itemlayoutID, String[] IntNowdatas,String[] Codes, int[] Imgs, String[] Jihuns,String[] syousais,String[] cids){
         inflater = LayoutInflater.from(context);
         layoutID = itemlayoutID;
-        timelist = times;
-        syousailist = syousais;
+        IntNowdataslist = IntNowdatas;
+        Codeslist = Codes;
+
         // bitmapの配列
-        iclist = new Bitmap[ics.length];
+        iclist = new Bitmap[Imgs.length];
         // drawableのIDからbitmapに変換
-        for( int i = 0; i< ics.length; i++){
-            iclist[i] = BitmapFactory.decodeResource(context.getResources(), ics[i]);
+        for( int i = 0; i< Imgs.length; i++){
+            iclist[i] = BitmapFactory.decodeResource(context.getResources(), Imgs[i]);
         }
+        Jihunlist = Jihuns;
+        syousailist = syousais;
+        cidlist = cids;
     }
 
 
@@ -43,17 +53,24 @@ public class Home_BaseAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = inflater.inflate(layoutID,null);
             holder = new ViewHolder();
-            holder.img = convertView.findViewById(R.id.img);
-            holder.time = convertView.findViewById(R.id.time);
-            holder.syousai = convertView.findViewById(R.id.syousai);
+            holder.timev = convertView.findViewById(R.id.intnowdata);
+            holder.syousaiv = convertView.findViewById(R.id.syousai);
+            holder.imgv = convertView.findViewById(R.id.img);
+            holder.jihunv = convertView.findViewById(R.id.time);
+            holder.codev = convertView.findViewById(R.id.code);
+            holder.cidv = convertView.findViewById(R.id.cid);
             convertView.setTag(holder);
 
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.img.setImageBitmap(iclist[position]);
-        holder.syousai.setText(syousailist[position]);
-        holder.time.setText(timelist[position]);
+        holder.imgv.setImageBitmap(iclist[position]);
+        holder.syousaiv.setText(syousailist[position]);
+        holder.timev.setText(IntNowdataslist[position]);
+        holder.codev.setText(Codeslist[position]);
+        holder.jihunv.setText(Jihunlist[position]);
+        holder.cidv.setText(cidlist[position]);
+
 
 
 
@@ -61,7 +78,7 @@ public class Home_BaseAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return timelist.length;
+        return IntNowdataslist.length;
     }
 
     @Override

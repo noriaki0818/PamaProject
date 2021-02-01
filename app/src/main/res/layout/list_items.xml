@@ -18,12 +18,32 @@
 
     <TextView
         android:id="@+id/syousai"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="90dp"
         android:layout_weight="1"
         android:gravity="center"
         android:text="TextView"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/intnowdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/cid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="1"/>
+
 
 
 </LinearLayout>

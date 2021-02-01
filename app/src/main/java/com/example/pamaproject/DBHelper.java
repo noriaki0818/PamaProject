@@ -17,6 +17,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String Hospital_TABLE = "HospitalTable";
     public static final String Excretion_TABLE = "ExcretionTable";
     public static final String Code_TABLE = "CodeTable";
+    public static final String ListView_Table = "ListViewTable";
+
+
     public static final int DATABASE_VERSION = 1;
 
     public static final String DATABASE_NAME = "PamaProjectTest.db";
@@ -63,10 +66,10 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", Child_ID INTEGER NOT NULL" +
                         ", Code INTEGER NOT NULL" +
                         ", Registration_Time TEXT NOT NULL" +
+                        ", jihun TEXT NOT NULL" +
+                        ", IntNowdata BIGINT NOT NULL" +
                         ", Memo TEXT" +
-                        ", ml INTEGER NOT NULL DEFAULT 0, " +
-                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
-                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
+                        ", ml INTEGER NOT NULL DEFAULT 0);"
         );
         db.execSQL(
                 "CREATE TABLE SleepTable(Sleep_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
@@ -110,6 +113,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE CodeTable(Code INTEGER PRIMARY KEY AUTOINCREMENT" +
                         ", Class TEXT NOT NULL" +
                         ", Code_Name TEXT NOT NULL);"
+        );
+        db.execSQL(
+                "CREATE TABLE ListViewTable(IntNowdata BIGINT PRIMARY KEY " +
+                        ", Code INTEGER NOT NULL" +
+                        ", jihun TEXT NOT NULL" +
+                        ", syousai TEXT " +
+                        ", Child_ID INTEGER );"
         );
         db.execSQL(
                 "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
