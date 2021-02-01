@@ -10,13 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PamaProject">
         <activity android:name=".BirthNP"></activity>
-        <activity android:name=".Home_summary" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Home_summary" />
         <activity android:name=".Home_MilkWatch" >
         </activity>
         <activity android:name=".Summary_height" />
@@ -27,7 +21,13 @@
         <activity android:name=".Nikki_tosibetu" />
         <activity android:name=".Nikki" />
         <activity android:name=".Article" />
-        <activity android:name=".Article_list" />
+        <activity android:name=".Article_list" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Home" >
         </activity>
         <activity android:name=".Start_Shared" />
@@ -43,13 +43,8 @@
         <activity android:name=".Menu_Share" />
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

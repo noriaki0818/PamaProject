@@ -20,6 +20,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String DATABASE_NAME = "PamaProjectTest.db";
+//    public static final String COLUMN_ID = "Article_ID";
+//    public static final String COLUMN_NAME = "Article_Name";
+//    public static final String COLUMN_TEXT = "Article_text";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -127,6 +130,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 ,"うんこ", "尿", "両方", "せき", "げろ"
                 ,"発疹", "けが", "病院", "予防接種", "薬"
                 ,"体温", "身長", "体温"};
+        String[] Article_Name = {"生後1ヶ月のおすすめ記事","生後2ヶ月のおすすめ記事","生後3ヶ月のおすすめ記事"
+                ,"生後4ヶ月のおすすめ記事","生後5ヶ月のおすすめ記事","生後6ヶ月のおすすめ記事"
+                ,"生後7ヶ月のおすすめ記事","生後8ヶ月のおすすめ記事","生後9ヶ月のおすすめ記事"
+                ,"生後10ヶ月のおすすめ記事","生後11ヶ月のおすすめ記事","生後1年0ヶ月のおすすめ記事"
+                ,"生後1年1ヶ月のおすすめ記事","生後1年2ヶ月のおすすめ記事","生後1年3ヶ月のおすすめ記事"
+                ,"生後1年4ヶ月のおすすめ記事","生後1年5ヶ月のおすすめ記事","生後1年6ヶ月のおすすめ記事"
+                ,"生後1年7ヶ月のおすすめ記事","生後1年8ヶ月のおすすめ記事","生後1年9ヶ月のおすすめ記事"
+                ,"生後1年10ヶ月のおすすめ記事","生後1年11ヶ月のおすすめ記事","生後2年0ヶ月のおすすめ記事"
+                ,"生後2年1ヶ月のおすすめ記事","生後2年2ヶ月のおすすめ記事","生後2年3ヶ月のおすすめ記事"
+                ,"生後2年4ヶ月のおすすめ記事","生後2年5ヶ月のおすすめ記事","生後2年6ヶ月のおすすめ記事"
+                ,"生後2年7ヶ月のおすすめ記事","生後2年8ヶ月のおすすめ記事","生後2年9ヶ月のおすすめ記事"
+                ,"生後2年10ヶ月のおすすめ記事","生後2年11ヶ月のおすすめ記事"};
+        String[] Article_text ={"ミルク"};
 
         db.beginTransaction();
 
@@ -145,6 +161,24 @@ public class DBHelper extends SQLiteOpenHelper {
         }finally {
             db.endTransaction();
         }
+
+        try{
+            SQLiteStatement sql = db.compileStatement(
+                    "INSERT INTO "+ Article_TABLE +"(Article_Name, Article_text) VALUES(?,?)"
+            );
+            for (int i = 0; i < Article_Name.length; i++){
+                sql.bindString(1, Article_Name[i]);
+                sql.bindString(2, Article_text[i]);
+                sql.executeInsert();//実行
+            }
+            db.setTransactionSuccessful();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+        }
+
+
 
     }
 
@@ -183,5 +217,6 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         onCreate(db);
     }
+
 
 }
