@@ -2,13 +2,17 @@ package com.example.pamaproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -20,9 +24,12 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Summary_unko extends AppCompatActivity implements View.OnClickListener {
+    private DBHelper helper = null;
+    private static SQLiteDatabase db;
     protected BarChart chart;
     ImageView menu,left,right,
             food,unko,sleep,height,weight;
@@ -66,6 +73,19 @@ public class Summary_unko extends AppCompatActivity implements View.OnClickListe
         next.setOnClickListener(this);
         back.setOnClickListener(this);
 
+        //ヘルパーの準備
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        } finally {
+            db.close();
+        }
+
+        insertExcretionTable(1,3,getNowDate(),"5");
         //ボタンの色を変える
         summary.setBackgroundColor(Color.WHITE);
         food.setBackgroundColor(Color.RED);
@@ -74,9 +94,19 @@ public class Summary_unko extends AppCompatActivity implements View.OnClickListe
         height.setBackgroundColor(Color.RED);
         weight.setBackgroundColor(Color.RED);
 
+        //時間
+        String bar = getWeek().get(1);
+        String bar2 = getWeek().get(2);
+        String bar3 = getWeek().get(3);
+        String bar4 = getWeek().get(4);
+        String bar5 = getWeek().get(5);
+        String bar6 = getWeek().get(6);
+        String bar7 = getWeek().get(7);
+
         //テキスト
-        next.setText("2021/2/1");
-        back.setText("2021/2/7");
+        next.setText(getWeek().get(7));
+        back.setText(getWeek().get(1));
+
 
         //表示データ取得
         BarData data = new BarData(getBarData());
@@ -84,6 +114,7 @@ public class Summary_unko extends AppCompatActivity implements View.OnClickListe
 
         //Y軸(左)
         YAxis left = chart.getAxisLeft();
+        //Y軸(最低値)
         left.setAxisMinimum(0);
         left.setLabelCount(3);
         left.setDrawTopYLabelEntry(true);
@@ -96,10 +127,13 @@ public class Summary_unko extends AppCompatActivity implements View.OnClickListe
         right.setDrawZeroLine(true);
         right.setDrawTopYLabelEntry(true);
 
+
+
+
         //X軸
         XAxis xAxis = chart.getXAxis();
         //X軸に表示するLabelのリスト(最初の""は原点の位置) 日付
-        final String[] labels = {"","うんこ", "9/13", "9/14","9/15","9/16","9/17","9/18"};
+        final String[] labels = {"",bar7, bar6, bar5,bar4,bar3,bar2,bar};
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         XAxis bottomAxis = chart.getXAxis();
         bottomAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -117,28 +151,144 @@ public class Summary_unko extends AppCompatActivity implements View.OnClickListe
 
         chart.setScaleEnabled(false);
     }
+    //今日の時間
+    public static String getNowDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+        String date = year + "年" + (month + 1) + "月" + day + "日　" + hour + "時" + minute + "分";
+
+        System.out.println(date);
+
+        return date;
+    }
+    //1週間
+    public static ArrayList<String> getWeek() {
+        String date;
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+
+        String Year = year + "年";
+        day = day+1;
+        ArrayList<String> week = new ArrayList<>();
+
+        for (int zikan = -1;zikan<= 6;zikan++){
+
+            if (day == 0){
+                month = month-1;
+                if(month ==-1){year = year -1;month = 11;date = (month +1) + "月" + (day = 31) + "日";week.add(date) ; } //12月
+                else if(month ==10){month = 10;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//11月
+                else if(month ==9){month = 9;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//10月
+                else if(month ==8){month = 8;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//9月
+                else if(month ==7){month = 7;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//8月
+                else if(month ==6){month = 6;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//7月
+                else if(month ==5){month = 5;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//6月
+                else if(month ==4){month = 4;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//5月
+                else if(month ==3){month = 3;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//4月
+                else if(month ==2){month = 2;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//3月
+                else if(month ==1){month = 1;date = (month +1) + "月" + (day = 28) + "日";week.add(date); }//2月
+                else if(month ==0){;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//1月
+            }else{
+                date = (month + 1) + "月" + day + "日　";
+                week.add(date);
+            }
+
+            day = day-1;
+        }
+        week.add(Year);
+        return week;
+    }
+
+
+    //うんこテーブルにデータ保存
+    public void insertExcretionTable(int Child_ID,int Code,String Registration_Time, String Memo) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Registration_Time", Registration_Time);
+        values.put("Code", Code);
+        values.put("Memo", Memo);
+        values.put("Child_ID", Child_ID);
+
+        db.insert("ExcretionTable", null, values);
+    }
+    //    ExcretionTable_IDを取得
+    public int ongetExcretionTable_ID(String Registration_Time){
+        int ExcretionTable_ID = 0;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"Food_ID"};//0,1,2
+            String[] SearchKey = {Registration_Time};
+            cs = db.query("FoodTable", getcols, "Registration_Time = ? ", SearchKey, null, null, null, null);
+            if (cs.moveToFirst()){
+                ExcretionTable_ID = cs.getCount();
+                Toast.makeText(this, cs.getString(0) , Toast.LENGTH_SHORT).show();
+                System.out.println("ExcretionTable " + ExcretionTable_ID);
+            } else if (ExcretionTable_ID == 0){
+                Toast.makeText(this, "ExcretionTableID取れてない", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+        return ExcretionTable_ID;
+    }
 
     //棒グラフのデータを取得　
-    private List<IBarDataSet> getBarData(){
-
+    private List<IBarDataSet> getBarData() {
+        SQLiteDatabase db = helper.getReadableDatabase();
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(1, 15));
-        entries.add(new BarEntry(2, 8));
-        entries.add(new BarEntry(3, 7));
-        entries.add(new BarEntry(4, 6));
-        entries.add(new BarEntry(5, 5));
-        entries.add(new BarEntry(6, 3));
-        entries.add(new BarEntry(7, 13));
+
+        for (int x = 1; x <= 7; x++) {
+            if(x == 1){
+                String Get = getWeek().get(8) + getWeek().get(1);
+                entries.add(new BarEntry(7, ongetExcretionTable_ID(Get)));
+                System.out.println(Get);
+            }
+            if(x == 2){
+                String Get = getWeek().get(8) + getWeek().get(2);
+                entries.add(new BarEntry(6, ongetExcretionTable_ID(Get)));
+            }
+            if(x == 3){
+                String Get = getWeek().get(8) + getWeek().get(3);
+                entries.add(new BarEntry(5, ongetExcretionTable_ID(Get)));
+            }if(x == 4){
+                String Get = getWeek().get(8) + getWeek().get(4);
+                entries.add(new BarEntry(4, ongetExcretionTable_ID(Get)));
+            }
+            if(x == 5){
+                String Get = getWeek().get(8) + getWeek().get(5);
+                entries.add(new BarEntry(3, ongetExcretionTable_ID(Get)));
+            }if(x == 6){
+                String Get = getWeek().get(8) + getWeek().get(6);
+                entries.add(new BarEntry(2, ongetExcretionTable_ID(Get)));
+            }
+            if(x == 7){
+                String Get = getWeek().get(8) + getWeek().get(7);
+                entries.add(new BarEntry(1, ongetExcretionTable_ID(Get)));
+            }
+        }
+
         List<IBarDataSet> bars = new ArrayList<>();
         BarDataSet dataSet = new BarDataSet(entries, "bar");
-
         //ハイライトさせない
         dataSet.setHighlightEnabled(false);
 
         //Barの色をセット
-        dataSet.setColors( R.color.purple_200);
+        dataSet.setColors(R.color.purple_200);
         bars.add(dataSet);
-
         return bars;
     }
 
