@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PamaProject">
         <activity android:name=".BirthNP" />
-        <activity android:name=".Home_summary"></activity>
+        <activity android:name=".Home_summary">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Home_MilkWatch"></activity>
         <activity android:name=".Summary_height" />
         <activity android:name=".Summary_sleep" />
