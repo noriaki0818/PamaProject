@@ -37,7 +37,6 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     int USER_ID = 1;
     String USER_NAME = null;
     String USER_GENDER = null;
-    String Birth = "2020年8月18日";
 
 
     @Override
@@ -85,7 +84,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         USER_NAME = intent.getStringExtra("username");//キーを間違いないよウニ←←←←←←←←←←←←←←←←←←←←←←←
         USER_GENDER = intent.getStringExtra("usergender");
 
-        birth.setText("誕生日を入力してください");
+        birth.setText("誕生日を入力");
 
         onSaveUser(USER_NAME, USER_GENDER);
         USER_ID = onSearch_ID(USER_NAME);

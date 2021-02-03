@@ -157,6 +157,8 @@ public class Menu_Babyadd extends AppCompatActivity implements View.OnClickListe
                     date.get(Calendar.MONTH),
                     date.get(Calendar.DATE)
             );
+            //dialogを表示
+            datePickerDialog.show();
         }
         int cnt = 0;
         if (cnt == 0) {
