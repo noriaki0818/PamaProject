@@ -38,6 +38,7 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
     TextView next, back;
     Intent intent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,7 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         //データベースを取得
         SQLiteDatabase db = helper.getWritableDatabase();
 
+
         try {
             Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
 
@@ -96,19 +98,18 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         height.setBackgroundColor(Color.RED);
         weight.setBackgroundColor(Color.RED);
 
-        insertFoodTable(1,3,getNowDate(),"5",6);
 
         //時間
         String bar = getWeek().get(1);
-        String bar2 = getWeek().get(2);
-        String bar3 = getWeek().get(3);
-        String bar4 = getWeek().get(4);
-        String bar5 = getWeek().get(5);
-        String bar6 = getWeek().get(6);
-        String bar7 = getWeek().get(7);
+        String bar2 = getWeek().get(3);
+        String bar3 = getWeek().get(5);
+        String bar4 = getWeek().get(7);
+        String bar5 = getWeek().get(9);
+        String bar6 = getWeek().get(11);
+        String bar7 = getWeek().get(13);
 
         //テキスト
-        next.setText(getWeek().get(7));
+        next.setText(getWeek().get(13));
         back.setText(getWeek().get(1));
 
         //表示データ取得
@@ -152,21 +153,6 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
 
         chart.setScaleEnabled(false);
     }
-    //今日の時間
-    public static String getNowDate() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
-        int second = cal.get(Calendar.SECOND);
-        String date = year + "年" + (month + 1) + "月" + day + "日" + hour + "時" + minute + "分";
-
-        System.out.println(date);
-
-        return date;
-    }
     //1週間
     public static ArrayList<String> getWeek() {
         String date;
@@ -179,49 +165,38 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         int minute = cal.get(Calendar.MINUTE);
         int second = cal.get(Calendar.SECOND);
 
-        String Year = year + "年";
-        day = day+1;
+
+
         ArrayList<String> week = new ArrayList<>();
 
         for (int zikan = -1;zikan<= 6;zikan++){
 
             if (day == 0){
                 month = month-1;
-                if(month ==-1){year = year -1;month = 11;date = (month +1) + "月" + (day = 31) + "日";week.add(date) ; } //12月
-                else if(month ==10){month = 10;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//11月
-                else if(month ==9){month = 9;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//10月
-                else if(month ==8){month = 8;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//9月
-                else if(month ==7){month = 7;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//8月
-                else if(month ==6){month = 6;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//7月
-                else if(month ==5){month = 5;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//6月
-                else if(month ==4){month = 4;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//5月
-                else if(month ==3){month = 3;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//4月
-                else if(month ==2){month = 2;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//3月
-                else if(month ==1){month = 1;date = (month +1) + "月" + (day = 28) + "日";week.add(date); }//2月
-                else if(month ==0){;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//1月
+                if(month ==-1){year = year -1;month = 11;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; } //12月
+                else if(month ==10){month = 10;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//11月
+                else if(month ==9){month = 9;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//10月
+                else if(month ==8){month = 8;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//9月
+                else if(month ==7){month = 7;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//8月
+                else if(month ==6){month = 6;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//7月
+                else if(month ==5){month = 5;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//6月
+                else if(month ==4){month = 4;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//5月
+                else if(month ==3){month = 3;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//4月
+                else if(month ==2){month = 2;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//3月
+                else if(month ==1){month = 1;date = (month +1) + "月" + (day = 28) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//2月
+                else if(month ==0){;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//1月
             }else{
                 date = (month + 1) + "月" + day + "日";
+                String Year = year + "年";
+                week.add(Year);
                 week.add(date);
             }
 
-            day = day-1;
+            day = day - 1;
         }
-        week.add(Year);
         return week;
     }
 
-    //食事テーブルにデータ保存
-    public void insertFoodTable(int Child_ID,int Code,String Registration_Time, String Memo, int ml) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("Registration_Time", Registration_Time);
-        values.put("ml", ml);
-        values.put("Code", Code);
-        values.put("Memo", Memo);
-        values.put("Child_ID", Child_ID);
-
-        db.insert("FoodTable", null, values);
-    }
     //    Food_IDを取得
     public int ongetFood_ID(String Registration_Time){
         int Food_ID = 0;
@@ -229,18 +204,12 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         Cursor cs = null;
         try {
             String[] getcols = {"Food_ID"};//0,1,2
-            String[] SearchKey = {Registration_Time};
-            cs = db.query("FoodTable", getcols, "Registration_Time LIKE  Registration_Time = ? AND '%'", SearchKey, null, null, null);
+            String[] SearchKey = {Registration_Time + '%'};
+            cs = db.query("FoodTable", getcols, "Registration_Time LIKE ?", SearchKey, null, null, null);
             if (cs.moveToFirst()){
                 Food_ID = cs.getCount();
-                Toast.makeText(this, cs.getString(0) , Toast.LENGTH_SHORT).show();
                 System.out.println("food " + Food_ID);
-                System.out.println("food " );
-            } else if (Food_ID == 0){
-                Toast.makeText(this, "FoodID取れてない", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
-            }
+             }
         } finally {
             cs.close();
             db.close();
@@ -255,35 +224,35 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
 
         for (int x = 1; x <= 7; x++) {
             if(x == 1){
-                String Get = getWeek().get(8) + getWeek().get(1);
+                String Get = getWeek().get(0) + getWeek().get(1);
                 entries.add(new BarEntry(7, ongetFood_ID(Get)));
                 System.out.println(Get);
             }
             if(x == 2){
-                String Get = getWeek().get(8) + getWeek().get(2);
+                String Get = getWeek().get(2) + getWeek().get(3);
                 entries.add(new BarEntry(6, ongetFood_ID(Get)));
                 System.out.println(Get);
             }
             if(x == 3){
-                String Get = getWeek().get(8) + getWeek().get(3);
+                String Get = getWeek().get(4) + getWeek().get(5);
                 entries.add(new BarEntry(5, ongetFood_ID(Get)));
                 System.out.println(Get);
             }if(x == 4){
-                String Get = getWeek().get(8) + getWeek().get(4);
+                String Get = getWeek().get(6) + getWeek().get(7);
                 entries.add(new BarEntry(4, ongetFood_ID(Get)));
                 System.out.println(Get);
             }
             if(x == 5){
-                String Get = getWeek().get(8) + getWeek().get(5);
+                String Get = getWeek().get(8) + getWeek().get(9);
                 entries.add(new BarEntry(3, ongetFood_ID(Get)));
                 System.out.println(Get);
             }if(x == 6){
-                String Get = getWeek().get(8) + getWeek().get(6);
+                String Get = getWeek().get(10) + getWeek().get(11);
                 entries.add(new BarEntry(2, ongetFood_ID(Get)));
                 System.out.println(Get);
             }
             if(x == 7){
-                String Get = getWeek().get(8) + getWeek().get(7);
+                String Get = getWeek().get(12) + getWeek().get(13);
                 entries.add(new BarEntry(1, ongetFood_ID(Get)));
                 System.out.println(Get);
             }

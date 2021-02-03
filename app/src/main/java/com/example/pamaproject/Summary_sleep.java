@@ -85,7 +85,6 @@ public class Summary_sleep extends AppCompatActivity implements View.OnClickList
             db.close();
         }
 
-        insertSleepTable(1,3,getNowDate(),"5");
 
         //ボタンの色を変える
         summary.setBackgroundColor(Color.WHITE);
@@ -99,15 +98,15 @@ public class Summary_sleep extends AppCompatActivity implements View.OnClickList
 
         //時間
         String bar = getWeek().get(1);
-        String bar2 = getWeek().get(2);
-        String bar3 = getWeek().get(3);
-        String bar4 = getWeek().get(4);
-        String bar5 = getWeek().get(5);
-        String bar6 = getWeek().get(6);
-        String bar7 = getWeek().get(7);
+        String bar2 = getWeek().get(3);
+        String bar3 = getWeek().get(5);
+        String bar4 = getWeek().get(7);
+        String bar5 = getWeek().get(9);
+        String bar6 = getWeek().get(11);
+        String bar7 = getWeek().get(13);
 
         //テキスト
-        next.setText(getWeek().get(7));
+        next.setText(getWeek().get(13));
         back.setText(getWeek().get(1));
 
 
@@ -154,21 +153,7 @@ public class Summary_sleep extends AppCompatActivity implements View.OnClickList
 
         chart.setScaleEnabled(false);
     }
-    //今日の時間
-    public static String getNowDate() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);    // 0 - 11eg
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
-        int second = cal.get(Calendar.SECOND);
-        String date = year + "年" + (month + 1) + "月" + day + "日　" + hour + "時" + minute + "分";
 
-        System.out.println(date);
-
-        return date;
-    }
     //1週間
     public static ArrayList<String> getWeek() {
         String date;
@@ -181,66 +166,51 @@ public class Summary_sleep extends AppCompatActivity implements View.OnClickList
         int minute = cal.get(Calendar.MINUTE);
         int second = cal.get(Calendar.SECOND);
 
-        String Year = year + "年";
-        day = day+1;
+
+
         ArrayList<String> week = new ArrayList<>();
 
         for (int zikan = -1;zikan<= 6;zikan++){
 
             if (day == 0){
                 month = month-1;
-                if(month ==-1){year = year -1;month = 11;date = (month +1) + "月" + (day = 31) + "日";week.add(date) ; } //12月
-                else if(month ==10){month = 10;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//11月
-                else if(month ==9){month = 9;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//10月
-                else if(month ==8){month = 8;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//9月
-                else if(month ==7){month = 7;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//8月
-                else if(month ==6){month = 6;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//7月
-                else if(month ==5){month = 5;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//6月
-                else if(month ==4){month = 4;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//5月
-                else if(month ==3){month = 3;date = (month +1) + "月" + (day = 30) + "日";week.add(date); }//4月
-                else if(month ==2){month = 2;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//3月
-                else if(month ==1){month = 1;date = (month +1) + "月" + (day = 28) + "日";week.add(date); }//2月
-                else if(month ==0){;date = (month +1) + "月" + (day = 31) + "日";week.add(date); }//1月
+                if(month ==-1){year = year -1;month = 11;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; } //12月
+                else if(month ==10){month = 10;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//11月
+                else if(month ==9){month = 9;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//10月
+                else if(month ==8){month = 8;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//9月
+                else if(month ==7){month = 7;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//8月
+                else if(month ==6){month = 6;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ; }//7月
+                else if(month ==5){month = 5;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//6月
+                else if(month ==4){month = 4;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//5月
+                else if(month ==3){month = 3;date = (month +1) + "月" + (day = 30) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//4月
+                else if(month ==2){month = 2;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//3月
+                else if(month ==1){month = 1;date = (month +1) + "月" + (day = 28) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//2月
+                else if(month ==0){;date = (month +1) + "月" + (day = 31) + "日";String Year = year + "年";week.add(Year);week.add(date) ;}//1月
             }else{
-                date = (month + 1) + "月" + day + "日　";
+                date = (month + 1) + "月" + day + "日";
+                String Year = year + "年";
+                week.add(Year);
                 week.add(date);
             }
 
-            day = day-1;
+            day = day - 1;
         }
-        week.add(Year);
         return week;
     }
 
-
-    //睡眠テーブルにデータ保存
-    public void insertSleepTable(int Child_ID,int Code,String Registration_Time, String Memo) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("Registration_Time", Registration_Time);
-        values.put("Code", Code);
-        values.put("Memo", Memo);
-        values.put("Child_ID", Child_ID);
-        db.insert("SleepTable", null, values);
-    }
-    //    Food_IDを取得
+    //    Sleep_IDを取得
     public int ongetSleep(String Registration_Time){
         int Sleep_ID = 0;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cs = null;
         try {
             String[] getcols = {"Sleep_ID"};//0,1,2
-            String[] SearchKey = {Registration_Time};
-            cs = db.query("SleepTable", getcols, "Registration_Time = ?", SearchKey, null, null, null, null);
+            String[] SearchKey = {Registration_Time + '%'};
+            cs = db.query("SleepTable", getcols, "Registration_Time  LIKE ?", SearchKey, null, null, null, null);
             if (cs.moveToFirst()){
                 Sleep_ID = cs.getCount();
-                Toast.makeText(this, cs.getString(0) , Toast.LENGTH_SHORT).show();
                 System.out.println("sleep " + Sleep_ID);
-            } else if (Sleep_ID == 0){
-                Toast.makeText(this, "Sleep_ID取れてない", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
-            }
+           }
         } finally {
             cs.close();
             db.close();
@@ -255,30 +225,30 @@ public class Summary_sleep extends AppCompatActivity implements View.OnClickList
 
         for (int x = 1; x <= 7; x++) {
             if(x == 1){
-                String Get = getWeek().get(8) + getWeek().get(1);
+                String Get = getWeek().get(0) + getWeek().get(1);
                 entries.add(new BarEntry(7, ongetSleep(Get)));
                 System.out.println(Get);
             }
             if(x == 2){
-                String Get = getWeek().get(8) + getWeek().get(2);
+                String Get = getWeek().get(2) + getWeek().get(3);
                 entries.add(new BarEntry(6, ongetSleep(Get)));
             }
             if(x == 3){
-                String Get = getWeek().get(8) + getWeek().get(3);
+                String Get = getWeek().get(4) + getWeek().get(5);
                 entries.add(new BarEntry(5, ongetSleep(Get)));
             }if(x == 4){
-                String Get = getWeek().get(8) + getWeek().get(4);
+                String Get = getWeek().get(6) + getWeek().get(7);
                 entries.add(new BarEntry(4, ongetSleep(Get)));
             }
             if(x == 5){
-                String Get = getWeek().get(8) + getWeek().get(5);
+                String Get = getWeek().get(8) + getWeek().get(9);
                 entries.add(new BarEntry(3, ongetSleep(Get)));
             }if(x == 6){
-                String Get = getWeek().get(8) + getWeek().get(6);
+                String Get = getWeek().get(10) + getWeek().get(11);
                 entries.add(new BarEntry(2, ongetSleep(Get)));
             }
             if(x == 7){
-                String Get = getWeek().get(8) + getWeek().get(7);
+                String Get = getWeek().get(12) + getWeek().get(13);
                 entries.add(new BarEntry(1, ongetSleep(Get)));
             }
         }
