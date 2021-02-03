@@ -193,6 +193,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         cid = intent.getStringExtra("child_id");
         System.out.println("IN HOme child_id ; " + cid);
 
+        if (cid == null){
+            cid = intent.getStringExtra("CHILD_ID");
+            System.out.println("MENU into IN HOme child_id ; " + cid);
+        }
 
         //listview表示
         selectListViewTable(cid);
@@ -237,6 +241,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         if (view == menu) {
             //メニュー
             intent = new Intent(Home.this, Menu_Baby.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
 

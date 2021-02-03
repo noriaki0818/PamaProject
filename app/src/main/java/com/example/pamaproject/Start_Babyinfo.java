@@ -84,7 +84,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         USER_NAME = intent.getStringExtra("username");//キーを間違いないよウニ←←←←←←←←←←←←←←←←←←←←←←←
         USER_GENDER = intent.getStringExtra("usergender");
 
-        birth.setText("誕生日を入力してください");
+        birth.setText("誕生日を入力");
 
         onSaveUser(USER_NAME, USER_GENDER);
         USER_ID = onSearch_ID(USER_NAME);
