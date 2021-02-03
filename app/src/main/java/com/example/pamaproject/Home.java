@@ -1,7 +1,6 @@
 package com.example.pamaproject;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,8 +53,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     String cid;
 
     private DBHelper helper=null;
-    private static SQLiteDatabase db;
-
 
     //しょうや ↓
     //listview変数設定
@@ -73,8 +70,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
         try {
             Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
-
-        }finally {
+        }
+        finally {
             db.close();
         }
 
@@ -193,10 +190,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
         //チャイルドID取得
         intent =getIntent();
-        //CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
-        CHILD_ID = 1;
-        cid=String.valueOf(CHILD_ID);
-
+        cid = intent.getStringExtra("child_id");
+        System.out.println("IN HOme child_id ; " + cid);
 
 
         //listview表示
@@ -234,13 +229,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         //時分
         String jihunn = jihunn();
 
-        //ヘッダー
-        if (view == daybefore) {
-            //前日にする
-        }
-        if (view == daynext) {
-            //次の日にする
-        }
         if (view == photo) {
             //赤ちゃんの画像
             intent = new Intent();
@@ -908,7 +896,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         try {
             String[] getcols = {"Diary"};//0,1,2
             String[] SearchKey = {CID,today};
-            cs = db.query("DiaryTable", getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
+            cs = db.query("DiaryTa" +
+                    "ble", getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
             if (cs.moveToFirst()) {
                 nikki = cs.getString(0);
             }else{

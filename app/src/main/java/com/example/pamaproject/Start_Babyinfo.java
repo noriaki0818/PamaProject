@@ -37,7 +37,6 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     int USER_ID = 1;
     String USER_NAME = null;
     String USER_GENDER = null;
-    String Birth = "2020年8月18日";
 
 
     @Override
