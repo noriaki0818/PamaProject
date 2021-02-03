@@ -27,39 +27,39 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         articleMenuBtn = (ImageButton)findViewById(R.id.article_menu2);
         articleMenuBtn.setOnClickListener( this );
 
-        String strName = "";
-        String strText = "";
-
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
-            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
-
-        }finally {
-            db.close();
-        }
-
-        String strSQL = "SELECT Article_Name, Article_text FROM ArticleTable WHERE Article_ID = " + strData;
-        Cursor cursor = db.rawQuery(strSQL, null);
-
-/*
-        Cursor cursor = db.query(DatabaseOpenHelper.TABLE_NAME,
-                new String[] {
-                        DatabaseOpenHelper.COLUMN_NAME,
-                        DatabaseOpenHelper.COLUMN_PRICE },
-                DatabaseOpenHelper.COLUMN_ID + "='" + strData + "'",
-                null, null, null, null);
-*/
-
-//        while (cursor.moveToNext()){
-//            strName = cursor.getString(
-//                    cursor.getColumnIndex(DBHelper.COLUMN_NAME));
-//            strText = cursor.getString(
-//                    cursor.getColumnIndex(DBHelper.COLUMN_TEXT));
+//        String strName = "";
+//        String strText = "";
+//
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//        try {
+//            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+//
+//        }finally {
+//            db.close();
 //        }
-
-        ListView listView = (ListView)findViewById(R.id.article_list2);
-        TextView textView = (TextView)findViewById(R.id.textView4);
-        textView.setText(strData);
+//
+//        String strSQL = "SELECT Article_Name, Article_text FROM ArticleTable WHERE Article_ID = " + strData;
+//        Cursor cursor = db.rawQuery(strSQL, null);
+//
+///*
+//        Cursor cursor = db.query(DatabaseOpenHelper.TABLE_NAME,
+//                new String[] {
+//                        DatabaseOpenHelper.COLUMN_NAME,
+//                        DatabaseOpenHelper.COLUMN_PRICE },
+//                DatabaseOpenHelper.COLUMN_ID + "='" + strData + "'",
+//                null, null, null, null);
+//*/
+//
+////        while (cursor.moveToNext()){
+////            strName = cursor.getString(
+////                    cursor.getColumnIndex(DBHelper.COLUMN_NAME));
+////            strText = cursor.getString(
+////                    cursor.getColumnIndex(DBHelper.COLUMN_TEXT));
+////        }
+//
+//        ListView listView = (ListView)findViewById(R.id.article_list2);
+//        TextView textView = (TextView)findViewById(R.id.textView4);
+//        textView.setText(strData);
 
     }
 

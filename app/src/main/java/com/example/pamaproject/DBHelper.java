@@ -1,5 +1,6 @@
 package com.example.pamaproject;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -20,9 +21,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String DATABASE_NAME = "PamaProjectTest.db";
-//    public static final String COLUMN_ID = "Article_ID";
-//    public static final String COLUMN_NAME = "Article_Name";
-//    public static final String COLUMN_TEXT = "Article_text";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -166,7 +164,7 @@ public class DBHelper extends SQLiteOpenHelper {
             SQLiteStatement sql = db.compileStatement(
                     "INSERT INTO "+ Article_TABLE +"(Article_Name, Article_text) VALUES(?,?)"
             );
-            for (int i = 0; i < Article_Name.length; i++){
+            for (int i = 0; i < Article_text.length; i++){
                 sql.bindString(1, Article_Name[i]);
                 sql.bindString(2, Article_text[i]);
                 sql.executeInsert();//実行
@@ -217,6 +215,5 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         onCreate(db);
     }
-
 
 }
