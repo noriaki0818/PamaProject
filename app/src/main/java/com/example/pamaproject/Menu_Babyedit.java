@@ -159,6 +159,8 @@ public class Menu_Babyedit extends AppCompatActivity implements View.OnClickList
                     date.get(Calendar.MONTH),
                     date.get(Calendar.DATE)
             );
+            //dialogを表示
+            datePickerDialog.show();
 
         }
         int cnt = 0;

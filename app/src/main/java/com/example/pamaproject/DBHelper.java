@@ -48,10 +48,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "CREATE TABLE DiaryTable(Diary_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
                         ", Child_ID INTEGER NOT NULL" +
-                        ",Registration_Time TEXT NOT NULL" +
-                        ", Diary TEXT NOT NULL" +
-                        ", Image  BLOB, " +
-                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID));"
+                        ", Today TEXT NOT NULL" +
+                        ", Diary TEXT " +
+                        ", Image  BLOB);"
         );
         db.execSQL(
                 "CREATE TABLE ArticleTable(Article_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
@@ -63,10 +62,10 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", Child_ID INTEGER NOT NULL" +
                         ", Code INTEGER NOT NULL" +
                         ", Registration_Time TEXT NOT NULL" +
-                        ", Memo TEXT" +
-                        ", ml INTEGER NOT NULL DEFAULT 0, " +
-                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID), " +
-                        " FOREIGN KEY (Code) REFERENCES CodeTable(Code));"
+                        ", jihun TEXT NOT NULL" +
+                        ", IntNowdata BIGINT NOT NULL" +
+                        ", syousai TEXT" +
+                        ", ml INTEGER NOT NULL DEFAULT 0);"
         );
         db.execSQL(
                 "CREATE TABLE SleepTable(Sleep_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
@@ -118,9 +117,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", syousai TEXT " +
                         ", Child_ID INTEGER );"
         );
-        db.execSQL(
-                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
-        );
 
         String[] Class = {"食事","食事","食事","食事","食事"
                 ,"食事","食事","食事","食事","食事"
@@ -147,6 +143,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 ,"生後2年4ヶ月のおすすめ記事","生後2年5ヶ月のおすすめ記事","生後2年6ヶ月のおすすめ記事"
                 ,"生後2年7ヶ月のおすすめ記事","生後2年8ヶ月のおすすめ記事","生後2年9ヶ月のおすすめ記事"
                 ,"生後2年10ヶ月のおすすめ記事","生後2年11ヶ月のおすすめ記事"};
+
         String[] Article_text ={"ミルク"};
 
         db.beginTransaction();
@@ -160,20 +157,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 sql.bindString(2, Code_Name[i]);
                 sql.executeInsert();//実行
             }
-            db.setTransactionSuccessful();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-        }
-        try{
-            SQLiteStatement sql = db.compileStatement(
+
+            SQLiteStatement sql2 = db.compileStatement(
                     "INSERT INTO "+ Article_TABLE +"(Article_Name, Article_text) VALUES(?,?)"
             );
             for (int i = 0; i < Article_text.length; i++){
-                sql.bindString(1, Article_Name[i]);
-                sql.bindString(2, Article_text[i]);
-                sql.executeInsert();//実行
+                sql2.bindString(1, Article_Name[i]);
+                sql2.bindString(2, Article_text[i]);
+                sql2.executeInsert();//実行
             }
             db.setTransactionSuccessful();
         }catch (SQLException e){

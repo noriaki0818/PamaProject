@@ -30,6 +30,7 @@ public class Menu_Baby extends AppCompatActivity implements View.OnClickListener
 
     Intent intent;
     DBHelper helper;
+    String CHILD_ID;
 
     int BabyCnt = 0;
 
@@ -103,12 +104,16 @@ public class Menu_Baby extends AppCompatActivity implements View.OnClickListener
         BabyCnt = onGetChildData();
         System.out.println("赤ちゃんの数は" + BabyCnt + " です");
 
+        intent = getIntent();
+        CHILD_ID = intent.getStringExtra("child_id");
+
     }
     @Override
     public void onClick (View v){
 //        ホームボタン
         if (v == toHome) {
             intent = new Intent(Menu_Baby.this, Home.class);
+            intent.putExtra("CHILD_ID", CHILD_ID);
             startActivity(intent);
         }
 //        フッダー
