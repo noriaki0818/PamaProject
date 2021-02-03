@@ -19,41 +19,42 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/footer" />
 
-    <ImageButton
-        android:id="@+id/help_bo_baby"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
+    <LinearLayout
+        android:id="@+id/memu_fooder"
+        android:layout_width="393dp"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/help_bo_help"
-        app:srcCompat="@drawable/bo_menubaby" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageButton
-        android:id="@+id/help_bo_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintHorizontal_bias="0.911"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bo_shared" />
+        <ImageButton
+            android:id="@+id/help_bo_baby"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_menubaby" />
 
-    <ImageButton
-        android:id="@+id/help_bo_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/footer"
-        app:layout_constraintEnd_toEndOf="@+id/footer"
-        app:layout_constraintStart_toStartOf="@+id/footer"
-        app:layout_constraintTop_toTopOf="@+id/footer"
-        app:srcCompat="@drawable/bo_help" />
+        <ImageButton
+            android:id="@+id/help_bo_help"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_help" />
+
+        <ImageButton
+            android:id="@+id/help_bo_share"
+            android:layout_width="61dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/bo_shared" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/header"

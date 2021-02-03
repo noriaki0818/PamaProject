@@ -1,14 +1,17 @@
 package com.example.pamaproject;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +19,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Start_Babyinfo extends AppCompatActivity implements View.OnClickListener{
+import java.util.Calendar;
 
+public class Start_Babyinfo extends AppCompatActivity implements View.OnClickListener{
     TextView birth;
     ImageView start;
     ImageView boy, noset, girl;
@@ -30,9 +34,11 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     String BABY_GENDER = null;
     String BABY_NAME = null;
     int CHILD_ID = 0;
-    int USER_ID = 0;
+    int USER_ID = 1;
     String USER_NAME = null;
     String USER_GENDER = null;
+    String Birth = "2020年8月18日";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +53,43 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         girl = (ImageView) findViewById(R.id.baby_girl);
         birth = (TextView) findViewById(R.id.baby_birth);
         babyname = (EditText) findViewById(R.id.babyname);
+
         start.setOnClickListener( this );
         boy.setOnClickListener(this);
         noset.setOnClickListener(this);
         girl.setOnClickListener(this);
         birth.setOnClickListener(this);
 
-        //            データベースからUserの ID を取得
+        boy.setAlpha((float) 0.3);
+        girl.setAlpha((float) 0.3);
+        noset.setAlpha((float) 0.3);
         intent = getIntent();
+
+        // 日付設定時のリスナ作成
+        DatePickerDialog.OnDateSetListener DateSetListener = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(android.widget.DatePicker datePicker, int year,
+                                  int monthOfYear, int dayOfMonth) {
+
+                // トーストとログ出力
+                Toast.makeText(
+                        Start_Babyinfo.this,
+                        "year:" + year + " monthOfYear:" + monthOfYear
+                                + " dayOfMonth:" + dayOfMonth, Toast.LENGTH_LONG)
+                        .show();
+                Log.d("DatePicker", "year:" + year + " monthOfYear:" + monthOfYear
+                        + " dayOfMonth:" + dayOfMonth);
+            }
+        };
+
+        //            データベースからUserの ID を取得
         USER_NAME = intent.getStringExtra("username");//キーを間違いないよウニ←←←←←←←←←←←←←←←←←←←←←←←
         USER_GENDER = intent.getStringExtra("usergender");
+
+        birth.setText("誕生日を入力してください");
+
         onSaveUser(USER_NAME, USER_GENDER);
-
         USER_ID = onSearch_ID(USER_NAME);
-
-        System.out.println(USER_NAME + "さん、性別は" + USER_GENDER + "　ID、"+ USER_ID + "です。");
+        System.out.println(USER_NAME + "さん、性別は" + USER_GENDER + "　ID、" + USER_ID + "です。");
 
         //入力画面外をタップしたら入力画面を閉じる（oncreateの一番最後に配置）
 //        ↓↓↓ここにeditTextをセット
@@ -89,47 +117,68 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     //    ここまで
 
     @Override
-    public void onClick (View v){
+    public void onClick (View v) {
         //これも忘れずに
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-        if(helper == null){
+        if (helper == null) {
             helper = new DBHelper(getApplicationContext());
         }
 
         BABY_NAME = babyname.getText().toString();
-        BIRTHDAY = "2020年8月18日";//ナンバーピッカーで取得
 
         if (v == boy) {
             BABY_GENDER = "男";
             boy.setAlpha((float) 1.0);
-            girl.setAlpha((float) 0.5);
-            noset.setAlpha((float) 0.5);
+            girl.setAlpha((float) 0.3);
+            noset.setAlpha((float) 0.3);
 
         }
         if (v == noset) {
             BABY_GENDER = "設定なし";
-            boy.setAlpha((float) 0.5);
-            girl.setAlpha((float) 0.5);
+            boy.setAlpha((float) 0.3);
+            girl.setAlpha((float) 0.3);
             noset.setAlpha((float) 1.0);
 
         }
         if (v == girl) {
             BABY_GENDER = "女";
-            boy.setAlpha((float) 0.5);
+            boy.setAlpha((float) 0.3);
             girl.setAlpha((float) 1.0);
-            noset.setAlpha((float) 0.5);
+            noset.setAlpha((float) 0.3);
 
         }
-        if(v == birth){
+        if (v == birth) {
+            //Calendarインスタンスを取得
+            final Calendar date = Calendar.getInstance();
 
-            System.out.println("誕生日"+ BIRTHDAY);
+            //DatePickerDialogインスタンスを取得
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    Start_Babyinfo.this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            //setした日付を取得して表示
+                            month = month + 1;
+                            birth.setText(String.format("%d 年 %02d 月 %02d 日", year, month, dayOfMonth));
+                            BIRTHDAY = year + "年" + month + "月 " + dayOfMonth + "日";
+                            System.out.println(BIRTHDAY);
+                        }
+                    },
+                    date.get(Calendar.YEAR),
+                    date.get(Calendar.MONTH),
+                    date.get(Calendar.DATE)
+            );
 
+            //dialogを表示
+            datePickerDialog.show();
         }
+
         int cnt = 0;
         if (cnt == 0) {
             if (v == start) {
+                System.out.println("赤ちゃん登録　情報" + "Child_ID: " + CHILD_ID + "　ID: " + USER_ID + "　名前: "+ BABY_NAME + "　性別: " + BABY_GENDER + "　誕生日" + BIRTHDAY);
                 if (USER_ID == 0 || BABY_NAME == null || BABY_GENDER == null || BIRTHDAY == null) {
                     Toast.makeText(this, "すべての項目を入力してください", Toast.LENGTH_SHORT).show();
 
@@ -138,7 +187,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
 
                     CHILD_ID = ongetChild_ID(BABY_NAME);
                     intent = new Intent(Start_Babyinfo.this, Home.class);
-                    intent.putExtra("child_id", CHILD_ID);//ホームにChild_IDを渡す
+                    intent.putExtra("child_id", String.valueOf(CHILD_ID));//ホームにChild_IDを渡す
                     startActivity(intent);
                 }
                 cnt++;
@@ -217,5 +266,4 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         }
         return ID;
     }
-
 }

@@ -53,14 +53,14 @@
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bo_girl" />
 
     <EditText
-        android:id="@+id/baby_edit_editname"
+        android:id="@+id/baby_edit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
@@ -73,18 +73,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/baby_edit_editbirth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="484dp"
-        android:ems="10"
-        android:hint="誕生日"
-        android:inputType="textPersonName"
+    <TextView
+        android:id="@+id/baby_edit_birth"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/flame_home"
+        android:gravity="center_vertical"
+        android:text="誕生日入力"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
@@ -113,9 +116,11 @@
         app:srcCompat="@drawable/text11" />
 
     <ImageButton
-        android:id="@+id/baby_edit_bo_babyadd"
+        android:id="@+id/baby_edit_bo_babyedit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_marginBottom="80dp"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"

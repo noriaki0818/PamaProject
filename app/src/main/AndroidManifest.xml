@@ -9,30 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PamaProject">
-        <activity android:name=".BirthNP"></activity>
-        <activity android:name=".Home_summary" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Home_MilkWatch" >
-        </activity>
-        <activity android:name=".Summary_height" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Summary_sleep" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".BirthNP" />
+        <activity android:name=".Home_summary"></activity>
+        <activity android:name=".Home_MilkWatch"></activity>
+        <activity android:name=".Summary_height" />
+        <activity android:name=".Summary_sleep" />
         <activity android:name=".Summary_unko" />
         <activity android:name=".Summary_weight" />
         <activity android:name=".Nikki_naiyou" />
@@ -40,23 +21,18 @@
         <activity android:name=".Nikki" />
         <activity android:name=".Article" />
         <activity android:name=".Article_list" />
-        <activity android:name=".Home" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-        <activity android:name=".Start_Shared" />
-        <activity android:name=".Start_Fail" />
-        <activity android:name=".Start_Complete2" />
-        <activity android:name=".Start_Complete" />
-        <activity android:name=".Start_Babyinfo" >
+        <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Start_Shared" />
+        <activity android:name=".Start_Fail" />
+        <activity android:name=".Start_Complete2" />
+        <activity android:name=".Start_Complete" />
+        <activity android:name=".Start_Babyinfo" />
         <activity android:name=".Start_Userinfo" />
         <activity android:name=".Start_Userinfo2" />
         <activity android:name=".Menu_Babyedit" />
@@ -65,13 +41,7 @@
         <activity android:name=".Menu_Share" />
         <activity android:name=".Menu_Help" />
         <activity android:name=".Menu_Baby" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" ></activity>
     </application>
 
 </manifest>

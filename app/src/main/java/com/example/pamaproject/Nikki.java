@@ -2,6 +2,8 @@ package com.example.pamaproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,14 +25,25 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
 
     List<String> hi = new ArrayList<>();
     List<String> nai = new ArrayList<>();
-    String tuki,nen;
-    int today = 0;
+    String tuki,nen,cid;
+    String today = null;
 
+    private DBHelper helper=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nikki);
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        }finally {
+            db.close();
+        }
 
         bo_tukibetu = (ImageButton)findViewById(R.id.bo_tukibetu);
         bo_record = (ImageButton)findViewById(R.id.bo_record);
@@ -53,6 +66,8 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         tuki = intent.getStringExtra("tuki");
         nen = intent.getStringExtra("nen");
 
+        cid ="1";
+
         //ない場合
         if(tuki ==null){
 
@@ -61,9 +76,18 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
             txt_nen.setText(nen+"年");
 
             int thismonth =getNowmonth();
+            if(thismonth < 10){
+                tuki = 0 + String.valueOf(thismonth);
+
+            }
             tuki = String.valueOf(thismonth);
+            if(thismonth < 10){
+
+            }
             txt_tuki.setText(tuki+"月");
-            today +=1;
+            today =nen + tuki;
+
+            getNikki(cid,today );
 
         }else{
 
@@ -71,6 +95,7 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
             txt_tuki.setText(tuki+"月");
 
         }
+
 
 
 
@@ -88,6 +113,14 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         nai.add("ら");
         nai.add("い");
 
+        showlistview();
+
+
+
+
+    }
+
+    private void showlistview() {
         // listを配列に入れる
         String[] hiniti = hi.toArray(new String[hi.size()]);
         String[] naiyou = nai.toArray(new String[hi.size()]);
@@ -114,8 +147,6 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
-
-
     }
 
 
@@ -169,5 +200,47 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);    // 0 - 11
         return month +1;
+    }
+
+    private void getNikki(String CID,String today ) {
+
+
+
+        ArrayList<String> Today = new ArrayList<>();
+
+        ArrayList<String> Dialy = new ArrayList<>();
+
+
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"Today", "Diary"};//0,1,2
+            String[] SearchKey = {CID};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? ", SearchKey, null, null, "Today ASC",null);
+            if (cs.moveToFirst()) {
+                for(int i = 0;i < cs.getCount();i++) {
+
+
+
+                    String kirokubi = cs.getString(0).substring(cs.getString(0).length() - 2);
+
+                    Today.add(kirokubi);
+
+                    String syousai1 = cs.getString(1);
+                    Dialy.add(syousai1);
+
+                    System.out.println("DiaryTable、Today:"+kirokubi+"、Diary:"+syousai1+"を取得。");
+
+                    cs.moveToNext();
+                }
+            }else{
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+
     }
 }

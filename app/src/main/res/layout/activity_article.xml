@@ -45,18 +45,17 @@
         app:layout_constraintTop_toTopOf="@+id/home_header"
         app:srcCompat="@drawable/bo_menu" />
 
+
     <TextView
-        android:id="@+id/articletext_title"
-        android:layout_width="300dp"
-        android:layout_height="52dp"
+        android:id="@+id/textView4"
+        android:layout_width="228dp"
+        android:layout_height="36dp"
         android:text="TextView"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintVertical_bias="0.158" />
 
     <ListView
         android:id="@+id/article_list2"
