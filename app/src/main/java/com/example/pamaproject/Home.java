@@ -193,9 +193,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
         //チャイルドID取得
         intent =getIntent();
-        //CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
-        CHILD_ID = 1;
-        cid=String.valueOf(CHILD_ID);
+        CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
+        //CHILD_ID = 1;
+        cid = String.valueOf(CHILD_ID);
 
 
 
@@ -579,7 +579,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         try {
             ContentValues values = new ContentValues();
 
-
             String Code = String.valueOf(code);
             String inttime =String.valueOf(intnowTime);
 
@@ -589,7 +588,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
             values.put("jihun", jihunn);
             values.put("IntNowdata", inttime);
             System.out.println("FoodTbleに、Child_ID:"+cid+"、Code:"+Code+"、Registration_Time:"+nowTime+"、jihun:"+jihunn+"、IntNowdata:"+inttime+"を登録");
-
 
             db.insert("FoodTable", null, values);
         }finally {
@@ -659,11 +657,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
     String unko;
     String hennsyuusurutokinoID;
-    String deleteI;
+    int deleteI;
+    ArrayList<String>  IntNowdata = new ArrayList<>() ;
     //しょうや検索ののちlistviewに表示
     public void selectListViewTable(String CID){
 
-        ArrayList<String>  IntNowdata = new ArrayList<>() ;
 
         ArrayList<Integer> Code = new ArrayList<>();
 
@@ -758,7 +756,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         recodelist2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                deleteI = String.valueOf(i);
+                deleteI = i;
                 System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyy-------------------------"+deleteI);
                 deleteDialog();
                 return true;
@@ -791,11 +789,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     }
 
     private void deleteDB() {
+
+        String u = IntNowdata.get(deleteI);
         SQLiteDatabase db = helper.getWritableDatabase();
-//        try{
-//            String[] params = {};
-//            db.delete("book","is")
-//        }
+        try{
+            String[] params = {u,cid};
+            db.delete("ListViewTable","IntNowdata = ? AND Child_ID = ?",params);
+        }finally {
+            db.close();
+        }
 
         System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 
