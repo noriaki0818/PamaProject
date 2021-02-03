@@ -1,8 +1,10 @@
 package com.example.pamaproject;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements View.OnClickListener {
+public class Home extends AppCompatActivity implements View.OnClickListener ,DialogInterface.OnClickListener{
     TextView day, passingday, babyname,
             diary;//日記入力ボタン、表示
 
@@ -55,22 +58,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
 
     //しょうや ↓
-    //記録時間
-    String kirokujikan;
-
     //listview変数設定
     ListView recodelist2;
-
-    //表示したいの内容のlist
-    ArrayList<String> time = new ArrayList<>();
-
-
-    ArrayList<Integer> ic = new ArrayList<>();
-
-
-    ArrayList<String> syousai = new ArrayList<>();
-
-
+    String nikki =null;
     //しょうや ↑
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,21 +77,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }finally {
             db.close();
         }
-
-
-
-        intent =getIntent();
-
-        //チャイルドID取得
-        //CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
-        CHILD_ID = 1;
-        cid=String.valueOf(CHILD_ID);
-
-
-        //listview表示
-        selectListViewTable();
-
-
 
 
         //テキスト
@@ -216,10 +191,28 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         poo.setOnClickListener(this);
         background.setOnClickListener(this);
 
+        //チャイルドID取得
+        intent =getIntent();
+        //CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
+        CHILD_ID = 1;
+        cid=String.valueOf(CHILD_ID);
+
+
+
+        //listview表示
+        selectListViewTable(cid);
+
+
+
+        String kirokubi =today();
+        nikki = getNikki(cid,kirokubi);
+        diary.setText(nikki);
+
         //ボタンの色を変える
         Record.setBackgroundColor(Color.WHITE);
 
         //テキスト
+
         day.setText("2021/8/18");
         passingday.setText("218");
         babyname.setText("のりくん");
@@ -261,16 +254,25 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
         //日記入力
         if (view == diary) {
-            //日記に飛ぶ
-            intent = new Intent(Home.this, Nikki.class);
-            startActivity(intent);
+
+            String kirokubi =today();
+            if(nikki == null) {
+                setnikki(cid, nikki, kirokubi);
+            }else {
+                updatenikki(cid, nikki, kirokubi);
+
+            }
+
+
+
         }
 
         //フッダーリスト
         if (view == Diary) {
-            //日記画面に飛ぶ
             intent = new Intent(Home.this, Nikki.class);
             startActivity(intent);
+
+
         }
         if (view == Article) {
             //記事画面に飛ぶ
@@ -331,7 +333,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         if (view == milk2) {
             //ミルク
             insertFoodtable(cid,7, nowTime,jihunn,intnowTime);
-            selectListViewTable();
+            selectListViewTable(cid);
 
         }
 //        if (view == meal) {
@@ -454,6 +456,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
 
 
+
     //log時間取得
     private long getintNowDate() {
         String months;
@@ -470,9 +473,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
         int second = cal.get(Calendar.SECOND);
-
         String years = String.valueOf(year);
-
         //月が9以下なら左に0を足す
         if(month<=9){
             String zetrotasumae = String.valueOf(month);
@@ -480,7 +481,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }else{
             months = String.valueOf(month);
         }
-
         //日が9以下なら左に0を足す
         if(day<=9){
             String zetrotasumae = String.valueOf(day);
@@ -488,7 +488,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }else{
             days = String.valueOf(day);
         }
-
         //時が9以下なら左に0を足す
         if(hour<=9){
             String zetrotasumae = String.valueOf(hour);
@@ -496,7 +495,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }else{
             hours = String.valueOf(hour);
         }
-
         //分が9以下なら左に0を足す
         if(minute<=9){
             String zetrotasumae = String.valueOf(minute);
@@ -504,7 +502,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }else{
             minutes = String.valueOf(minute);
         }
-
         //秒が9以下なら左に0を足す
         if(second<=9){
             String zetrotasumae = String.valueOf(second);
@@ -512,16 +509,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }else{
             seconds = String.valueOf(second);
         }
-
         String stringdata = years + months + days + hours + minutes + seconds;
-
         System.out.println(stringdata);
-
         long intdate = Long.parseLong(stringdata);
         System.out.println(intdate);
-
-
-
         return intdate;
     }
 
@@ -547,6 +538,33 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         int minute = cal.get(Calendar.MINUTE);
         String kirokutime = hour + ":"+  minute;
         return kirokutime;
+    }
+    public static String today(){
+        String months;
+        String days;
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    //// 0 - 11eg
+        month +=1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String years = String.valueOf(year);
+        //月が9以下なら左に0を足す
+        if(month<=9){
+            String zetrotasumae = String.valueOf(month);
+            months = "0" + zetrotasumae;
+        }else{
+            months = String.valueOf(month);
+        }
+        //日が9以下なら左に0を足す
+        if(day<=9){
+            String zetrotasumae = String.valueOf(day);
+            days = "0" + zetrotasumae;
+        }else{
+            days = String.valueOf(day);
+        }
+
+        String a = years+months+days;
+        return a;
     }
 
 
@@ -638,10 +656,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
     String unko;
     String hennsyuusurutokinoID;
+    String deleteI;
     //しょうや検索ののちlistviewに表示
-    public void selectListViewTable(){
+    public void selectListViewTable(String CID){
 
         ArrayList<String>  IntNowdata = new ArrayList<>() ;
 
@@ -659,8 +679,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         Cursor cs = null;
         try {
             String[] getcols = {"IntNowdata", "Code", "jihun", "syousai","Child_ID"};//0,1,2
-            String[] SearchKey = {};
-            cs = db.query("ListViewTable", getcols, null, null, null, null, "IntNowdata ASC",null);
+            String[] SearchKey = {CID};
+            cs = db.query("ListViewTable", getcols, "Child_ID = ?", SearchKey, null, null, "IntNowdata ASC",null);
             if (cs.moveToFirst()) {
                 for(int i = 0;i < cs.getCount();i++) {
 
@@ -680,13 +700,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                     String syousai1;
                     if(cs.getString(3)==null) {
                         syousai1 = "";
-                        syousai.add(syousai1);
-                        System.out.println("inttime;"+ inttime+",Code;"+code+",jihun;"+jihun+"syousai;"+syousai1);
                     }else{
                         syousai1 = cs.getString(3);
-                        syousai.add(syousai1);
-                        System.out.println("inttime;"+ inttime+",Code;"+code+",jihun;"+jihun+"syousai;"+syousai1);
                     }
+                    syousai.add(syousai1);
+                    System.out.println("inttime;"+ inttime+",Code;"+code+",jihun;"+jihun+"syousai;"+syousai1);
                     String cid =cs.getString(4);
                     Cid.add(cid);
 
@@ -703,11 +721,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
             db.close();
         }
 
-
-
-
         String[] IntNowdatas = IntNowdata.toArray(new String[IntNowdata.size()]);
-
 
         String[] Codes = new String[Code.size()];
         for (int i=0; i<Code.size(); i++) {
@@ -724,10 +738,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         String[] syousais = syousai.toArray(new String[syousai.size()]);
         String[] cids = Cid.toArray(new String[Cid.size()]);
 
-
-
-
-
         recodelist2 = (ListView)findViewById(R.id.recordlist2) ;
         BaseAdapter adapter = new Home_BaseAdapter(this.getApplicationContext(),
                 R.layout.list_items, IntNowdatas,Codes,Imgs, Jihuns, syousais,cids);
@@ -740,16 +750,57 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 hennsyuusurutokinoID = IntNowdata.get(i);
                 System.out.println("選択したリストのintdata:"+hennsyuusurutokinoID);
 
-
                 hensyuDialog();
 //                System.out.println("ml:"+unko);
+            }
 
+        });
+        recodelist2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                deleteI = String.valueOf(i);
+                System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyy-------------------------"+deleteI);
+                deleteDialog();
+                return true;
             }
 
 
+
         });
+    }
+    private void deleteDialog() {
+        AlertDialog.Builder altdialog = new AlertDialog.Builder(this);
+        altdialog.setTitle("消しますか？");
+        altdialog.setIcon(R.mipmap.ic_launcher);
+        altdialog.setPositiveButton("yes", (DialogInterface.OnClickListener) this);
+        altdialog.setNeutralButton("キャンセル", (DialogInterface.OnClickListener) this);
+        altdialog.setNegativeButton("no", (DialogInterface.OnClickListener) this);
+        altdialog.create().show();
 
     }
+
+    public void onClick(DialogInterface dialogInterface, int i) {
+        if( i == DialogInterface.BUTTON_POSITIVE)
+            Toast.makeText(this,"ポジティブボタン",Toast.LENGTH_LONG).show();
+            deleteDB();
+        if( i == DialogInterface.BUTTON_NEUTRAL)
+            Toast.makeText(this,"ナチュラルボタン",Toast.LENGTH_LONG).show();
+        if( i == DialogInterface.BUTTON_NEGATIVE)
+            Toast.makeText(this,"ネガティブボタン",Toast.LENGTH_LONG).show();
+
+    }
+
+    private void deleteDB() {
+        SQLiteDatabase db = helper.getWritableDatabase();
+//        try{
+//            String[] params = {};
+//            db.delete("book","is")
+//        }
+
+        System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+
+    }
+
 
     private void hensyuDialog() {
         ArrayList<Item> itemList = new ArrayList<>();
@@ -769,8 +820,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         ListView listView = new ListView(this);
         listView.setAdapter(adapter);
 
-
-
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("選択してくだい。")
                 .setView(listView).create();
@@ -780,14 +829,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
-
                 String msg ="選択されたもの:" + ml.get(i);
 
-                unko = String.valueOf(ml.get(i));
+                unko = String.valueOf(ml.get(i))+"ml";
                 System.out.println(msg);
-
-
+                update(unko,hennsyuusurutokinoID,cid);
 
                 dialog.dismiss();
             }
@@ -796,13 +842,24 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
 
     }
-    public void update(){
+    public void update(String unko,String hensyu,String cid){
+        System.out.println("ここ一"+unko+"koko"+hensyu+"cid:"+cid);
 
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try {
+            ContentValues cv = new ContentValues();
+
+            cv.put("syousai", unko);
+
+            db.update("ListViewTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+            db.update("FoodTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+
+            Toast.makeText(this, "編集",Toast.LENGTH_SHORT).show();
+        }finally {
+            db.close();
+        }
+        selectListViewTable(cid);
     }
-
-
-
-
 
     public class Item{
         private int intItem;
@@ -844,7 +901,93 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    private String getNikki(String CID,String today ) {
+        String nikki;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"Diary"};//0,1,2
+            String[] SearchKey = {CID,today};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
+            if (cs.moveToFirst()) {
+                nikki = cs.getString(0);
+            }else{
+                nikki =null;
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+        return nikki;
+    }
 
+    public void setnikki(String cid,String nikki,String kirokubi){
+
+        final EditText editText = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle("日記")
+                .setView(editText)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // お好きな処理をどうぞ
+                        TextView textView = (TextView) findViewById(R.id.bo_diary);
+                        textView.setText(editText.getText());
+                        String text = textView.getText().toString();
+                        setNikki(cid,text,kirokubi);
+                    }
+
+                    private void setNikki(String cid,String text,String kirokubi) {
+                        SQLiteDatabase db = helper.getWritableDatabase();
+                        try {
+                            ContentValues values = new ContentValues();
+                            values.put("Child_ID", cid);
+                            values.put("Today", kirokubi);
+                            values.put("Diary", text);
+
+                            System.out.println("DiaryTableに、Child_ID:"+cid+"を登録");
+
+
+                            db.insert("DiaryTable", null, values);
+                        }finally {
+                            db.close();
+                        }
+                    }
+                })
+                .show();
+    }
+    private void updatenikki(String cid,String nikki,String kirokubi) {
+        final EditText editText = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle("日記")
+                .setView(editText)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // お好きな処理をどうぞ
+                        TextView textView = (TextView) findViewById(R.id.bo_diary);
+                        textView.setText(editText.getText());
+                        String text = textView.getText().toString();
+                        setNikki(cid,text,kirokubi);
+                    }
+
+                    private void setNikki(String cid,String text,String kirokubi) {
+                        SQLiteDatabase db = helper.getReadableDatabase();
+                        try {
+                            ContentValues cv = new ContentValues();
+
+                            cv.put("Diary", text);
+
+                            db.update("DiaryTable", cv, "CHILD_ID = ? AND Today = ?" , new String[] {cid,kirokubi}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+
+                        }finally {
+                            db.close();
+                        }
+                    }
+                })
+                .show();
+    }
 
 }
 

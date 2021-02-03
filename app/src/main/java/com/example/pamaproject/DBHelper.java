@@ -51,10 +51,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "CREATE TABLE DiaryTable(Diary_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
                         ", Child_ID INTEGER NOT NULL" +
-                        ",Registration_Time TEXT NOT NULL" +
-                        ", Diary TEXT NOT NULL" +
-                        ", Image  BLOB, " +
-                        " FOREIGN KEY (Child_ID) REFERENCES BabyTable(Child_ID));"
+                        ", Today TEXT NOT NULL" +
+
+                        ", Diary TEXT " +
+                        ", Image  BLOB);"
         );
         db.execSQL(
                 "CREATE TABLE ArticleTable(Article_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
@@ -68,7 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", Registration_Time TEXT NOT NULL" +
                         ", jihun TEXT NOT NULL" +
                         ", IntNowdata BIGINT NOT NULL" +
-                        ", Memo TEXT" +
+                        ", syousai TEXT" +
                         ", ml INTEGER NOT NULL DEFAULT 0);"
         );
         db.execSQL(
