@@ -40,9 +40,9 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
         noset.setOnClickListener(this);
         woman.setOnClickListener(this);
 
-        man.setAlpha((float) 0.5);
-        woman.setAlpha((float) 0.5);
-        noset.setAlpha((float) 0.5);
+        man.setAlpha((float) 0.3);
+        woman.setAlpha((float) 0.3);
+        noset.setAlpha((float) 0.3);
 
         //ヘルパーの準備
         helper = new DBHelper(this);
@@ -83,22 +83,22 @@ public class Start_Userinfo extends AppCompatActivity implements View.OnClickLis
         if (v == man) {
             GENDER = "男";
             man.setAlpha((float) 1.0);
-            woman.setAlpha((float) 0.5);
-            noset.setAlpha((float) 0.5);
+            woman.setAlpha((float) 0.3);
+            noset.setAlpha((float) 0.3);
 
         }
         if (v == noset) {
             GENDER = "設定なし";
-            man.setAlpha((float) 0.5);
-            woman.setAlpha((float) 0.5);
+            man.setAlpha((float) 0.3);
+            woman.setAlpha((float) 0.3);
             noset.setAlpha((float) 1.0);
 
         }
         if (v == woman) {
             GENDER = "女";
-            man.setAlpha((float) 0.5);
+            man.setAlpha((float) 0.3);
             woman.setAlpha((float) 1.0);
-            noset.setAlpha((float) 0.5);
+            noset.setAlpha((float) 0.3);
 
         }
         if (v == next) {

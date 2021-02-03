@@ -163,9 +163,6 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         excretionBG = (ImageView) findViewById(R.id.excretionlistbg);
 
 
-
-
-
         diary.setOnClickListener(this);
         daybefore.setOnClickListener(this);
         daynext.setOnClickListener(this);
