@@ -170,7 +170,7 @@ public class DBHelper extends SQLiteOpenHelper {
             SQLiteStatement sql = db.compileStatement(
                     "INSERT INTO "+ Article_TABLE +"(Article_Name, Article_text) VALUES(?,?)"
             );
-            for (int i = 0; i < Article_text.length; i++){
+            for (int i = 0; i < Article_Name.length; i++){
                 sql.bindString(1, Article_Name[i]);
                 sql.bindString(2, Article_text[i]);
                 sql.executeInsert();//実行

@@ -20,14 +20,15 @@
         <activity android:name=".Nikki_tosibetu" />
         <activity android:name=".Nikki" />
         <activity android:name=".Article" />
-        <activity android:name=".Article_list" />
-        <activity android:name=".Home">
+        <activity android:name=".Article_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Home"/>
+
         <activity android:name=".Start_Shared" />
         <activity android:name=".Start_Fail" />
         <activity android:name=".Start_Complete2" />
