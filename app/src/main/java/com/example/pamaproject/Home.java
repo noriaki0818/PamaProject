@@ -1,24 +1,36 @@
 package com.example.pamaproject;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class Home extends AppCompatActivity  implements View.OnClickListener {
+public class Home extends AppCompatActivity implements View.OnClickListener ,DialogInterface.OnClickListener{
     TextView day, passingday, babyname,
             diary;//日記入力ボタン、表示
 
@@ -38,60 +50,34 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
             background; //バックグラウンド
 
     Intent intent;
+    int CHILD_ID ;
+    String cid;
 
-    private DBHelper helper;
+    private DBHelper helper=null;
     private static SQLiteDatabase db;
 
-    int CHILD_ID;
 
     //しょうや ↓
-    //記録時間
-    String kirokujikan;
-
     //listview変数設定
     ListView recodelist2;
-
-    //表示したいの内容のlist
-    ArrayList<String> time = new ArrayList<>();
-    String[] times = time.toArray(new String[time.size()]);
-
-    ArrayList<Integer> ic = new ArrayList<>();
-
-
-    ArrayList<String> syousai = new ArrayList<>();
-    String[] syousais = syousai.toArray(new String[syousai.size()]);
-
-
+    String nikki =null;
     //しょうや ↑
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //記録した時間のリストに追加
-        kirokujikan=kirokutime();
-        time.add(kirokujikan);
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
 
-        ic.add(R.drawable.milk2);
-        int[] ics = new int[ic.size()];
-        for (int i=0; i<ic.size(); i++) {
-            ics[i] = ic.get(i);
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        }finally {
+            db.close();
         }
 
-        //記録を表示するリストしょうや
-        recodelist2 = (ListView)findViewById(R.id.recordlist2) ;
-        BaseAdapter adapter = new Home_BaseAdapter(this.getApplicationContext(),
-                R.layout.list_items, times, ics, syousais);
-        recodelist2.setAdapter(adapter);
-
-
-
-        //child_idの入力
-        CHILD_ID = 1;
 
         //テキスト
         day = (TextView) findViewById(R.id.home_text_day);
@@ -163,6 +149,7 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         excretionBG = (ImageView) findViewById(R.id.excretionlistbg);
 
 
+
         diary.setOnClickListener(this);
         daybefore.setOnClickListener(this);
         daynext.setOnClickListener(this);
@@ -204,10 +191,28 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         poo.setOnClickListener(this);
         background.setOnClickListener(this);
 
+        //チャイルドID取得
+        intent =getIntent();
+        //CHILD_ID = Integer.parseInt(intent.getStringExtra("child_id"));
+        CHILD_ID = 1;
+        cid=String.valueOf(CHILD_ID);
+
+
+
+        //listview表示
+        selectListViewTable(cid);
+
+
+
+        String kirokubi =today();
+        nikki = getNikki(cid,kirokubi);
+        diary.setText(nikki);
+
         //ボタンの色を変える
         Record.setBackgroundColor(Color.WHITE);
 
         //テキスト
+
         day.setText("2021/8/18");
         passingday.setText("218");
         babyname.setText("のりくん");
@@ -217,11 +222,17 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
     }
 
+
+
     @Override
     public void onClick(View view) {
 
-//        時間の取得
+        //年月日時分秒
         String nowTime = getNowDate();
+        long intnowTime = getintNowDate();
+
+        //時分
+        String jihunn = jihunn();
 
         //ヘッダー
         if (view == daybefore) {
@@ -243,16 +254,25 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
         //日記入力
         if (view == diary) {
-            //日記に飛ぶ
-            intent = new Intent(Home.this, Nikki.class);
-            startActivity(intent);
+
+            String kirokubi =today();
+            if(nikki == null) {
+                setnikki(cid, nikki, kirokubi);
+            }else {
+                updatenikki(cid, nikki, kirokubi);
+
+            }
+
+
+
         }
 
         //フッダーリスト
         if (view == Diary) {
-            //日記画面に飛ぶ
             intent = new Intent(Home.this, Nikki.class);
             startActivity(intent);
+
+
         }
         if (view == Article) {
             //記事画面に飛ぶ
@@ -309,38 +329,33 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         //食事リスト
         if (view == milk1) {
             //母乳
-
         }
         if (view == milk2) {
             //ミルク
-            insertFoodtable(CHILD_ID, 7, nowTime);
-
-
-
-
-
+            insertFoodtable(cid,7, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
 
         }
-        if (view == meal) {
-            //ごはん
-            insertFoodtable(CHILD_ID, 8, nowTime);
-        }
-        if (view == drink) {
-            //飲み物
-            insertFoodtable(CHILD_ID, 9, nowTime);
-        }
-        if (view == babyfood) {
-            //離乳食
-            insertFoodtable(CHILD_ID, 10, nowTime);
-        }
-        if (view == snack) {
-            //おやつ
-            insertFoodtable(CHILD_ID, 11, nowTime);
-        }
-        if (view == milk3) {
-            //搾乳
-            insertFoodtable(CHILD_ID, 12, nowTime);
-        }
+//        if (view == meal) {
+//            //ごはん
+//            insertFoodtable(CHILD_ID, 8, nowTime,jihunn,intnowTime);
+//        }
+//        if (view == drink) {
+//            //飲み物
+//            insertFoodtable(CHILD_ID, 9, nowTime,jihunn,intnowTime);
+//        }
+//        if (view == babyfood) {
+//            //離乳食
+//            insertFoodtable(CHILD_ID, 10, nowTime,jihunn,intnowTime);
+//        }
+//        if (view == snack) {
+//            //おやつ
+//            insertFoodtable(CHILD_ID, 11, nowTime,jihunn,intnowTime);
+//        }
+//        if (view == milk3) {
+//            //搾乳
+//            insertFoodtable(CHILD_ID, 12, nowTime,jihunn,intnowTime);
+//        }
 
         //睡眠リスト
         if (view == sleep) {
@@ -434,6 +449,71 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
             background.setVisibility(View.INVISIBLE);
 
         }
+        if(view==recodelist2){
+
+        }
+    }
+
+
+
+
+    //log時間取得
+    private long getintNowDate() {
+        String months;
+        String days;
+        String hours;
+        String minutes;
+        String seconds;
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    //// 0 - 11eg
+        month +=1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+        String years = String.valueOf(year);
+        //月が9以下なら左に0を足す
+        if(month<=9){
+            String zetrotasumae = String.valueOf(month);
+            months = "0" + zetrotasumae;
+        }else{
+            months = String.valueOf(month);
+        }
+        //日が9以下なら左に0を足す
+        if(day<=9){
+            String zetrotasumae = String.valueOf(day);
+            days = "0" + zetrotasumae;
+        }else{
+            days = String.valueOf(day);
+        }
+        //時が9以下なら左に0を足す
+        if(hour<=9){
+            String zetrotasumae = String.valueOf(hour);
+            hours = "0" + zetrotasumae;
+        }else{
+            hours = String.valueOf(hour);
+        }
+        //分が9以下なら左に0を足す
+        if(minute<=9){
+            String zetrotasumae = String.valueOf(minute);
+            minutes = "0" + zetrotasumae;
+        }else{
+            minutes = String.valueOf(minute);
+        }
+        //秒が9以下なら左に0を足す
+        if(second<=9){
+            String zetrotasumae = String.valueOf(second);
+            seconds = "0" + zetrotasumae;
+        }else{
+            seconds = String.valueOf(second);
+        }
+        String stringdata = years + months + days + hours + minutes + seconds;
+        System.out.println(stringdata);
+        long intdate = Long.parseLong(stringdata);
+        System.out.println(intdate);
+        return intdate;
     }
 
     //    時間取得
@@ -451,22 +531,73 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
 
         return date;
     }
-    public static String kirokutime(){
+    //時間分取得
+    public static String jihunn(){
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
         String kirokutime = hour + ":"+  minute;
         return kirokutime;
     }
-    public void insertFoodtable(int Child_ID, int Code, String Registraction_Time) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("Child_ID", Child_ID);
-        values.put("Code", Code);
-        values.put("Registraction_Time", Registraction_Time);
-        db.insert("FoodTable", null, values);
+    public static String today(){
+        String months;
+        String days;
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);    //// 0 - 11eg
+        month +=1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String years = String.valueOf(year);
+        //月が9以下なら左に0を足す
+        if(month<=9){
+            String zetrotasumae = String.valueOf(month);
+            months = "0" + zetrotasumae;
+        }else{
+            months = String.valueOf(month);
+        }
+        //日が9以下なら左に0を足す
+        if(day<=9){
+            String zetrotasumae = String.valueOf(day);
+            days = "0" + zetrotasumae;
+        }else{
+            days = String.valueOf(day);
+        }
 
+        String a = years+months+days;
+        return a;
     }
+
+
+
+
+
+
+
+    //インサート文
+    public void insertFoodtable(String cid,int code,String nowTime,String jihunn,long intnowTime) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        try {
+            ContentValues values = new ContentValues();
+
+
+            String Code = String.valueOf(code);
+            String inttime =String.valueOf(intnowTime);
+
+            values.put("Child_ID", cid);
+            values.put("Code", Code);
+            values.put("Registration_Time", nowTime);
+            values.put("jihun", jihunn);
+            values.put("IntNowdata", inttime);
+            System.out.println("FoodTbleに、Child_ID:"+cid+"、Code:"+Code+"、Registration_Time:"+nowTime+"、jihun:"+jihunn+"、IntNowdata:"+inttime+"を登録");
+
+
+            db.insert("FoodTable", null, values);
+        }finally {
+            db.close();
+        }
+        insertListViewTable(intnowTime,code, jihunn,cid);
+    }
+
     public void insertSleeptable(int Child_ID, int Code, String Registraction_Time) {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -503,5 +634,360 @@ public class Home extends AppCompatActivity  implements View.OnClickListener {
         db.insert("ExcretionTable", null, values);
 
     }
+    private void insertListViewTable(long intnowTime, int i, String jihunn,String cid) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        try {
+            ContentValues values = new ContentValues();
+
+            String inttime = String.valueOf(intnowTime);
+            String Code = String.valueOf(i);
+
+            values.put("IntNowdata", inttime);
+            values.put("Code", Code);
+            values.put("jihun", jihunn);
+            values.put("Child_ID", cid);
+
+            System.out.println("ListViewTableに、IntNowdata:"+inttime+"、Code:"+Code+"、jihun:"+jihunn+"、cid:"+cid+"を登録");
+
+            db.insert("ListViewTable", null, values);
+        }finally {
+            db.close();
+        }
+    }
+
+
+
+    String unko;
+    String hennsyuusurutokinoID;
+    String deleteI;
+    //しょうや検索ののちlistviewに表示
+    public void selectListViewTable(String CID){
+
+        ArrayList<String>  IntNowdata = new ArrayList<>() ;
+
+        ArrayList<Integer> Code = new ArrayList<>();
+
+        ArrayList<Integer> img = new ArrayList<>();
+
+        ArrayList<String> Jihun = new ArrayList<>();
+
+        ArrayList<String> syousai = new ArrayList<>();
+
+        ArrayList<String> Cid = new ArrayList<>();
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"IntNowdata", "Code", "jihun", "syousai","Child_ID"};//0,1,2
+            String[] SearchKey = {CID};
+            cs = db.query("ListViewTable", getcols, "Child_ID = ?", SearchKey, null, null, "IntNowdata ASC",null);
+            if (cs.moveToFirst()) {
+                for(int i = 0;i < cs.getCount();i++) {
+
+                    String inttime =cs.getString(0);
+                    IntNowdata.add(inttime);
+
+                    int code = cs.getInt(1);
+                    Code.add(code);
+                    if(code == 7) {
+                        img.add(R.drawable.milk2);
+                    }
+
+                    String jihun = cs.getString(2);
+                    Jihun.add(jihun);
+
+
+                    String syousai1;
+                    if(cs.getString(3)==null) {
+                        syousai1 = "";
+                    }else{
+                        syousai1 = cs.getString(3);
+                    }
+                    syousai.add(syousai1);
+                    System.out.println("inttime;"+ inttime+",Code;"+code+",jihun;"+jihun+"syousai;"+syousai1);
+                    String cid =cs.getString(4);
+                    Cid.add(cid);
+
+                    System.out.println("ListViewTableから、IntNowdata:"+inttime+"、code:"+code+"、jihun:"+jihun+"、syousai:"+syousai1+"、Child_ID"+cid+
+                            "を取得。arrayimgに"+img.get(i));
+
+                    cs.moveToNext();
+                }
+            }else{
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+
+        String[] IntNowdatas = IntNowdata.toArray(new String[IntNowdata.size()]);
+
+        String[] Codes = new String[Code.size()];
+        for (int i=0; i<Code.size(); i++) {
+            String s = String.valueOf(Code.get(i));
+            Codes[i] =s;
+        }
+
+        int[] Imgs = new int[img.size()];
+        for (int i=0; i<img.size(); i++) {
+            Imgs[i] = img.get(i);
+        }
+
+        String[] Jihuns = Jihun.toArray(new String[Jihun.size()]);
+        String[] syousais = syousai.toArray(new String[syousai.size()]);
+        String[] cids = Cid.toArray(new String[Cid.size()]);
+
+        recodelist2 = (ListView)findViewById(R.id.recordlist2) ;
+        BaseAdapter adapter = new Home_BaseAdapter(this.getApplicationContext(),
+                R.layout.list_items, IntNowdatas,Codes,Imgs, Jihuns, syousais,cids);
+        recodelist2.setAdapter(adapter);
+
+        recodelist2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                hennsyuusurutokinoID = IntNowdata.get(i);
+                System.out.println("選択したリストのintdata:"+hennsyuusurutokinoID);
+
+                hensyuDialog();
+//                System.out.println("ml:"+unko);
+            }
+
+        });
+        recodelist2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                deleteI = String.valueOf(i);
+                System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyy-------------------------"+deleteI);
+                deleteDialog();
+                return true;
+            }
+
+
+
+        });
+    }
+    private void deleteDialog() {
+        AlertDialog.Builder altdialog = new AlertDialog.Builder(this);
+        altdialog.setTitle("消しますか？");
+        altdialog.setIcon(R.mipmap.ic_launcher);
+        altdialog.setPositiveButton("yes", (DialogInterface.OnClickListener) this);
+        altdialog.setNeutralButton("キャンセル", (DialogInterface.OnClickListener) this);
+        altdialog.setNegativeButton("no", (DialogInterface.OnClickListener) this);
+        altdialog.create().show();
+
+    }
+
+    public void onClick(DialogInterface dialogInterface, int i) {
+        if( i == DialogInterface.BUTTON_POSITIVE)
+            Toast.makeText(this,"ポジティブボタン",Toast.LENGTH_LONG).show();
+            deleteDB();
+        if( i == DialogInterface.BUTTON_NEUTRAL)
+            Toast.makeText(this,"ナチュラルボタン",Toast.LENGTH_LONG).show();
+        if( i == DialogInterface.BUTTON_NEGATIVE)
+            Toast.makeText(this,"ネガティブボタン",Toast.LENGTH_LONG).show();
+
+    }
+
+    private void deleteDB() {
+        SQLiteDatabase db = helper.getWritableDatabase();
+//        try{
+//            String[] params = {};
+//            db.delete("book","is")
+//        }
+
+        System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+
+    }
+
+
+    private void hensyuDialog() {
+        ArrayList<Item> itemList = new ArrayList<>();
+        ArrayList<Integer> ml = new ArrayList<>();
+
+        for(int i=0;i<=500;i+=10){
+
+            Item item = new Item();
+            item.setIntItem(i);
+            ml.add(i);
+            item.setStringItem("ml");
+            itemList.add(item);
+
+        }
+
+        CustomAdapter adapter = new CustomAdapter(getApplicationContext(), 0, itemList);
+        ListView listView = new ListView(this);
+        listView.setAdapter(adapter);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("選択してくだい。")
+                .setView(listView).create();
+        dialog.show();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String msg ="選択されたもの:" + ml.get(i);
+
+                unko = String.valueOf(ml.get(i))+"ml";
+                System.out.println(msg);
+                update(unko,hennsyuusurutokinoID,cid);
+
+                dialog.dismiss();
+            }
+        });
+
+
+
+    }
+    public void update(String unko,String hensyu,String cid){
+        System.out.println("ここ一"+unko+"koko"+hensyu+"cid:"+cid);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try {
+            ContentValues cv = new ContentValues();
+
+            cv.put("syousai", unko);
+
+            db.update("ListViewTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+            db.update("FoodTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+
+            Toast.makeText(this, "編集",Toast.LENGTH_SHORT).show();
+        }finally {
+            db.close();
+        }
+        selectListViewTable(cid);
+    }
+
+    public class Item{
+        private int intItem;
+        private String stringItem;
+
+        public void setStringItem(String stringItem){
+            this.stringItem = stringItem;
+        }
+        public String getStringItem(){
+            return this.stringItem;
+        }
+        public void setIntItem(int intItem){
+            this.intItem = intItem;
+        }
+        public int getIntItem(){
+            return this.intItem;
+        }
+    }
+
+    // ListViewで使用するadapter
+    public class CustomAdapter extends ArrayAdapter<Item> {
+        private LayoutInflater inflater;
+
+        public CustomAdapter(Context context, int resource, List<Item> objects) {
+            super(context, resource, objects);
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        @Override
+        public View getView(int position, View v, ViewGroup parent) {
+            Item item = (Item)getItem(position);
+            if (null == v) v = inflater.inflate(R.layout.custom_listview, null);
+
+            TextView intTextView = (TextView)v.findViewById(R.id.int_item);
+            intTextView.setText(item.getIntItem()+"");
+
+            TextView stringTextView = (TextView)v.findViewById(R.id.string_item);
+            stringTextView.setText(item.getStringItem());
+            return v;
+        }
+    }
+
+    private String getNikki(String CID,String today ) {
+        String nikki;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"Diary"};//0,1,2
+            String[] SearchKey = {CID,today};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
+            if (cs.moveToFirst()) {
+                nikki = cs.getString(0);
+            }else{
+                nikki =null;
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+        return nikki;
+    }
+
+    public void setnikki(String cid,String nikki,String kirokubi){
+
+        final EditText editText = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle("日記")
+                .setView(editText)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // お好きな処理をどうぞ
+                        TextView textView = (TextView) findViewById(R.id.bo_diary);
+                        textView.setText(editText.getText());
+                        String text = textView.getText().toString();
+                        setNikki(cid,text,kirokubi);
+                    }
+
+                    private void setNikki(String cid,String text,String kirokubi) {
+                        SQLiteDatabase db = helper.getWritableDatabase();
+                        try {
+                            ContentValues values = new ContentValues();
+                            values.put("Child_ID", cid);
+                            values.put("Today", kirokubi);
+                            values.put("Diary", text);
+
+                            System.out.println("DiaryTableに、Child_ID:"+cid+"を登録");
+
+
+                            db.insert("DiaryTable", null, values);
+                        }finally {
+                            db.close();
+                        }
+                    }
+                })
+                .show();
+    }
+    private void updatenikki(String cid,String nikki,String kirokubi) {
+        final EditText editText = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle("日記")
+                .setView(editText)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // お好きな処理をどうぞ
+                        TextView textView = (TextView) findViewById(R.id.bo_diary);
+                        textView.setText(editText.getText());
+                        String text = textView.getText().toString();
+                        setNikki(cid,text,kirokubi);
+                    }
+
+                    private void setNikki(String cid,String text,String kirokubi) {
+                        SQLiteDatabase db = helper.getReadableDatabase();
+                        try {
+                            ContentValues cv = new ContentValues();
+
+                            cv.put("Diary", text);
+
+                            db.update("DiaryTable", cv, "CHILD_ID = ? AND Today = ?" , new String[] {cid,kirokubi}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
+
+                        }finally {
+                            db.close();
+                        }
+                    }
+                })
+                .show();
+    }
+
 }
 

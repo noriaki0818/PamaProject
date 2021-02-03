@@ -1,6 +1,5 @@
 package com.example.pamaproject;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -112,9 +111,16 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", Class TEXT NOT NULL" +
                         ", Code_Name TEXT NOT NULL);"
         );
-//        db.execSQL(
-//                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
-//        );
+        db.execSQL(
+                "CREATE TABLE ListViewTable(IntNowdata BIGINT PRIMARY KEY " +
+                        ", Code INTEGER NOT NULL" +
+                        ", jihun TEXT NOT NULL" +
+                        ", syousai TEXT " +
+                        ", Child_ID INTEGER );"
+        );
+        db.execSQL(
+                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
+        );
 
         String[] Class = {"食事","食事","食事","食事","食事"
                 ,"食事","食事","食事","食事","食事"
@@ -128,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 ,"うんこ", "尿", "両方", "せき", "げろ"
                 ,"発疹", "けが", "病院", "予防接種", "薬"
                 ,"体温", "身長", "体温"};
+
         String[] Article_Name = {"生後1ヶ月のおすすめ記事","生後2ヶ月のおすすめ記事","生後3ヶ月のおすすめ記事"
                 ,"生後4ヶ月のおすすめ記事","生後5ヶ月のおすすめ記事","生後6ヶ月のおすすめ記事"
                 ,"生後7ヶ月のおすすめ記事","生後8ヶ月のおすすめ記事","生後9ヶ月のおすすめ記事"
@@ -159,7 +166,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }finally {
             db.endTransaction();
         }
-
         try{
             SQLiteStatement sql = db.compileStatement(
                     "INSERT INTO "+ Article_TABLE +"(Article_Name, Article_text) VALUES(?,?)"
@@ -175,9 +181,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }finally {
             db.endTransaction();
         }
-
-
-
     }
 
     @Override

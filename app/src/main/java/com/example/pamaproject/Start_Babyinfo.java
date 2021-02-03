@@ -37,6 +37,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
     int USER_ID = 1;
     String USER_NAME = null;
     String USER_GENDER = null;
+    String Birth = "2020年8月18日";
 
 
     @Override
@@ -52,6 +53,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
         girl = (ImageView) findViewById(R.id.baby_girl);
         birth = (TextView) findViewById(R.id.baby_birth);
         babyname = (EditText) findViewById(R.id.babyname);
+
         start.setOnClickListener( this );
         boy.setOnClickListener(this);
         noset.setOnClickListener(this);
@@ -185,7 +187,7 @@ public class Start_Babyinfo extends AppCompatActivity implements View.OnClickLis
 
                     CHILD_ID = ongetChild_ID(BABY_NAME);
                     intent = new Intent(Start_Babyinfo.this, Home.class);
-                    intent.putExtra("child_id", CHILD_ID);//ホームにChild_IDを渡す
+                    intent.putExtra("child_id", String.valueOf(CHILD_ID));//ホームにChild_IDを渡す
                     startActivity(intent);
                 }
                 cnt++;
