@@ -111,9 +111,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", Class TEXT NOT NULL" +
                         ", Code_Name TEXT NOT NULL);"
         );
-        db.execSQL(
-                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
-        );
+//        db.execSQL(
+//                "INSERT INTO UserTable (Name, Gender) VALUES('良子', '女')"
+//        );
 
         String[] Class = {"食事","食事","食事","食事","食事"
                 ,"食事","食事","食事","食事","食事"

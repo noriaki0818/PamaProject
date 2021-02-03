@@ -1,15 +1,15 @@
 package com.example.pamaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Menu_Help extends AppCompatActivity implements View.OnClickListener{
-    ImageButton btn,btn2,btn3;
+    ImageButton btn,btn2,btn3, btn4;
     Intent intent;
 
     @Override
@@ -22,6 +22,10 @@ public class Menu_Help extends AppCompatActivity implements View.OnClickListener
         btn2.setOnClickListener( this );
         btn3 = (ImageButton) findViewById(R.id.help_bo_hame);
         btn3.setOnClickListener( this );
+        btn4 = (ImageButton) findViewById(R.id.help_bo_help);
+
+        btn4.setBackgroundColor(Color.WHITE);
+
     }
     @Override
     public void onClick (View v){
