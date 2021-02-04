@@ -37,6 +37,7 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         bo_article.setOnClickListener(this);
         bo_summary.setOnClickListener(this);
 
+
         //親要素のリスト
         List<String> nen1 = new ArrayList<>();
         nen1.add("2020");
@@ -200,4 +201,5 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }
     }
+
 }

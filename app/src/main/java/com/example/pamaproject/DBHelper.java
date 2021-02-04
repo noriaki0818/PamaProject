@@ -49,6 +49,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE DiaryTable(Diary_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" +
                         ", Child_ID INTEGER NOT NULL" +
                         ", Today TEXT NOT NULL" +
+                        ", nen TEXT " +
+                        ", tuki TEXT " +
+                        ", hi TEXT " +
                         ", Diary TEXT " +
                         ", Image  BLOB);"
         );
