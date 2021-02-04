@@ -59,6 +59,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     ListView recodelist2;
     String nikki =null;
     //しょうや ↑
+    String nen =nen();
+    String tuki = tuki();
+    String hi = hi();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,12 +215,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
         //テキスト
 
-        day.setText("2021/8/18");
-        passingday.setText("218");
-        babyname.setText("のりくん");
+
+
+        day.setText(nen+"/"+tuki+"/"+hi);
+        passingday.setText("0");
+        babyname.setText("aaa");
 
         //赤ちゃんの画像
-        photo.setImageResource(R.drawable.abe);
+//        photo.setImageResource(R.drawable.abe);
 
     }
 
@@ -249,8 +254,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         if (view == diary) {
 
             String kirokubi =today();
+            String nen =nen();
+            String tuki = tuki();
+            String hi = hi();
             if(nikki == null) {
-                setnikki(cid, nikki, kirokubi);
+                setnikki(cid, nikki, kirokubi,nen,tuki,hi);
             }else {
                 updatenikki(cid, nikki, kirokubi);
 
@@ -263,6 +271,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         //フッダーリスト
         if (view == Diary) {
             intent = new Intent(Home.this, Nikki.class);
+            intent.putExtra("child_id",cid);
+            intent.putExtra("nen",nen);
+            intent.putExtra("tuki",tuki);
             startActivity(intent);
 
 
@@ -270,11 +281,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         if (view == Article) {
             //記事画面に飛ぶ
             intent = new Intent(Home.this, Article.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
         if (view == Summary) {
             //まとめ画面に飛ぶ
             intent = new Intent(Home.this, Home_summary.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
 
@@ -329,26 +342,31 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
             selectListViewTable(cid);
 
         }
-//        if (view == meal) {
-//            //ごはん
-//            insertFoodtable(CHILD_ID, 8, nowTime,jihunn,intnowTime);
-//        }
-//        if (view == drink) {
-//            //飲み物
-//            insertFoodtable(CHILD_ID, 9, nowTime,jihunn,intnowTime);
-//        }
-//        if (view == babyfood) {
-//            //離乳食
-//            insertFoodtable(CHILD_ID, 10, nowTime,jihunn,intnowTime);
-//        }
-//        if (view == snack) {
-//            //おやつ
-//            insertFoodtable(CHILD_ID, 11, nowTime,jihunn,intnowTime);
-//        }
-//        if (view == milk3) {
-//            //搾乳
-//            insertFoodtable(CHILD_ID, 12, nowTime,jihunn,intnowTime);
-//        }
+        if (view == meal) {
+            //ごはん
+            insertFoodtable(cid, 8, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
+        }
+        if (view == drink) {
+            //飲み物
+            insertFoodtable(cid, 9, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
+        }
+        if (view == babyfood) {
+            //離乳食
+            insertFoodtable(cid, 10, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
+        }
+        if (view == snack) {
+            //おやつ
+            insertFoodtable(cid, 11, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
+        }
+        if (view == milk3) {
+            //搾乳
+            insertFoodtable(cid, 12, nowTime,jihunn,intnowTime);
+            selectListViewTable(cid);
+        }
 
         //睡眠リスト
         if (view == sleep) {
@@ -559,6 +577,24 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         String a = years+months+days;
         return a;
     }
+    public static String nen(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        String b = String.valueOf(year);
+        return b;
+    }
+    public static String tuki(){
+        Calendar cal = Calendar.getInstance();
+        int month = 1 + cal.get(Calendar.MONTH);
+        String c = String.valueOf(month);
+        return c;
+    }
+    public static String hi(){
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String d = String.valueOf(day);
+        return d;
+    }
 
 
 
@@ -653,6 +689,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     String unko;
     String hennsyuusurutokinoID;
     String deleteI;
+
     //しょうや検索ののちlistviewに表示
     public void selectListViewTable(String CID){
 
@@ -684,6 +721,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
                     Code.add(code);
                     if(code == 7) {
                         img.add(R.drawable.milk2);
+                    }else if(code == 8){
+                        img.add(R.drawable.meal);
+                    }else if(code == 9){
+                        img.add(R.drawable.drink);
+                    }else if(code == 10){
+                        img.add(R.drawable.babyfood);
+                    }else if(code == 11){
+                        img.add(R.drawable.snack);
+                    }else if(code == 2){
+                        img.add(R.drawable.milk3);
+                    }else{
+                        img.add(null);
                     }
 
                     String jihun = cs.getString(2);
@@ -707,7 +756,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
                     cs.moveToNext();
                 }
             }else{
-                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
             }
         } finally {
             cs.close();
@@ -751,7 +800,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         recodelist2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                deleteI = String.valueOf(i);
+                deleteI = IntNowdata.get(i);
                 System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyy-------------------------"+deleteI);
                 deleteDialog();
                 return true;
@@ -784,14 +833,17 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     }
 
     private void deleteDB() {
+
         SQLiteDatabase db = helper.getWritableDatabase();
-//        try{
-//            String[] params = {};
-//            db.delete("book","is")
-//        }
+        try{
+            String[] params = {deleteI,cid};
+            db.delete("ListViewTable","IntNowdata = ? AND Child_ID = ?",params);
+        }finally{
+            db.close();
+        }
 
-        System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-
+        System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"+deleteI+cid);
+        selectListViewTable(cid);
     }
 
 
@@ -847,7 +899,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
             db.update("ListViewTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
             db.update("FoodTable", cv, "CHILD_ID = ? AND IntNowdata = ?" , new String[] {cid,hensyu}); // 入力文で書くと UPDATE UserTable SET name = '初め', gender = "男 WHERE ID = 1;
 
-            Toast.makeText(this, "編集",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "編集",Toast.LENGTH_SHORT).show();
         }finally {
             db.close();
         }
@@ -901,13 +953,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         try {
             String[] getcols = {"Diary"};//0,1,2
             String[] SearchKey = {CID,today};
-            cs = db.query("DiaryTa" +
-                    "ble", getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
+            cs = db.query("DiaryTable" , getcols, "Child_ID = ? AND today = ?", SearchKey, null, null, null,null);
             if (cs.moveToFirst()) {
                 nikki = cs.getString(0);
             }else{
                 nikki =null;
-                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
             }
         } finally {
             cs.close();
@@ -916,7 +967,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         return nikki;
     }
 
-    public void setnikki(String cid,String nikki,String kirokubi){
+    public void setnikki(String cid,String nikki,String kirokubi,String nen,String tuki,String hi){
 
         final EditText editText = new EditText(this);
         new AlertDialog.Builder(this)
@@ -938,11 +989,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
                             ContentValues values = new ContentValues();
                             values.put("Child_ID", cid);
                             values.put("Today", kirokubi);
+                            values.put("nen", nen);
+                            values.put("tuki", tuki);
+                            values.put("hi", hi);
                             values.put("Diary", text);
-
-                            System.out.println("DiaryTableに、Child_ID:"+cid+"を登録");
-
-
+                            System.out.println("DiaryTableに、Child_ID:"+cid+nen+tuki+hi+"を登録");
                             db.insert("DiaryTable", null, values);
                         }finally {
                             db.close();
@@ -953,6 +1004,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
     }
     private void updatenikki(String cid,String nikki,String kirokubi) {
         final EditText editText = new EditText(this);
+        editText.setText(nikki);
         new AlertDialog.Builder(this)
                 .setTitle("日記")
                 .setView(editText)
