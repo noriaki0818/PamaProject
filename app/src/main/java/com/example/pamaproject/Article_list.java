@@ -1,4 +1,4 @@
-package com.example.pamaproject;
+    package com.example.pamaproject;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Article_list extends AppCompatActivity implements View.OnClickListener , AdapterView.OnItemClickListener {
-    private DBHelper helper = null;
+    private DBHelper helper ;
     ImageButton articleMenuBtn,
             Record, Diary, Article, Summary;
 
@@ -50,20 +50,17 @@ public class Article_list extends AppCompatActivity implements View.OnClickListe
 
         helper = new DBHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery("SELECT Article_ID as _id, Article_Name FROM ArticleTable;",null);
-            cursor.moveToFirst();
 
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2,cursor
-                    ,new String[]{"_id", "Article_Name"},new int[]{android.R.id.text1,android.R.id.text2},0);
 
-            ListView listView = (ListView) findViewById(R.id.article_listview);
+            Cursor cursor = db.rawQuery("SELECT ArticleID as _id , Article_Name FROM ArticleTable;",null);
+
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,cursor
+                    ,new String[]{"_id"},new int[]{android.R.id.text1},0);
+
+            ListView listView = findViewById(R.id.article_listview);
             listView.setAdapter(adapter);
-        }finally {
-            cursor.close();
+
             db.close();
-        }
 
 
 
