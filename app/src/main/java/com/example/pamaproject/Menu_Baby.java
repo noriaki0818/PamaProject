@@ -14,7 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-public class Menu_Baby extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
+public class
+Menu_Baby extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
     //    フッダー
     ImageView MENU_baby, MENU_help, MENU_share,
     //    フッダー

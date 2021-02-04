@@ -26,7 +26,7 @@ public class BirthNP extends AppCompatActivity {
         done = (ImageButton) findViewById(R.id.birthnp_done);
         intent = getIntent();
         String babyname = intent.getStringExtra("Baby_Name");
-        String babygender = intent.getStringExtra("Bbay_Gender");
+        String babygender = intent.getStringExtra("Baby_Gender");
 
         System.out.println("名前　: " +babyname + babygender);
 
