@@ -49,7 +49,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
             background; //バックグラウンド
 
     Intent intent;
-    int CHILD_ID ;
     String cid;
 
     private DBHelper helper=null;
@@ -219,12 +218,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
 
         day.setText(nen+"/"+tuki+"/"+hi);
         passingday.setText("0");
-        babyname.setText("aaa");
+
+        String getbabyname = getBabyname(cid);
+        babyname.setText(getbabyname);
 
         //赤ちゃんの画像
 //        photo.setImageResource(R.drawable.abe);
 
     }
+
 
 
 
@@ -280,7 +282,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
         }
         if (view == Article) {
             //記事画面に飛ぶ
-            intent = new Intent(Home.this, Article.class);
+            intent = new Intent(Home.this, Article_list.class);
             intent.putExtra("child_id",cid);
             startActivity(intent);
         }
@@ -368,77 +370,77 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
             selectListViewTable(cid);
         }
 
-        //睡眠リスト
-        if (view == sleep) {
-            //寝る
-            insertSleeptable(CHILD_ID, 13, nowTime);
-        }
-        if (view == getup) {
-            //起きる
-            insertSleeptable(CHILD_ID, 14, nowTime);
-        }
-        if (view == bath) {
-            //風呂
-            insertSleeptable(CHILD_ID, 15, nowTime);
-        }
-
-        //身体リスト
-        if (view == temperature) {
-            //体温
-            insertBodyhealthtable(CHILD_ID, 26, nowTime);
-        }
-        if (view == height) {
-            //身長
-            insertBodyhealthtable(CHILD_ID, 27, nowTime);
-        }
-        if (view == weight) {
-            //体重
-            insertBodyhealthtable(CHILD_ID, 28, nowTime);
-        }
-
-        //病院リスト
-        if (view == cough) {
-            //せき
-            insertHospitaltable(CHILD_ID, 19, nowTime);
-        }
-        if (view == vomit) {
-            //げろ
-            insertHospitaltable(CHILD_ID, 20, nowTime);
-        }
-        if (view == rash) {
-            //発疹
-            insertHospitaltable(CHILD_ID, 21, nowTime);
-        }
-        if (view == lnjury) {
-            //けが
-            insertHospitaltable(CHILD_ID, 22, nowTime);
-        }
-        if (view == hospital) {
-            //病院
-            insertHospitaltable(CHILD_ID, 23, nowTime);
-        }
-        if (view == preventional) {
-            //予防接種
-            insertHospitaltable(CHILD_ID, 24, nowTime);
-        }
-        if (view == medicine) {
-            //薬
-            insertHospitaltable(CHILD_ID, 25, nowTime);
-        }
-
-        //排泄リスト
-        if (view == poo) {
-            //うんこ
-            insertExcretiontable(CHILD_ID, 16, nowTime);
-        }
-        if (view == pee) {
-            //尿
-            insertExcretiontable(CHILD_ID, 17, nowTime);
-        }
-        if (view == both) {
-            //両方
-            insertExcretiontable(CHILD_ID, 18, nowTime);
-        }
+//        //睡眠リスト
+//        if (view == sleep) {
+//            //寝る
+//            insertSleeptable(CHILD_ID, 13, nowTime);
+//        }
+//        if (view == getup) {
+//            //起きる
+//            insertSleeptable(CHILD_ID, 14, nowTime);
+//        }
+//        if (view == bath) {
+//            //風呂
+//            insertSleeptable(CHILD_ID, 15, nowTime);
+//        }
+//
+//        //身体リスト
+//        if (view == temperature) {
+//            //体温
+//            insertBodyhealthtable(CHILD_ID, 26, nowTime);
+//        }
+//        if (view == height) {
+//            //身長
+//            insertBodyhealthtable(CHILD_ID, 27, nowTime);
+//        }
+//        if (view == weight) {
+//            //体重
+//            insertBodyhealthtable(CHILD_ID, 28, nowTime);
+//        }
+//
+//        //病院リスト
+//        if (view == cough) {
+//            //せき
+//            insertHospitaltable(CHILD_ID, 19, nowTime);
+//        }
+//        if (view == vomit) {
+//            //げろ
+//            insertHospitaltable(CHILD_ID, 20, nowTime);
+//        }
+//        if (view == rash) {
+//            //発疹
+//            insertHospitaltable(CHILD_ID, 21, nowTime);
+//        }
+//        if (view == lnjury) {
+//            //けが
+//            insertHospitaltable(CHILD_ID, 22, nowTime);
+//        }
+//        if (view == hospital) {
+//            //病院
+//            insertHospitaltable(CHILD_ID, 23, nowTime);
+//        }
+//        if (view == preventional) {
+//            //予防接種
+//            insertHospitaltable(CHILD_ID, 24, nowTime);
+//        }
+//        if (view == medicine) {
+//            //薬
+//            insertHospitaltable(CHILD_ID, 25, nowTime);
+//        }
+//
+//        //排泄リスト
+//        if (view == poo) {
+//            //うんこ
+//            insertExcretiontable(CHILD_ID, 16, nowTime);
+//        }
+//        if (view == pee) {
+//            //尿
+//            insertExcretiontable(CHILD_ID, 17, nowTime);
+//        }
+//        if (view == both) {
+//            //両方
+//            insertExcretiontable(CHILD_ID, 18, nowTime);
+//        }
 
         //バックグラウンド
         if (view == background) {
@@ -1034,6 +1036,24 @@ public class Home extends AppCompatActivity implements View.OnClickListener ,Dia
                 })
                 .show();
     }
+    private String getBabyname(String cid) {
+        String babyname = null;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        try {
+            String[] getcols = {"Child_ID", "ID", "Baby_Name", "Baby_Gender", "Birth"};//0,1,2
+            String[] SearchKey = {cid};
+            cs = db.query("BabyTable" , getcols, "Child_ID = ?", SearchKey, null, null, null,null);
+            if (cs.moveToFirst()) {
+                babyname = cs.getString(2);
+                System.out.println(babyname);
+            }
 
+        } finally {
+            cs.close();
+            db.close();
+        }
+        return babyname;
+    }
 }
 

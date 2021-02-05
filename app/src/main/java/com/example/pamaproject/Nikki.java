@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -57,6 +58,8 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         bo_article.setOnClickListener(this);
         bo_summary.setOnClickListener(this);
 
+        bo_nikki.setBackgroundColor(Color.WHITE);
+
         TextView txt_tuki= (TextView)findViewById(R.id.txt_tuki);
         TextView txt_nen = (TextView)findViewById(R.id.txt_nen);
 
@@ -77,6 +80,7 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
             int thismonth =getNowmonth();
             tuki = String.valueOf(thismonth);
             txt_tuki.setText(tuki+"月");
+            System.out.println("111111111111111111111111111111111111111111111111111111111111111111");
 
 
 
@@ -84,7 +88,8 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
 
             txt_nen.setText(nen+"年");
             txt_tuki.setText(tuki+"月");
-
+            System.out.println("2222222222222222222222222222222222222222222222222222222222222222222");
+            System.out.println(nen+tuki);
         }
 
         getNikki(cid,today,nen,tuki);
@@ -138,10 +143,12 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         }
         if(v == bo_article){
             intent = new Intent(this,Article_list.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
         if(v == bo_summary){
             intent = new Intent(this,Home_summary.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
 
@@ -163,6 +170,7 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         intent.putExtra("nen",nen2);
         intent.putExtra("hi", hi);
         intent.putExtra("nai",nai);
+        intent.putExtra("child_id",cid);
         // Activity をスイッチする
         startActivity(intent);
     }

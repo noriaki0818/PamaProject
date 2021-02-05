@@ -26,7 +26,7 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
     Button bo_back2,button;
     EditText nikkinaiyou;
     ImageView photo;
-    String hi,tuki,nen,nai;
+    String hi,tuki,nen,nai,cid;
 
 
 
@@ -56,6 +56,7 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
         hi = intent1.getStringExtra("hi");
         tuki = intent1.getStringExtra("tuki");
         nen = intent1.getStringExtra("nen");
+        cid =intent1.getStringExtra("child_id");
         //日付けの挿入
         TextView textdate =(TextView)findViewById(R.id.textdate);
         textdate.setText(nen+"/"+tuki+"/"+hi);
@@ -147,6 +148,7 @@ public class Nikki_naiyou extends AppCompatActivity implements View.OnClickListe
             intent = new Intent(this,Nikki.class);
             intent.putExtra("tuki",tuki);
             intent.putExtra("nen",nen);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
 

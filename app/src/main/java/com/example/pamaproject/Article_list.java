@@ -48,19 +48,23 @@ public class Article_list extends AppCompatActivity implements View.OnClickListe
         articleMenuBtn.setOnClickListener( this );
 
 
-        helper = new DBHelper(this);
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-
-            Cursor cursor = db.rawQuery("SELECT ArticleID as _id , Article_Name FROM ArticleTable;",null);
-
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,cursor
-                    ,new String[]{"_id"},new int[]{android.R.id.text1},0);
-
-            ListView listView = findViewById(R.id.article_listview);
-            listView.setAdapter(adapter);
-
-            db.close();
+        String[] list = {
+                "生後1~3ヶ月におすすめの記事","生後4~6ヶ月におすすめの記事","生後7~9ヶ月におすすめの記事",
+                "生後10~12ヶ月におすすめの記事","生後1年1~3ヶ月におすすめの記事","生後1年4~6ヶ月におすすめの記事",
+                "生後1年7~10ヶ月におすすめの記事","生後1年11~2年1ヶ月におすすめの記事","生後2年2~4ヶ月におすすめの記事",
+                "生後2年5~7ヶ月におすすめの記事","生後2年8~11ヶ月におすすめの記事"
+        };
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,list);
+        ((ListView)findViewById(R.id.article_listview)).setAdapter(adapter);
+        ((ListView)findViewById(R.id.article_listview)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListView listView = (ListView)parent;
+                Intent intent = new Intent(getApplication(), Article.class);
+                intent.putExtra("article_ID", listView.getItemAtPosition(position).toString());
+                startActivity(intent);
+            }
+        });
 
 
 

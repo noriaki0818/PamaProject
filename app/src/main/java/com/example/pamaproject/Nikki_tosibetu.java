@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +14,35 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickListener {
     ImageButton bo_menu,bo_record,bo_nikki,bo_article,bo_summary;
+    private DBHelper helper=null;
+    String cid;
 
+    List<String> nen1 = new ArrayList<>();
+    List<String> tuki1 = new ArrayList<>();
+    List<List<String>> cars = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nikki_tosibetu);
+
+        helper = new DBHelper(this);
+        //データベースを取得
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        try {
+            Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+
+        }finally {
+            db.close();
+        }
 
         //ボタン設定
         bo_menu = (ImageButton)findViewById(R.id.bo_menu);
@@ -37,32 +56,45 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         bo_article.setOnClickListener(this);
         bo_summary.setOnClickListener(this);
 
+        Intent intent;
+        intent = getIntent();
+        cid =intent.getStringExtra("child_id");
+
+        getNikkiYear(cid);
+
 
         //親要素のリスト
-        List<String> nen1 = new ArrayList<>();
-        nen1.add("2020");
-        nen1.add("2021");
-        nen1.add("2022");
+
+//        nen1.add("2020");
+//        nen1.add("2021");
+//        nen1.add("2022");
 
         //子要素のリスト
-        List<String> tuki1 = new ArrayList<>();
-        tuki1.add("1");
-        tuki1.add("2");
-        tuki1.add("3");
-        tuki1.add("4");
-        tuki1.add("5");
-        tuki1.add("6");
-        tuki1.add("7");
-        tuki1.add("8");
-        tuki1.add("9");
-        tuki1.add("10");
-        tuki1.add("11");
-        tuki1.add("12");
 
-        List<List<String>> cars = new ArrayList<>();
-        cars.add(tuki1);
-        cars.add(tuki1);
-        cars.add(tuki1);
+//        tuki1.add("1");
+//        tuki1.add("2");
+//        tuki1.add("3");
+//        tuki1.add("4");
+//        tuki1.add("5");
+//        tuki1.add("6");
+//        tuki1.add("7");
+//        tuki1.add("8");
+//        tuki1.add("9");
+//        tuki1.add("10");
+//        tuki1.add("11");
+//        tuki1.add("12");
+
+
+//        cars.add(tuki1);
+//        cars.add(tuki1);
+//        cars.add(tuki1);
+
+        for(int i = 0 ; i < nen1.size() ; i++){
+            tuki1.clear();
+            String nen2 = nen1.get(i);
+            getNikkiMonth(cid,nen2);
+            cars.add(tuki1);
+        }
 
 
 
@@ -84,6 +116,7 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
                 Intent intent = new Intent(getApplication(), Nikki.class);
                 intent.putExtra("tuki",tuki);
                 intent.putExtra("nen",nen);
+                intent.putExtra("child_id",cid);
                 startActivity(intent);
                 finish();
                 return true;
@@ -91,6 +124,9 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
+
+
 
     class CarMakerListAdapter extends BaseExpandableListAdapter {
         //メンバ変数
@@ -199,6 +235,74 @@ public class Nikki_tosibetu extends AppCompatActivity implements View.OnClickLis
         if(v == bo_summary){
             intent = new Intent(this,Home_summary.class);
             startActivity(intent);
+        }
+    }
+
+    private void getNikkiYear(String cid) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+        String c = null;
+        String c2 = null;
+        try {
+            String[] getcols = {"nen"};//0,1,2
+            String[] SearchKey = {cid};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? ", SearchKey, null, null, "nen ASC",null);
+            if (cs.moveToFirst()) {
+                for(int i = 0;i < cs.getCount();i++) {
+
+                    String kirokunen = cs.getString(0);
+                    c =kirokunen;
+
+                    if(c2 == null){
+                        nen1.add(kirokunen);
+                        System.out.println("年"+kirokunen+"を取得。add");
+                        c2 =kirokunen;
+                    }else if(c == c2){
+
+                    }else if(c != c2){
+                        nen1.add(kirokunen);
+                        System.out.println("年"+kirokunen+"を取得。add");
+                        c2 =kirokunen;
+                    }
+
+                    System.out.println("DiaryTable、記録年:"+kirokunen+"、を取得。");
+
+                    cs.moveToNext();
+                }
+            }else{
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
+        }
+    }
+    private void getNikkiMonth(String cid,String nen2) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cs = null;
+
+        try {
+            String[] getcols = {"tuki",};//0,1,2
+            String[] SearchKey = {cid,nen2};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? AND nen = ?", SearchKey, null, null, "nen ASC",null);
+            if (cs.moveToFirst()) {
+                for(int i = 0;i < cs.getCount();i++) {
+
+                    String kirokutuki = cs.getString(0);
+                    tuki1.add(kirokutuki);
+
+
+
+                    System.out.println("DiaryTable、記録tuki:"+kirokutuki+"、を取得。");
+
+                    cs.moveToNext();
+                }
+            }else{
+                Toast.makeText(this, "いみわかんね2", Toast.LENGTH_SHORT).show();
+            }
+        } finally {
+            cs.close();
+            db.close();
         }
     }
 
