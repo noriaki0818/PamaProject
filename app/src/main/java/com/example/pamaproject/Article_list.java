@@ -27,6 +27,13 @@ public class Article_list extends AppCompatActivity implements View.OnClickListe
     ImageButton articleMenuBtn,
             Record, Diary, Article, Summary;
 
+    private static final String[] article_title = {
+            "生後0~3ヶ月におすすめの記事","生後4~6ヶ月におすすめの記事","生後7~9ヶ月におすすめの記事",
+            "生後10~12ヶ月におすすめの記事","生後1年1~3ヶ月におすすめの記事","生後1年4~6ヶ月におすすめの記事",
+            "生後1年7~9ヶ月におすすめの記事","生後1年10~12ヶ月におすすめの記事","生後2年1~3ヶ月におすすめの記事",
+            "生後2年4~6ヶ月におすすめの記事","生後2年7~9ヶ月におすすめの記事","生後2年10~12ヶ月におすすめの記事"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,59 +54,88 @@ public class Article_list extends AppCompatActivity implements View.OnClickListe
         articleMenuBtn = (ImageButton) findViewById(R.id.article_menu);
         articleMenuBtn.setOnClickListener( this );
 
+        ListView list = (ListView)findViewById(R.id.article_listview);
 
-        helper = new DBHelper(this);
-        SQLiteDatabase db = helper.getReadableDatabase();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,article_title);
+
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListView listview = (ListView)parent;
+                String item = (String)listview.getItemAtPosition(position);
+
+                Intent intent = new Intent(getApplication(),Article.class);
+
+                if (position == 0){
+                    intent.putExtra("list_item",1);
+                    startActivity(intent);
+                }
+                if (position == 1){
+                    intent.putExtra("list_item",2);
+                    startActivity(intent);
+                }
+                if (position == 2){
+                    intent.putExtra("list_item",3);
+                    startActivity(intent);
+                }
+                if (position == 3){
+                    intent.putExtra("list_item",4);
+                    startActivity(intent);
+                }
+                if (position == 4){
+                    intent.putExtra("list_item",5);
+                    startActivity(intent);
+                }
+                if (position == 5){
+                    intent.putExtra("list_item",6);
+                    startActivity(intent);
+                }
+                if (position == 6){
+                    intent.putExtra("list_item",7);
+                    startActivity(intent);
+                }
+                if (position == 7){
+                    intent.putExtra("list_item",8);
+                    startActivity(intent);
+                }
+                if (position == 8){
+                    intent.putExtra("list_item",9);
+                    startActivity(intent);
+                }
+                if (position == 9){
+                    intent.putExtra("list_item",10);
+                    startActivity(intent);
+                }
+                if (position == 10){
+                    intent.putExtra("list_item",11);
+                    startActivity(intent);
+                }
+                if (position == 11){
+                    intent.putExtra("list_item",12);
+                    startActivity(intent);
+                }
+                if (position == 12){
+                    intent.putExtra("list_item",13);
+                    startActivity(intent);
+                }
 
 
-            Cursor cursor = db.rawQuery("SELECT ArticleID as _id , Article_Name FROM ArticleTable;",null);
-
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,cursor
-                    ,new String[]{"_id"},new int[]{android.R.id.text1},0);
-
-            ListView listView = findViewById(R.id.article_listview);
-            listView.setAdapter(adapter);
-
-            db.close();
+            }
+        });
 
 
-
-
-//        Cursor cs = null;
-//        try {
-//            cs = db.query("ArticleTable", cols, null, null, null, null, null, null);
-//            cs.moveToFirst();
-//            //layout
-//            int db_layout = android.R.layout.simple_expandable_list_item_2;
-//            //String from
-//            String[]from = {DBHelper.COLUMN_NAME,DBHelper.COLUMN_TEXT};
-//            //int to
-//            int[] to = new int[]{android.R.id.text1,android.R.id.text2};
-//            adapter = new SimpleCursorAdapter(this,db_layout,cs,from,to,0);
+//        ((ListView)findViewById(R.id.article_listview)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //
-//            listView.setAdapter(adapter);
-//
-//            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    ListView listView1 = (ListView)parent;
-//                    Cursor item = (Cursor)listView1.getItemAtPosition(position);
-//                    String string = item.getString(
-//                            item.getColumnIndex(DBHelper.COLUMN_ID));
-//
-//                    Intent intent = new Intent(Article_list.this, Article.class);
-//                    intent.putExtra("SELECTED_DATA",string);
-//                    startActivity(intent);
-//
-//                }
-//            });
-//
-//        }finally {
-//            cs.close();
-//            db.close();
-//        }
-//
-//
+//                ListView listView = (ListView)parent;
+//                Intent intent = new Intent(getApplication(), Article.class);
+//                intent.putExtra("article_ID", listView.getItemAtPosition(position).toString());
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

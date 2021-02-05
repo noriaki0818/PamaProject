@@ -32,22 +32,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-    <ImageButton
-        android:id="@+id/article_menu2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="660dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_header"
-        app:srcCompat="@drawable/bo_menu" />
-
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/articletext_title"
         android:layout_width="228dp"
         android:layout_height="36dp"
         android:text="TextView"
@@ -55,17 +42,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.158"
+        app:autoSizeTextType="uniform"
+        android:gravity="center_horizontal"/>
 
-    <ListView
-        android:id="@+id/article_list2"
-        android:layout_width="370dp"
-        android:layout_height="450dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.37" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.572" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
