@@ -37,13 +37,17 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
     ImageButton record, diary, article, summary;
     TextView next, back;
     Intent intent;
-
-
+    String CHILD_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_summary);
         chart = (BarChart) findViewById(R.id.Summary_bar_chart);
+
+        intent = getIntent();
+        CHILD_ID = intent.getStringExtra("child_id");
+        CHILD_ID = "1";
+        System.out.println("summary : "+ CHILD_ID);
 
         menu = (ImageView) findViewById(R.id.Summary_menu);
         left = (ImageView) findViewById(R.id.Summary_bo_daybefore2);
@@ -84,6 +88,14 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
 
         try {
             Toast.makeText(this, "DBに接続完了", Toast.LENGTH_SHORT).show();
+            ContentValues values = new ContentValues();
+            values.put("Child_ID", "1");
+            values.put("Code", 3);
+            values.put("Registration_Time", getWeek().get(13));
+            values.put("jihun", 4);
+            values.put("IntNowdata", 5);
+
+            db.insert("FoodTable", null, values);
 
         } finally {
             db.close();
@@ -113,7 +125,7 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         back.setText(getWeek().get(1));
 
         //表示データ取得
-        BarData data = new BarData(getBarData());
+        BarData data = new BarData(getBarData(CHILD_ID));
         chart.setData(data);
 
         //Y軸(左)
@@ -197,15 +209,16 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         return week;
     }
 
+
     //    Food_IDを取得
-    public int ongetFood_ID(String Registration_Time){
+    public int ongetFood_ID(String Registration_Time, String CHILD_ID){
         int Food_ID = 0;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cs = null;
         try {
             String[] getcols = {"Food_ID"};//0,1,2
-            String[] SearchKey = {Registration_Time + '%'};
-            cs = db.query("FoodTable", getcols, "Registration_Time LIKE ?", SearchKey, null, null, null);
+            String[] SearchKey = {Registration_Time + '%' , CHILD_ID};
+            cs = db.query("FoodTable", getcols, "Registration_Time LIKE ? AND ?", SearchKey, null, null, null);
             if (cs.moveToFirst()){
                 Food_ID = cs.getCount();
                 System.out.println("food " + Food_ID);
@@ -218,42 +231,42 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
     }
 
     //棒グラフのデータを取得　
-    private List<IBarDataSet> getBarData() {
+    private List<IBarDataSet> getBarData(String CHILD_ID) {
         SQLiteDatabase db = helper.getReadableDatabase();
         ArrayList<BarEntry> entries = new ArrayList<>();
 
         for (int x = 1; x <= 7; x++) {
             if(x == 1){
                 String Get = getWeek().get(0) + getWeek().get(1);
-                entries.add(new BarEntry(7, ongetFood_ID(Get)));
+                entries.add(new BarEntry(7, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
             if(x == 2){
                 String Get = getWeek().get(2) + getWeek().get(3);
-                entries.add(new BarEntry(6, ongetFood_ID(Get)));
+                entries.add(new BarEntry(6, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
             if(x == 3){
                 String Get = getWeek().get(4) + getWeek().get(5);
-                entries.add(new BarEntry(5, ongetFood_ID(Get)));
+                entries.add(new BarEntry(5, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }if(x == 4){
                 String Get = getWeek().get(6) + getWeek().get(7);
-                entries.add(new BarEntry(4, ongetFood_ID(Get)));
+                entries.add(new BarEntry(4, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
             if(x == 5){
                 String Get = getWeek().get(8) + getWeek().get(9);
-                entries.add(new BarEntry(3, ongetFood_ID(Get)));
+                entries.add(new BarEntry(3, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }if(x == 6){
                 String Get = getWeek().get(10) + getWeek().get(11);
-                entries.add(new BarEntry(2, ongetFood_ID(Get)));
+                entries.add(new BarEntry(2, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
             if(x == 7){
                 String Get = getWeek().get(12) + getWeek().get(13);
-                entries.add(new BarEntry(1, ongetFood_ID(Get)));
+                entries.add(new BarEntry(1, ongetFood_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
         }

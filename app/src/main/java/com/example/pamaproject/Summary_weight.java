@@ -45,8 +45,7 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
 
         intent = getIntent();
         CHILD_ID = intent.getStringExtra("child_id");
-        CHILD_ID = "1";
-        System.out.println("summary : "+CHILD_ID);
+        System.out.println("summary : "+ CHILD_ID);
 
         menu =(ImageView)findViewById(R.id.Summary_menu) ;
         left =(ImageView)findViewById(R.id.Summary_bo_daybefore2) ;
@@ -210,10 +209,10 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
             String[] getcols = {"Body_Amount"};//0,1,2
             String[] SearchKey = {Registration_Time + '%' , CHILD_ID};
             System.out.println("Summary weight" + Registration_Time + "  " + CHILD_ID);
-            cs = db.query("BodyhealthTable", getcols, "Registration_Time LIKE ? AND Code = 28 AND Child_ID = ?", SearchKey, null, null, null, null);
+            cs = db.query("BodyhealthTable", getcols, "Registration_Time LIKE ? AND Child_ID = ?", SearchKey, null, null, null, null);
             if (cs.moveToFirst()){
 
-                Bodyhealth_ID = Integer.parseInt(cs.getString(0));
+                Bodyhealth_ID = cs.getCount();
                 System.out.println("Bodyhealth " + Bodyhealth_ID);
             }
         } finally {
