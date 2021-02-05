@@ -36,11 +36,17 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
     ImageButton record,diary,article,summary;
     TextView next, back;
     Intent intent;
+    String CHILD_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_summary);
         chart = (BarChart) findViewById(R.id.Summary_bar_chart);
+
+        intent = getIntent();
+        CHILD_ID = intent.getStringExtra("child_id");
+        CHILD_ID = "1";
+        System.out.println("summary : "+CHILD_ID);
 
         menu =(ImageView)findViewById(R.id.Summary_menu) ;
         left =(ImageView)findViewById(R.id.Summary_bo_daybefore2) ;
@@ -108,7 +114,7 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
 
 
         //表示データ取得
-        BarData data = new BarData(getBarData());
+        BarData data = new BarData(getBarData(CHILD_ID));
         chart.setData(data);
 
         //Y軸(左)
@@ -196,16 +202,18 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
     }
 
     //    Bodyhealth_IDを取得
-    public int ongetBodyhealth_ID(String Registration_Time){
-        int Bodyhealth_ID = 0;
+    public int ongetBodyhealth_ID(String Registration_Time, String CHILD_ID){
+        int  Bodyhealth_ID = 0;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cs = null;
         try {
-            String[] getcols = {"Bodyhealth_ID"};//0,1,2
-            String[] SearchKey = {Registration_Time + '%'};
-            cs = db.query("BodyhealthTable", getcols, "Registration_Time  LIKE ?", SearchKey, null, null, null, null);
+            String[] getcols = {"Body_Amount"};//0,1,2
+            String[] SearchKey = {Registration_Time + '%' , CHILD_ID};
+            System.out.println("Summary weight" + Registration_Time + "  " + CHILD_ID);
+            cs = db.query("BodyhealthTable", getcols, "Registration_Time LIKE ? AND Code = 28 AND Child_ID = ?", SearchKey, null, null, null, null);
             if (cs.moveToFirst()){
-                Bodyhealth_ID = cs.getCount();
+
+                Bodyhealth_ID = Integer.parseInt(cs.getString(0));
                 System.out.println("Bodyhealth " + Bodyhealth_ID);
             }
         } finally {
@@ -216,37 +224,37 @@ public class Summary_weight extends AppCompatActivity implements View.OnClickLis
     }
 
     //棒グラフのデータを取得　
-    private List<IBarDataSet> getBarData() {
+    private List<IBarDataSet> getBarData(String CHILD_ID) {
         SQLiteDatabase db = helper.getReadableDatabase();
         ArrayList<BarEntry> entries = new ArrayList<>();
 
         for (int x = 1; x <= 7; x++) {
             if(x == 1){
                 String Get = getWeek().get(0) + getWeek().get(1);
-                entries.add(new BarEntry(7, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(7, ongetBodyhealth_ID(Get, CHILD_ID)));
                 System.out.println(Get);
             }
             if(x == 2){
                 String Get = getWeek().get(2) + getWeek().get(3);
-                entries.add(new BarEntry(6, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(6, ongetBodyhealth_ID(Get, CHILD_ID)));
             }
             if(x == 3){
                 String Get = getWeek().get(4) + getWeek().get(5);
-                entries.add(new BarEntry(5, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(5, ongetBodyhealth_ID(Get, CHILD_ID)));
             }if(x == 4){
                 String Get = getWeek().get(6) + getWeek().get(7);
-                entries.add(new BarEntry(4, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(4, ongetBodyhealth_ID(Get, CHILD_ID)));
             }
             if(x == 5){
                 String Get = getWeek().get(8) + getWeek().get(9);
-                entries.add(new BarEntry(3, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(3, ongetBodyhealth_ID(Get, CHILD_ID)));
             }if(x == 6){
                 String Get = getWeek().get(10) + getWeek().get(11);
-                entries.add(new BarEntry(2, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(2, ongetBodyhealth_ID(Get, CHILD_ID)));
             }
             if(x == 7){
                 String Get = getWeek().get(12) + getWeek().get(13);
-                entries.add(new BarEntry(1, ongetBodyhealth_ID(Get)));
+                entries.add(new BarEntry(1, ongetBodyhealth_ID(Get, CHILD_ID)));
             }
         }
 

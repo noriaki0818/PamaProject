@@ -154,7 +154,7 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         chart.setScaleEnabled(false);
     }
     //1週間
-    public static ArrayList<String> getWeek() {
+    public ArrayList<String> getWeek() {
         String date;
 
         Calendar cal = Calendar.getInstance();

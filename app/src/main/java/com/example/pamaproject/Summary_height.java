@@ -197,8 +197,9 @@ public class Summary_height extends AppCompatActivity implements View.OnClickLis
         try {
             String[] getcols = {"Bodyhealth_ID"};//0,1,2
             String[] SearchKey = {Registration_Time + '%'};
-            cs = db.query("BodyhealthTable", getcols, "Registration_Time  LIKE ?", SearchKey, null, null, null, null);
+            cs = db.query("BodyhealthTable", getcols, "Registration_Time LIKE ? AND Code = 28", SearchKey, null, null, null, null);
             if (cs.moveToFirst()){
+                cs.moveToLast();
                 Bodyhealth_ID = cs.getCount();
                 System.out.println("Bodyhealth " + Bodyhealth_ID);
             }
