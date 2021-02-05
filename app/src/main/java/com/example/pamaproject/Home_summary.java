@@ -293,7 +293,9 @@ public class Home_summary extends AppCompatActivity implements View.OnClickListe
         }
         if (view == record){
             //日記に飛ぶ
+            String Child_ID = "1";
             intent = new Intent(this, Home.class);
+            intent.putExtra("child_id", Child_ID);
             startActivity(intent);
         }
         if (view == article){

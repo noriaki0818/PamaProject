@@ -65,8 +65,7 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         intent = getIntent();
         tuki = intent.getStringExtra("tuki");
         nen = intent.getStringExtra("nen");
-
-        cid ="1";
+        cid =intent.getStringExtra("child_id");
 
         //ない場合
         if(tuki ==null){
@@ -76,18 +75,10 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
             txt_nen.setText(nen+"年");
 
             int thismonth =getNowmonth();
-            if(thismonth < 10){
-                tuki = 0 + String.valueOf(thismonth);
-
-            }
             tuki = String.valueOf(thismonth);
-            if(thismonth < 10){
-
-            }
             txt_tuki.setText(tuki+"月");
-            today =nen + tuki;
 
-            getNikki(cid,today );
+
 
         }else{
 
@@ -96,27 +87,9 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
 
         }
 
-
-
-
-
-        //dbから持ってきたデータをlistに入れる
-        //日
-        hi.add("1");
-        hi.add("2");
-        hi.add("3");
-        hi.add("4");
-        //内容
-
-        nai.add("さ");
-        nai.add("む");
-        nai.add("ら");
-        nai.add("い");
+        getNikki(cid,today,nen,tuki);
 
         showlistview();
-
-
-
 
     }
 
@@ -155,10 +128,12 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         Intent intent;
         if(v == bo_tukibetu){
             intent = new Intent(this, Nikki_tosibetu.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
         if(v == bo_record){
             intent = new Intent(this,Home.class);
+            intent.putExtra("child_id",cid);
             startActivity(intent);
         }
         if(v == bo_article){
@@ -202,35 +177,27 @@ public class Nikki extends AppCompatActivity implements View.OnClickListener, Ad
         return month +1;
     }
 
-    private void getNikki(String CID,String today ) {
-
-
-
-        ArrayList<String> Today = new ArrayList<>();
-
-        ArrayList<String> Dialy = new ArrayList<>();
-
-
+    private void getNikki(String CID,String today ,String nen ,String tuki) {
 
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cs = null;
         try {
-            String[] getcols = {"Today", "Diary"};//0,1,2
-            String[] SearchKey = {CID};
-            cs = db.query("DiaryTable", getcols, "Child_ID = ? ", SearchKey, null, null, "Today ASC",null);
+            String[] getcols = {"hi", "Diary"};//0,1,2
+            String[] SearchKey = {CID,nen,tuki};
+            cs = db.query("DiaryTable", getcols, "Child_ID = ? AND nen = ? AND tuki = ?", SearchKey, null, null, "tuki ASC",null);
             if (cs.moveToFirst()) {
                 for(int i = 0;i < cs.getCount();i++) {
 
 
 
-                    String kirokubi = cs.getString(0).substring(cs.getString(0).length() - 2);
+                    String kirokutuki = cs.getString(0);
 
-                    Today.add(kirokubi);
+                    hi.add(kirokutuki);
 
                     String syousai1 = cs.getString(1);
-                    Dialy.add(syousai1);
+                    nai.add(syousai1);
 
-                    System.out.println("DiaryTable、Today:"+kirokubi+"、Diary:"+syousai1+"を取得。");
+                    System.out.println("DiaryTable、Today:"+kirokutuki+"、Diary:"+syousai1+"を取得。");
 
                     cs.moveToNext();
                 }

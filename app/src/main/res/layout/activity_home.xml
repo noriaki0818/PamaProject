@@ -646,7 +646,7 @@
         <ImageView
             android:id="@+id/home_babypic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/Summary_Food_footer"
             app:layout_constraintEnd_toEndOf="@+id/background"
@@ -654,7 +654,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/background"
             app:layout_constraintVertical_bias="0.093"
-            app:srcCompat="@drawable/abe" />
+            app:srcCompat="@drawable/bo_babyic" />
 
     </androidx.cardview.widget.CardView>
 
