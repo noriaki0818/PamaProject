@@ -117,6 +117,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         ", syousai TEXT " +
                         ", Child_ID INTEGER );"
         );
+        db.execSQL(
+                "INSERT INTO BodyhealthTable(Child_ID, Code,Registration_Time,Body_Amount ) VALUES(1,28,'2021年2月3日',130)"
+        );
 
         String[] Class = {"食事","食事","食事","食事","食事"
                 ,"食事","食事","食事","食事","食事"
