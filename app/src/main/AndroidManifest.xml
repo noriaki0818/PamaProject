@@ -16,11 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home_MilkWatch"></activity>
+        <activity android:name=".Home_MilkWatch">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Summary_height" />
         <activity android:name=".Summary_sleep" />
         <activity android:name=".Summary_unko" />
-        <activity android:name=".Summary_weight" />
+        <activity android:name=".Summary_weight" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".Nikki_naiyou" />
         <activity android:name=".Nikki_tosibetu" />
         <activity android:name=".Nikki" />
